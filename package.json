@@ -1,0 +1,52 @@
+{
+  "name": "orc-scripts",
+  "version": "0.0.1",
+  "description": "Scripts toolbox for Orckestra",
+  "bin": {
+    "orc-scripts": "dist/index.js"
+  },
+  "engines": {
+    "node": ">= 8",
+    "npm": ">= 5"
+  },
+  "scripts": {
+    "test": "node src test",
+    "build": "node src build --cli"
+  },
+  "files": [
+    "dist",
+    "webpack.config.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Orckestra/orc-scripts.git"
+  },
+  "author": "Gert K. Sønderby <gert.sonderby@orckestra.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Orckestra/orc-scripts/issues"
+  },
+  "homepage": "https://github.com/Orckestra/orc-scripts#readme",
+  "dependencies": {
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.0",
+    "babel-eslint": "8.2.2",
+    "babel-loader": "7.1.3",
+    "babel-plugin-styled-components": "1.5.0",
+    "babel-plugin-transform-react-jsx": "6.24.1",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-react-app": "3.1.1",
+    "cross-spawn": "6.0.4",
+    "eslint": "4.18.1",
+    "eslint-config-react-app": "2.1.0",
+    "eslint-plugin-flowtype": "2.46.1",
+    "eslint-plugin-import": "2.9.0",
+    "eslint-plugin-jsx-a11y": "6.0.3",
+    "eslint-plugin-react": "7.7.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "styled-components": "3.1.6",
+    "webpack": "^4.0.0",
+    "webpack-cli": "^2.0.9"
+  }
+}
