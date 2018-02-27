@@ -11,11 +11,12 @@
   },
   "scripts": {
     "test": "node src test",
-    "build": "node src build --cli"
+    "build": "node src build"
   },
   "files": [
     "dist",
-    "webpack.config.js"
+    "webpack.config.js",
+    "eslint.js"
   ],
   "repository": {
     "type": "git",
@@ -37,11 +38,12 @@
     "babel-preset-env": "1.6.1",
     "babel-preset-react-app": "3.1.1",
     "cross-spawn": "6.0.4",
+    "dotenv": "5.0.1",
     "eslint": "4.18.1",
     "eslint-config-react-app": "2.1.0",
     "eslint-plugin-flowtype": "2.46.1",
     "eslint-plugin-import": "2.9.0",
-    "eslint-plugin-jsx-a11y": "6.0.3",
+    "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "7.7.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

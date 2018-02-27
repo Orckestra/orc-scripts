@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// Copied from kcd-scripts
+
+require('dotenv').config();
 
 let shouldThrow;
 try {

@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path');
+const which = require('which')
 
 function parseEnv(name, def) {
   if (envIsSet(name)) {
