@@ -1,1 +1,1 @@
-module.exports = require('./dist/config/webpack.config.js');
+module.exports = require("./dist/config/webpack.config.js");
