@@ -5,7 +5,7 @@ const isWebpack = parseEnv('BUILD_WEBPACK', false)
 
 const envTargets = isTest ?
 	{ node: 'current' } :
-	isWebpack ? ["last 2 versions", "IE 11"] : { node: '4.5' };
+	isWebpack ? ["defaults", "IE 11"] : { node: '4.5' };
 
 const envOptions = { modules: false, loose: true, targets: envTargets };
 
