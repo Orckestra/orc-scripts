@@ -12,7 +12,8 @@
 	"scripts": {
 		"test": "node src test",
 		"build": "node src build",
-		"precommit": "lint-staged"
+		"precommit": "lint-staged",
+		"prepublish": "node src build"
 	},
 	"files": ["dist", "webpack.js", "eslint.js", "prettier.js", "jest.js"],
 	"repository": {
