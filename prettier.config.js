@@ -1,4 +1,1 @@
-module.exports = {
-	useTabs: true,
-	trailingComma: "all",
-};
+module.exports = require("./src/config/prettier.config");
