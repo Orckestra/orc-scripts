@@ -7,7 +7,7 @@ const envTargets = isTest
 	? { node: "current" }
 	: isWebpack ? ["defaults", "IE 11"] : { node: "4.5" };
 
-const envOptions = { modules: false, loose: true, targets: envTargets };
+const envOptions = { loose: true, targets: envTargets };
 
 module.exports = {
 	presets: [[require.resolve("babel-preset-env"), envOptions]],

@@ -1,10 +1,37 @@
 const path = require("path");
 const spawn = require("cross-spawn");
+const glob = require("glob");
 
 const [executor, ignoredBin, script, ...args] = process.argv;
 
 if (script) {
 	spawnScript();
+} else {
+	const scriptsPath = path.join(__dirname, "scripts/");
+	const scriptsAvailable = glob.sync(path.join(__dirname, "scripts", "*"));
+	// `glob.sync` returns paths with unix style path separators even on Windows.
+	// So we normalize it before attempting to strip out the scripts path.
+	const scriptsAvailableMessage = scriptsAvailable
+		.map(path.normalize)
+		.map(s =>
+			s
+				.replace(scriptsPath, "")
+				.replace(/__tests__/, "")
+				.replace(/\.js$/, ""),
+		)
+		.filter(Boolean)
+		.join("\n  ")
+		.trim();
+	const fullMessage = `
+Usage: ${ignoredBin} [script] [--flags]
+Available Scripts:
+  ${scriptsAvailableMessage}
+Options:
+  All options depend on the script. For most scripts you can assume that the
+  args you pass will be forwarded to the respective tool that's being run
+  under the hood.
+  `.trim();
+	console.log(`\n${fullMessage}\n`);
 }
 
 function getEnv() {
@@ -48,4 +75,21 @@ function attemptResolve(...resolveArgs) {
 	} catch (error) {
 		return null;
 	}
+}
+
+function handleSignal(result) {
+	if (result.signal === "SIGKILL") {
+		console.log(
+			`The script "${script}" failed because the process exited too early. ` +
+				"This probably means the system ran out of memory or someone called " +
+				"`kill -9` on the process.",
+		);
+	} else if (result.signal === "SIGTERM") {
+		console.log(
+			`The script "${script}" failed because the process exited too early. ` +
+				"Someone might have called `kill` or `killall`, or the system could " +
+				"be shutting down.",
+		);
+	}
+	process.exit(1);
 }

@@ -1,6 +1,32 @@
 const fs = require("fs");
 const path = require("path");
+const arrify = require("arrify");
 const which = require("which");
+const readPkgUp = require("read-pkg-up");
+
+const has = (obj, key) =>
+	obj.hasOwnProperty(key) && obj.key !== null && obj.key !== undefined;
+
+const { pkg, path: pkgPath } = readPkgUp.sync({
+	cwd: fs.realpathSync(process.cwd()),
+});
+
+const appDirectory = path.dirname(pkgPath);
+
+const fromRoot = (...p) => path.join(appDirectory, ...p);
+const hasFile = (...p) => fs.existsSync(fromRoot(...p));
+
+const hasPkgProp = props => arrify(props).some(prop => has(pkg, prop));
+
+const hasPkgSubProp = pkgProp => props =>
+	hasPkgProp(arrify(props).map(p => `${pkgProp}.${p}`));
+
+const hasPeerDep = hasPkgSubProp("peerDependencies");
+const hasDep = hasPkgSubProp("dependencies");
+const hasDevDep = hasPkgSubProp("devDependencies");
+const hasAnyDep = args => [hasDep, hasDevDep, hasPeerDep].some(fn => fn(args));
+
+const ifAnyDep = (deps, t, f) => (hasAnyDep(arrify(deps)) ? t : f);
 
 function parseEnv(name, def) {
 	if (envIsSet(name)) {
@@ -50,6 +76,10 @@ function resolveBin(
 }
 
 module.exports = {
-	resolveBin,
+	fromRoot,
+	hasFile,
+	hasPkgProp,
+	ifAnyDep,
 	parseEnv,
+	resolveBin,
 };
