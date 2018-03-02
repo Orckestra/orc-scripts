@@ -4,8 +4,23 @@ const arrify = require("arrify");
 const which = require("which");
 const readPkgUp = require("read-pkg-up");
 
-const has = (obj, key) =>
-	obj.hasOwnProperty(key) && obj.key !== null && obj.key !== undefined;
+const hasOwn = (obj, key) =>
+	obj.hasOwnProperty(key) && obj[key] !== null && obj[key] !== undefined;
+
+const hasPath = (obj, keys) => {
+	const [key, ...tail] = keys;
+	if (hasOwn(obj, key)) {
+		if (tail && tail.length) {
+			return hasPath(obj[key], tail);
+		} else {
+			return true;
+		}
+	} else {
+		return false;
+	}
+};
+
+const has = (obj, keypath) => hasPath(obj, keypath.split(/[./]/));
 
 const { pkg, path: pkgPath } = readPkgUp.sync({
 	cwd: fs.realpathSync(process.cwd()),
