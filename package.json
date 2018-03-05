@@ -13,7 +13,7 @@
 		"test": "node src test",
 		"build": "node src build",
 		"precommit": "lint-staged",
-		"prepublish": "node src build"
+		"prepare": "node src build"
 	},
 	"files": ["dist", "webpack.js", "eslint.js", "prettier.js", "jest.js"],
 	"repository": {
@@ -58,6 +58,7 @@
 		"redux": "3.7.2",
 		"redux-api-middleware": "2.2.0",
 		"redux-immutable": "4.0.0",
+		"redux-routing": "0.3.3",
 		"sinon": "4.4.2",
 		"styled-components": "3.1.6",
 		"unexpected": "10.37.2",

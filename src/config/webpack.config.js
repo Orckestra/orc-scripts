@@ -36,10 +36,6 @@ module.exports = {
 
 if (parseEnv("NODE_ENV") === "development") {
 	module.exports.devtool = "inline-source-map";
-	module.exports.devServer = {
-		contentBase: "./dist",
-		hotOnly: true,
-	};
 	module.exports.plugins.push(
 		new webpack.NamedModulesPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
