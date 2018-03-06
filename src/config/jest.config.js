@@ -19,6 +19,10 @@ const jestConfig = {
 	verbose: true,
 };
 
+if (isWebpack) {
+	jestConfig.testURL = "http://localhost:8000/";
+}
+
 if (useBuiltInBabelConfig) {
 	jestConfig.transform = { "^.+\\.js$": here("./babel-transform") };
 }
