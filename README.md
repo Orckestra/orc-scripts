@@ -1,0 +1,63 @@
+# Script and dependency toolbox for Orckestra web applications
+
+This package contains a standard set of dependencies and tooling for web applications. It is based on [`kcd-scripts`](https://github.com/kentcdodds/kcd-scripts) (copyright &copy; 2017 Kent C. Dodds, licensed via MIT License).
+
+## Installation and use
+
+Installing this package is done via npm: `npm install orc-scripts`. This will also install the dependency set provided.
+
+### Scripts
+
+To use the scripts, you can add entries to your package.json under "scripts", invoking the `orc-scripts` command. A typical "scripts" section might look like this:
+
+```json
+{
+	"scripts": {
+		"build": "orc-scripts build",
+		"start": "orc-scripts start",
+		"test": "orc-scripts test"
+	}
+}
+```
+
+### Code tools
+
+The toolbox contains support for `eslint` and `prettier`, both for use with development tools (such as Atom or VS Code) and in git hooks. To integrate with your development tool of choice, ensure the suitable plugin is installed if applicable, and create a config file or `package.json` entry that points to the `orc-scripts` preset for that tool (`orc-scripts/eslint`, resp. `orc-scripts/prettier`).
+
+To set up a git commit hook that runs `prettier` on all staged files, add an entry to the "scripts" section of `package.json` as follows:
+
+```json
+	"precommit": "lint-staged"
+```
+
+This will run the `lint-staged` tool whenever you commit files to git. Configure this tool with a section in your package.json as follows:
+
+```json
+"lint-staged": {
+	"*.{js,json,md}": ["prettier --write", "git add"]
+}
+```
+
+This instructs `lint-staged` to run `prettier` on staged files, rewriting the file to specifications, and then re-staging it for the commit. This ensures that all code in the app lives up to the strict standards set by `prettier`.
+
+## License
+
+Copyright &copy; 2018 Orckestra Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
