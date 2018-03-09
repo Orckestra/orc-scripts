@@ -21,10 +21,14 @@ module.exports = {
 					options: require("./babelrc.js"),
 				},
 			},
+			{
+				test: /\.svg$/,
+				loader: "svg-inline-loader",
+			},
 		],
 	},
 	resolve: {
-		modules: [path.resolve("./node_modules")],
+		modules: ["src", "node_modules"],
 	},
 	plugins: [
 		// This makes it possible for us to safely use env vars on our code

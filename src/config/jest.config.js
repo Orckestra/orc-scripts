@@ -11,6 +11,7 @@ const ignores = ["/node_modules/"];
 const jestConfig = {
 	roots: [fromRoot("src")],
 	testEnvironment: isWebpack ? "jsdom" : "node",
+	modulePaths: ["src"],
 	moduleFileExtensions: ["js", "json"],
 	collectCoverageFrom: ["src/**/*.js"],
 	setupTestFrameworkScriptFile: here("unexpected.js"),
