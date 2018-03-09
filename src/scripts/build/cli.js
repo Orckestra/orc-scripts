@@ -13,9 +13,11 @@ const copyFiles = args.includes("--no-copy-files") ? [] : ["--copy-files"];
 
 const config = ["--presets", here("../../config/babelrc.js")];
 
+const ignore = ["--ignore", ".test.js"];
+
 const result = spawn.sync(
 	resolveBin("babel-cli", { executable: "babel" }),
-	[...outDir, ...copyFiles, /*...ignore,*/ ...config, "src"].concat(args),
+	[...outDir, ...copyFiles, ...ignore, ...config, "src"].concat(args),
 	{ stdio: "inherit" },
 );
 
