@@ -11,6 +11,9 @@ const ignores = ["/node_modules/"];
 const jestConfig = {
 	roots: [fromRoot("src")],
 	testEnvironment: isWebpack ? "jsdom" : "node",
+	moduleNameMapper: {
+		"\\.(jpg|jpeg|png|gif)$": here("../__mocks__/fileMock.js"),
+	},
 	modulePaths: ["src"],
 	moduleFileExtensions: ["js", "json"],
 	collectCoverageFrom: ["src/**/*.js"],

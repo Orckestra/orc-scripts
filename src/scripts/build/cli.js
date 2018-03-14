@@ -13,7 +13,7 @@ const copyFiles = args.includes("--no-copy-files") ? [] : ["--copy-files"];
 
 const config = ["--presets", here("../../config/babelrc.js")];
 
-const ignore = ["--ignore", ".test.js"];
+const ignore = ["--ignore", ".test.js,__mocks__"];
 
 const result = spawn.sync(
 	resolveBin("babel-cli", { executable: "babel" }),
