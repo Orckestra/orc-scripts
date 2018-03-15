@@ -1,3 +1,4 @@
+// @flow
 module.exports = {
-	extends: "react-app",
+	extends: ["plugin:flowtype/recommended", "react-app"],
 };

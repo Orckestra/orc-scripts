@@ -1,3 +1,4 @@
+// @flow
 const webpack = require("webpack");
 const path = require("path");
 const { parseEnv } = require("../utils");
@@ -40,6 +41,7 @@ module.exports = {
 			"process.env.ASSET_PATH": JSON.stringify(ASSET_PATH),
 		}),
 	],
+	devtool: undefined,
 };
 
 if (parseEnv("NODE_ENV") === "development") {
