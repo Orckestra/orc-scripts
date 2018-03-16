@@ -1,8 +1,10 @@
+// @flow
 const path = require("path");
 const spawn = require("cross-spawn");
 const glob = require("glob");
 
-const [executor, ignoredBin, script, ...args] = process.argv;
+const [, ignoredBin, script, ...args] = process.argv;
+const executor = global.amOrcScripts ? "flow-node" : process.argv[0];
 
 if (script) {
 	spawnScript();

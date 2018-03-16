@@ -1,3 +1,4 @@
+// @flow
 const path = require("path");
 const { parseEnv, hasFile, hasPkgProp, fromRoot } = require("../utils");
 const isWebpack = parseEnv("BUILD_WEBPACK", false);
@@ -21,6 +22,8 @@ const jestConfig = {
 	testMatch: ["**/*.test.js"],
 	testPathIgnorePatterns: [...ignores],
 	verbose: true,
+	testURL: undefined,
+	transform: undefined,
 };
 
 if (isWebpack) {

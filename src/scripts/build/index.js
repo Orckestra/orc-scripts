@@ -1,3 +1,4 @@
+// @flow
 const { parseEnv } = require("../../utils");
 
 const isWebpack = parseEnv("BUILD_WEBPACK", false);

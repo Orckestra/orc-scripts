@@ -1,3 +1,4 @@
+// @flow
 const config = require("../../config/webpack.config");
 const webpack = require("webpack");
 

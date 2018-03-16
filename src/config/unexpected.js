@@ -1,3 +1,4 @@
+// @flow
 const unexpected = require("unexpected");
 const unexpectedReact = require("unexpected-react");
 const unexpectedSinon = require("unexpected-sinon");

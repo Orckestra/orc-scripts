@@ -10,10 +10,10 @@
 		"npm": ">= 5"
 	},
 	"scripts": {
-		"test": "node src test",
-		"build": "node src build",
+		"test": "flow-node src test",
+		"build": "flow-node src build",
 		"precommit": "lint-staged",
-		"prepare": "node src build"
+		"prepare": "flow-node src build"
 	},
 	"files": ["dist", "webpack.js", "eslint.js", "prettier.js", "jest.js"],
 	"repository": {
@@ -35,22 +35,25 @@
 		"babel-plugin-styled-components": "1.5.0",
 		"babel-plugin-transform-react-jsx": "6.24.1",
 		"babel-preset-env": "1.6.1",
+		"babel-preset-flow": "^6.23.0",
 		"babel-preset-react-app": "3.1.1",
 		"cross-spawn": "6.0.4",
 		"dotenv": "5.0.1",
 		"eslint": "4.18.1",
 		"eslint-config-react-app": "2.1.0",
-		"eslint-plugin-flowtype": "2.46.1",
+		"eslint-plugin-flowtype": "^2.46.1",
 		"eslint-plugin-import": "2.9.0",
 		"eslint-plugin-jsx-a11y": "5.1.1",
 		"eslint-plugin-react": "7.7.0",
 		"file-loader": "1.1.11",
+		"flow-bin": "^0.67.1",
 		"husky": "0.14.3",
 		"img-loader": "2.0.1",
-		"immutable": "3.8.2",
+		"immutable": "4.0.0-rc.9",
 		"is-ci": "1.1.0",
 		"jest": "22.4.2",
 		"lint-staged": "7.0.0",
+		"pkg-dir": "^2.0.0",
 		"prettier": "1.11.0",
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
@@ -76,6 +79,10 @@
 		"webpack-dev-server": "3.0.0"
 	},
 	"lint-staged": {
-		"*.{js,json,md}": ["prettier --write", "git add"]
+		"!(flow-typed/)*.{js,json,md}": ["prettier --write", "git add"],
+		"!(flow-typed/)*.js": ["eslint"]
+	},
+	"devDependencies": {
+		"flow-remove-types": "^1.2.3"
 	}
 }
