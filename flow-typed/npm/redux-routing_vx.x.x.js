@@ -13,8 +13,8 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module "redux-routing" {
-	declare module.exports: any;
+declare module 'redux-routing' {
+  declare module.exports: any;
 }
 
 /**
@@ -22,186 +22,186 @@ declare module "redux-routing" {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module "redux-routing/lib/actions" {
-	declare module.exports: any;
+declare module 'redux-routing/lib/actions' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/lib/constants" {
-	declare module.exports: any;
+declare module 'redux-routing/lib/constants' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/lib/createMiddleware" {
-	declare module.exports: any;
+declare module 'redux-routing/lib/createMiddleware' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/lib/Hash" {
-	declare module.exports: any;
+declare module 'redux-routing/lib/Hash' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/lib/History" {
-	declare module.exports: any;
+declare module 'redux-routing/lib/History' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/lib/index" {
-	declare module.exports: any;
+declare module 'redux-routing/lib/index' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/lib/match" {
-	declare module.exports: any;
+declare module 'redux-routing/lib/match' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/lib/reducer" {
-	declare module.exports: any;
+declare module 'redux-routing/lib/reducer' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/lib/route" {
-	declare module.exports: any;
+declare module 'redux-routing/lib/route' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/src/actions" {
-	declare module.exports: any;
+declare module 'redux-routing/src/actions' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/src/constants" {
-	declare module.exports: any;
+declare module 'redux-routing/src/constants' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/src/createMiddleware" {
-	declare module.exports: any;
+declare module 'redux-routing/src/createMiddleware' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/src/Hash" {
-	declare module.exports: any;
+declare module 'redux-routing/src/Hash' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/src/History" {
-	declare module.exports: any;
+declare module 'redux-routing/src/History' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/src/index" {
-	declare module.exports: any;
+declare module 'redux-routing/src/index' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/src/match" {
-	declare module.exports: any;
+declare module 'redux-routing/src/match' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/src/reducer" {
-	declare module.exports: any;
+declare module 'redux-routing/src/reducer' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/src/route" {
-	declare module.exports: any;
+declare module 'redux-routing/src/route' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/test/actions" {
-	declare module.exports: any;
+declare module 'redux-routing/test/actions' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/test/createMiddleware" {
-	declare module.exports: any;
+declare module 'redux-routing/test/createMiddleware' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/test/exports" {
-	declare module.exports: any;
+declare module 'redux-routing/test/exports' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/test/Hash" {
-	declare module.exports: any;
+declare module 'redux-routing/test/Hash' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/test/History" {
-	declare module.exports: any;
+declare module 'redux-routing/test/History' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/test/match" {
-	declare module.exports: any;
+declare module 'redux-routing/test/match' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/test/reducer" {
-	declare module.exports: any;
+declare module 'redux-routing/test/reducer' {
+  declare module.exports: any;
 }
 
-declare module "redux-routing/test/route" {
-	declare module.exports: any;
+declare module 'redux-routing/test/route' {
+  declare module.exports: any;
 }
 
 // Filename aliases
-declare module "redux-routing/lib/actions.js" {
-	declare module.exports: $Exports<"redux-routing/lib/actions">;
+declare module 'redux-routing/lib/actions.js' {
+  declare module.exports: $Exports<'redux-routing/lib/actions'>;
 }
-declare module "redux-routing/lib/constants.js" {
-	declare module.exports: $Exports<"redux-routing/lib/constants">;
+declare module 'redux-routing/lib/constants.js' {
+  declare module.exports: $Exports<'redux-routing/lib/constants'>;
 }
-declare module "redux-routing/lib/createMiddleware.js" {
-	declare module.exports: $Exports<"redux-routing/lib/createMiddleware">;
+declare module 'redux-routing/lib/createMiddleware.js' {
+  declare module.exports: $Exports<'redux-routing/lib/createMiddleware'>;
 }
-declare module "redux-routing/lib/Hash.js" {
-	declare module.exports: $Exports<"redux-routing/lib/Hash">;
+declare module 'redux-routing/lib/Hash.js' {
+  declare module.exports: $Exports<'redux-routing/lib/Hash'>;
 }
-declare module "redux-routing/lib/History.js" {
-	declare module.exports: $Exports<"redux-routing/lib/History">;
+declare module 'redux-routing/lib/History.js' {
+  declare module.exports: $Exports<'redux-routing/lib/History'>;
 }
-declare module "redux-routing/lib/index.js" {
-	declare module.exports: $Exports<"redux-routing/lib/index">;
+declare module 'redux-routing/lib/index.js' {
+  declare module.exports: $Exports<'redux-routing/lib/index'>;
 }
-declare module "redux-routing/lib/match.js" {
-	declare module.exports: $Exports<"redux-routing/lib/match">;
+declare module 'redux-routing/lib/match.js' {
+  declare module.exports: $Exports<'redux-routing/lib/match'>;
 }
-declare module "redux-routing/lib/reducer.js" {
-	declare module.exports: $Exports<"redux-routing/lib/reducer">;
+declare module 'redux-routing/lib/reducer.js' {
+  declare module.exports: $Exports<'redux-routing/lib/reducer'>;
 }
-declare module "redux-routing/lib/route.js" {
-	declare module.exports: $Exports<"redux-routing/lib/route">;
+declare module 'redux-routing/lib/route.js' {
+  declare module.exports: $Exports<'redux-routing/lib/route'>;
 }
-declare module "redux-routing/src/actions.js" {
-	declare module.exports: $Exports<"redux-routing/src/actions">;
+declare module 'redux-routing/src/actions.js' {
+  declare module.exports: $Exports<'redux-routing/src/actions'>;
 }
-declare module "redux-routing/src/constants.js" {
-	declare module.exports: $Exports<"redux-routing/src/constants">;
+declare module 'redux-routing/src/constants.js' {
+  declare module.exports: $Exports<'redux-routing/src/constants'>;
 }
-declare module "redux-routing/src/createMiddleware.js" {
-	declare module.exports: $Exports<"redux-routing/src/createMiddleware">;
+declare module 'redux-routing/src/createMiddleware.js' {
+  declare module.exports: $Exports<'redux-routing/src/createMiddleware'>;
 }
-declare module "redux-routing/src/Hash.js" {
-	declare module.exports: $Exports<"redux-routing/src/Hash">;
+declare module 'redux-routing/src/Hash.js' {
+  declare module.exports: $Exports<'redux-routing/src/Hash'>;
 }
-declare module "redux-routing/src/History.js" {
-	declare module.exports: $Exports<"redux-routing/src/History">;
+declare module 'redux-routing/src/History.js' {
+  declare module.exports: $Exports<'redux-routing/src/History'>;
 }
-declare module "redux-routing/src/index.js" {
-	declare module.exports: $Exports<"redux-routing/src/index">;
+declare module 'redux-routing/src/index.js' {
+  declare module.exports: $Exports<'redux-routing/src/index'>;
 }
-declare module "redux-routing/src/match.js" {
-	declare module.exports: $Exports<"redux-routing/src/match">;
+declare module 'redux-routing/src/match.js' {
+  declare module.exports: $Exports<'redux-routing/src/match'>;
 }
-declare module "redux-routing/src/reducer.js" {
-	declare module.exports: $Exports<"redux-routing/src/reducer">;
+declare module 'redux-routing/src/reducer.js' {
+  declare module.exports: $Exports<'redux-routing/src/reducer'>;
 }
-declare module "redux-routing/src/route.js" {
-	declare module.exports: $Exports<"redux-routing/src/route">;
+declare module 'redux-routing/src/route.js' {
+  declare module.exports: $Exports<'redux-routing/src/route'>;
 }
-declare module "redux-routing/test/actions.js" {
-	declare module.exports: $Exports<"redux-routing/test/actions">;
+declare module 'redux-routing/test/actions.js' {
+  declare module.exports: $Exports<'redux-routing/test/actions'>;
 }
-declare module "redux-routing/test/createMiddleware.js" {
-	declare module.exports: $Exports<"redux-routing/test/createMiddleware">;
+declare module 'redux-routing/test/createMiddleware.js' {
+  declare module.exports: $Exports<'redux-routing/test/createMiddleware'>;
 }
-declare module "redux-routing/test/exports.js" {
-	declare module.exports: $Exports<"redux-routing/test/exports">;
+declare module 'redux-routing/test/exports.js' {
+  declare module.exports: $Exports<'redux-routing/test/exports'>;
 }
-declare module "redux-routing/test/Hash.js" {
-	declare module.exports: $Exports<"redux-routing/test/Hash">;
+declare module 'redux-routing/test/Hash.js' {
+  declare module.exports: $Exports<'redux-routing/test/Hash'>;
 }
-declare module "redux-routing/test/History.js" {
-	declare module.exports: $Exports<"redux-routing/test/History">;
+declare module 'redux-routing/test/History.js' {
+  declare module.exports: $Exports<'redux-routing/test/History'>;
 }
-declare module "redux-routing/test/match.js" {
-	declare module.exports: $Exports<"redux-routing/test/match">;
+declare module 'redux-routing/test/match.js' {
+  declare module.exports: $Exports<'redux-routing/test/match'>;
 }
-declare module "redux-routing/test/reducer.js" {
-	declare module.exports: $Exports<"redux-routing/test/reducer">;
+declare module 'redux-routing/test/reducer.js' {
+  declare module.exports: $Exports<'redux-routing/test/reducer'>;
 }
-declare module "redux-routing/test/route.js" {
-	declare module.exports: $Exports<"redux-routing/test/route">;
+declare module 'redux-routing/test/route.js' {
+  declare module.exports: $Exports<'redux-routing/test/route'>;
 }

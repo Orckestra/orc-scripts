@@ -13,8 +13,8 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module "babel-preset-react-app" {
-	declare module.exports: any;
+declare module 'babel-preset-react-app' {
+  declare module.exports: any;
 }
 
 /**
@@ -23,10 +23,11 @@ declare module "babel-preset-react-app" {
  * needed.
  */
 
+
 // Filename aliases
-declare module "babel-preset-react-app/index" {
-	declare module.exports: $Exports<"babel-preset-react-app">;
+declare module 'babel-preset-react-app/index' {
+  declare module.exports: $Exports<'babel-preset-react-app'>;
 }
-declare module "babel-preset-react-app/index.js" {
-	declare module.exports: $Exports<"babel-preset-react-app">;
+declare module 'babel-preset-react-app/index.js' {
+  declare module.exports: $Exports<'babel-preset-react-app'>;
 }

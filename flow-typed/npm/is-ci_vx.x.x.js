@@ -13,8 +13,8 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module "is-ci" {
-	declare module.exports: any;
+declare module 'is-ci' {
+  declare module.exports: any;
 }
 
 /**
@@ -22,24 +22,24 @@ declare module "is-ci" {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module "is-ci/bin" {
-	declare module.exports: any;
+declare module 'is-ci/bin' {
+  declare module.exports: any;
 }
 
-declare module "is-ci/test" {
-	declare module.exports: any;
+declare module 'is-ci/test' {
+  declare module.exports: any;
 }
 
 // Filename aliases
-declare module "is-ci/bin.js" {
-	declare module.exports: $Exports<"is-ci/bin">;
+declare module 'is-ci/bin.js' {
+  declare module.exports: $Exports<'is-ci/bin'>;
 }
-declare module "is-ci/index" {
-	declare module.exports: $Exports<"is-ci">;
+declare module 'is-ci/index' {
+  declare module.exports: $Exports<'is-ci'>;
 }
-declare module "is-ci/index.js" {
-	declare module.exports: $Exports<"is-ci">;
+declare module 'is-ci/index.js' {
+  declare module.exports: $Exports<'is-ci'>;
 }
-declare module "is-ci/test.js" {
-	declare module.exports: $Exports<"is-ci/test">;
+declare module 'is-ci/test.js' {
+  declare module.exports: $Exports<'is-ci/test'>;
 }

@@ -13,8 +13,8 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module "dotenv" {
-	declare module.exports: any;
+declare module 'dotenv' {
+  declare module.exports: any;
 }
 
 /**
@@ -22,18 +22,18 @@ declare module "dotenv" {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module "dotenv/config" {
-	declare module.exports: any;
+declare module 'dotenv/config' {
+  declare module.exports: any;
 }
 
-declare module "dotenv/lib/main" {
-	declare module.exports: any;
+declare module 'dotenv/lib/main' {
+  declare module.exports: any;
 }
 
 // Filename aliases
-declare module "dotenv/config.js" {
-	declare module.exports: $Exports<"dotenv/config">;
+declare module 'dotenv/config.js' {
+  declare module.exports: $Exports<'dotenv/config'>;
 }
-declare module "dotenv/lib/main.js" {
-	declare module.exports: $Exports<"dotenv/lib/main">;
+declare module 'dotenv/lib/main.js' {
+  declare module.exports: $Exports<'dotenv/lib/main'>;
 }

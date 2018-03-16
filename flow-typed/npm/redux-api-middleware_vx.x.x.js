@@ -13,8 +13,8 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module "redux-api-middleware" {
-	declare module.exports: any;
+declare module 'redux-api-middleware' {
+  declare module.exports: any;
 }
 
 /**
@@ -22,46 +22,46 @@ declare module "redux-api-middleware" {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module "redux-api-middleware/lib/errors" {
-	declare module.exports: any;
+declare module 'redux-api-middleware/lib/errors' {
+  declare module.exports: any;
 }
 
-declare module "redux-api-middleware/lib/index" {
-	declare module.exports: any;
+declare module 'redux-api-middleware/lib/index' {
+  declare module.exports: any;
 }
 
-declare module "redux-api-middleware/lib/middleware" {
-	declare module.exports: any;
+declare module 'redux-api-middleware/lib/middleware' {
+  declare module.exports: any;
 }
 
-declare module "redux-api-middleware/lib/RSAA" {
-	declare module.exports: any;
+declare module 'redux-api-middleware/lib/RSAA' {
+  declare module.exports: any;
 }
 
-declare module "redux-api-middleware/lib/util" {
-	declare module.exports: any;
+declare module 'redux-api-middleware/lib/util' {
+  declare module.exports: any;
 }
 
-declare module "redux-api-middleware/lib/validation" {
-	declare module.exports: any;
+declare module 'redux-api-middleware/lib/validation' {
+  declare module.exports: any;
 }
 
 // Filename aliases
-declare module "redux-api-middleware/lib/errors.js" {
-	declare module.exports: $Exports<"redux-api-middleware/lib/errors">;
+declare module 'redux-api-middleware/lib/errors.js' {
+  declare module.exports: $Exports<'redux-api-middleware/lib/errors'>;
 }
-declare module "redux-api-middleware/lib/index.js" {
-	declare module.exports: $Exports<"redux-api-middleware/lib/index">;
+declare module 'redux-api-middleware/lib/index.js' {
+  declare module.exports: $Exports<'redux-api-middleware/lib/index'>;
 }
-declare module "redux-api-middleware/lib/middleware.js" {
-	declare module.exports: $Exports<"redux-api-middleware/lib/middleware">;
+declare module 'redux-api-middleware/lib/middleware.js' {
+  declare module.exports: $Exports<'redux-api-middleware/lib/middleware'>;
 }
-declare module "redux-api-middleware/lib/RSAA.js" {
-	declare module.exports: $Exports<"redux-api-middleware/lib/RSAA">;
+declare module 'redux-api-middleware/lib/RSAA.js' {
+  declare module.exports: $Exports<'redux-api-middleware/lib/RSAA'>;
 }
-declare module "redux-api-middleware/lib/util.js" {
-	declare module.exports: $Exports<"redux-api-middleware/lib/util">;
+declare module 'redux-api-middleware/lib/util.js' {
+  declare module.exports: $Exports<'redux-api-middleware/lib/util'>;
 }
-declare module "redux-api-middleware/lib/validation.js" {
-	declare module.exports: $Exports<"redux-api-middleware/lib/validation">;
+declare module 'redux-api-middleware/lib/validation.js' {
+  declare module.exports: $Exports<'redux-api-middleware/lib/validation'>;
 }

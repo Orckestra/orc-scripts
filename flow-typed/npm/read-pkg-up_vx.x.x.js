@@ -13,8 +13,8 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module "read-pkg-up" {
-	declare module.exports: any;
+declare module 'read-pkg-up' {
+  declare module.exports: any;
 }
 
 /**
@@ -23,10 +23,11 @@ declare module "read-pkg-up" {
  * needed.
  */
 
+
 // Filename aliases
-declare module "read-pkg-up/index" {
-	declare module.exports: $Exports<"read-pkg-up">;
+declare module 'read-pkg-up/index' {
+  declare module.exports: $Exports<'read-pkg-up'>;
 }
-declare module "read-pkg-up/index.js" {
-	declare module.exports: $Exports<"read-pkg-up">;
+declare module 'read-pkg-up/index.js' {
+  declare module.exports: $Exports<'read-pkg-up'>;
 }

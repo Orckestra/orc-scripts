@@ -13,8 +13,8 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module "pkg-dir" {
-	declare module.exports: any;
+declare module 'pkg-dir' {
+  declare module.exports: any;
 }
 
 /**
@@ -23,10 +23,11 @@ declare module "pkg-dir" {
  * needed.
  */
 
+
 // Filename aliases
-declare module "pkg-dir/index" {
-	declare module.exports: $Exports<"pkg-dir">;
+declare module 'pkg-dir/index' {
+  declare module.exports: $Exports<'pkg-dir'>;
 }
-declare module "pkg-dir/index.js" {
-	declare module.exports: $Exports<"pkg-dir">;
+declare module 'pkg-dir/index.js' {
+  declare module.exports: $Exports<'pkg-dir'>;
 }

@@ -13,8 +13,8 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module "unexpected-immutable" {
-	declare module.exports: any;
+declare module 'unexpected-immutable' {
+  declare module.exports: any;
 }
 
 /**
@@ -22,86 +22,74 @@ declare module "unexpected-immutable" {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module "unexpected-immutable/__tests__/immutable-base.spec" {
-	declare module.exports: any;
+declare module 'unexpected-immutable/__tests__/immutable-base.spec' {
+  declare module.exports: any;
 }
 
-declare module "unexpected-immutable/__tests__/immutable-indexed.spec" {
-	declare module.exports: any;
+declare module 'unexpected-immutable/__tests__/immutable-indexed.spec' {
+  declare module.exports: any;
 }
 
-declare module "unexpected-immutable/__tests__/immutable-keyed.spec" {
-	declare module.exports: any;
+declare module 'unexpected-immutable/__tests__/immutable-keyed.spec' {
+  declare module.exports: any;
 }
 
-declare module "unexpected-immutable/build/unexpected-immutable" {
-	declare module.exports: any;
+declare module 'unexpected-immutable/build/unexpected-immutable' {
+  declare module.exports: any;
 }
 
-declare module "unexpected-immutable/lib/immutable-base" {
-	declare module.exports: any;
+declare module 'unexpected-immutable/lib/immutable-base' {
+  declare module.exports: any;
 }
 
-declare module "unexpected-immutable/lib/immutable-indexed" {
-	declare module.exports: any;
+declare module 'unexpected-immutable/lib/immutable-indexed' {
+  declare module.exports: any;
 }
 
-declare module "unexpected-immutable/lib/immutable-keyed" {
-	declare module.exports: any;
+declare module 'unexpected-immutable/lib/immutable-keyed' {
+  declare module.exports: any;
 }
 
-declare module "unexpected-immutable/lib/unexpected-immutable" {
-	declare module.exports: any;
+declare module 'unexpected-immutable/lib/unexpected-immutable' {
+  declare module.exports: any;
 }
 
-declare module "unexpected-immutable/rollup.config" {
-	declare module.exports: any;
+declare module 'unexpected-immutable/rollup.config' {
+  declare module.exports: any;
 }
 
-declare module "unexpected-immutable/test_setup" {
-	declare module.exports: any;
+declare module 'unexpected-immutable/test_setup' {
+  declare module.exports: any;
 }
 
 // Filename aliases
-declare module "unexpected-immutable/__tests__/immutable-base.spec.js" {
-	declare module.exports: $Exports<
-		"unexpected-immutable/__tests__/immutable-base.spec",
-	>;
+declare module 'unexpected-immutable/__tests__/immutable-base.spec.js' {
+  declare module.exports: $Exports<'unexpected-immutable/__tests__/immutable-base.spec'>;
 }
-declare module "unexpected-immutable/__tests__/immutable-indexed.spec.js" {
-	declare module.exports: $Exports<
-		"unexpected-immutable/__tests__/immutable-indexed.spec",
-	>;
+declare module 'unexpected-immutable/__tests__/immutable-indexed.spec.js' {
+  declare module.exports: $Exports<'unexpected-immutable/__tests__/immutable-indexed.spec'>;
 }
-declare module "unexpected-immutable/__tests__/immutable-keyed.spec.js" {
-	declare module.exports: $Exports<
-		"unexpected-immutable/__tests__/immutable-keyed.spec",
-	>;
+declare module 'unexpected-immutable/__tests__/immutable-keyed.spec.js' {
+  declare module.exports: $Exports<'unexpected-immutable/__tests__/immutable-keyed.spec'>;
 }
-declare module "unexpected-immutable/build/unexpected-immutable.js" {
-	declare module.exports: $Exports<
-		"unexpected-immutable/build/unexpected-immutable",
-	>;
+declare module 'unexpected-immutable/build/unexpected-immutable.js' {
+  declare module.exports: $Exports<'unexpected-immutable/build/unexpected-immutable'>;
 }
-declare module "unexpected-immutable/lib/immutable-base.js" {
-	declare module.exports: $Exports<"unexpected-immutable/lib/immutable-base">;
+declare module 'unexpected-immutable/lib/immutable-base.js' {
+  declare module.exports: $Exports<'unexpected-immutable/lib/immutable-base'>;
 }
-declare module "unexpected-immutable/lib/immutable-indexed.js" {
-	declare module.exports: $Exports<
-		"unexpected-immutable/lib/immutable-indexed",
-	>;
+declare module 'unexpected-immutable/lib/immutable-indexed.js' {
+  declare module.exports: $Exports<'unexpected-immutable/lib/immutable-indexed'>;
 }
-declare module "unexpected-immutable/lib/immutable-keyed.js" {
-	declare module.exports: $Exports<"unexpected-immutable/lib/immutable-keyed">;
+declare module 'unexpected-immutable/lib/immutable-keyed.js' {
+  declare module.exports: $Exports<'unexpected-immutable/lib/immutable-keyed'>;
 }
-declare module "unexpected-immutable/lib/unexpected-immutable.js" {
-	declare module.exports: $Exports<
-		"unexpected-immutable/lib/unexpected-immutable",
-	>;
+declare module 'unexpected-immutable/lib/unexpected-immutable.js' {
+  declare module.exports: $Exports<'unexpected-immutable/lib/unexpected-immutable'>;
 }
-declare module "unexpected-immutable/rollup.config.js" {
-	declare module.exports: $Exports<"unexpected-immutable/rollup.config">;
+declare module 'unexpected-immutable/rollup.config.js' {
+  declare module.exports: $Exports<'unexpected-immutable/rollup.config'>;
 }
-declare module "unexpected-immutable/test_setup.js" {
-	declare module.exports: $Exports<"unexpected-immutable/test_setup">;
+declare module 'unexpected-immutable/test_setup.js' {
+  declare module.exports: $Exports<'unexpected-immutable/test_setup'>;
 }

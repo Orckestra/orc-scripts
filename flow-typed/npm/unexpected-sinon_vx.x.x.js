@@ -13,8 +13,8 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module "unexpected-sinon" {
-	declare module.exports: any;
+declare module 'unexpected-sinon' {
+  declare module.exports: any;
 }
 
 /**
@@ -22,45 +22,39 @@ declare module "unexpected-sinon" {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module "unexpected-sinon/bootstrap-unexpected-markdown" {
-	declare module.exports: any;
+declare module 'unexpected-sinon/bootstrap-unexpected-markdown' {
+  declare module.exports: any;
 }
 
-declare module "unexpected-sinon/lib/unexpected-sinon" {
-	declare module.exports: any;
+declare module 'unexpected-sinon/lib/unexpected-sinon' {
+  declare module.exports: any;
 }
 
-declare module "unexpected-sinon/test/monkeyPatchSinonStackFrames" {
-	declare module.exports: any;
+declare module 'unexpected-sinon/test/monkeyPatchSinonStackFrames' {
+  declare module.exports: any;
 }
 
-declare module "unexpected-sinon/test/unexpected-sinon.spec" {
-	declare module.exports: any;
+declare module 'unexpected-sinon/test/unexpected-sinon.spec' {
+  declare module.exports: any;
 }
 
-declare module "unexpected-sinon/vendor/mocha" {
-	declare module.exports: any;
+declare module 'unexpected-sinon/vendor/mocha' {
+  declare module.exports: any;
 }
 
 // Filename aliases
-declare module "unexpected-sinon/bootstrap-unexpected-markdown.js" {
-	declare module.exports: $Exports<
-		"unexpected-sinon/bootstrap-unexpected-markdown",
-	>;
+declare module 'unexpected-sinon/bootstrap-unexpected-markdown.js' {
+  declare module.exports: $Exports<'unexpected-sinon/bootstrap-unexpected-markdown'>;
 }
-declare module "unexpected-sinon/lib/unexpected-sinon.js" {
-	declare module.exports: $Exports<"unexpected-sinon/lib/unexpected-sinon">;
+declare module 'unexpected-sinon/lib/unexpected-sinon.js' {
+  declare module.exports: $Exports<'unexpected-sinon/lib/unexpected-sinon'>;
 }
-declare module "unexpected-sinon/test/monkeyPatchSinonStackFrames.js" {
-	declare module.exports: $Exports<
-		"unexpected-sinon/test/monkeyPatchSinonStackFrames",
-	>;
+declare module 'unexpected-sinon/test/monkeyPatchSinonStackFrames.js' {
+  declare module.exports: $Exports<'unexpected-sinon/test/monkeyPatchSinonStackFrames'>;
 }
-declare module "unexpected-sinon/test/unexpected-sinon.spec.js" {
-	declare module.exports: $Exports<
-		"unexpected-sinon/test/unexpected-sinon.spec",
-	>;
+declare module 'unexpected-sinon/test/unexpected-sinon.spec.js' {
+  declare module.exports: $Exports<'unexpected-sinon/test/unexpected-sinon.spec'>;
 }
-declare module "unexpected-sinon/vendor/mocha.js" {
-	declare module.exports: $Exports<"unexpected-sinon/vendor/mocha">;
+declare module 'unexpected-sinon/vendor/mocha.js' {
+  declare module.exports: $Exports<'unexpected-sinon/vendor/mocha'>;
 }

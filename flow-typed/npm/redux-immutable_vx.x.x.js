@@ -13,8 +13,8 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module "redux-immutable" {
-	declare module.exports: any;
+declare module 'redux-immutable' {
+  declare module.exports: any;
 }
 
 /**
@@ -22,59 +22,53 @@ declare module "redux-immutable" {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module "redux-immutable/benchmarks/index" {
-	declare module.exports: any;
+declare module 'redux-immutable/benchmarks/index' {
+  declare module.exports: any;
 }
 
-declare module "redux-immutable/dist/combineReducers" {
-	declare module.exports: any;
+declare module 'redux-immutable/dist/combineReducers' {
+  declare module.exports: any;
 }
 
-declare module "redux-immutable/dist/index" {
-	declare module.exports: any;
+declare module 'redux-immutable/dist/index' {
+  declare module.exports: any;
 }
 
-declare module "redux-immutable/dist/utilities/getStateName" {
-	declare module.exports: any;
+declare module 'redux-immutable/dist/utilities/getStateName' {
+  declare module.exports: any;
 }
 
-declare module "redux-immutable/dist/utilities/getUnexpectedInvocationParameterMessage" {
-	declare module.exports: any;
+declare module 'redux-immutable/dist/utilities/getUnexpectedInvocationParameterMessage' {
+  declare module.exports: any;
 }
 
-declare module "redux-immutable/dist/utilities/index" {
-	declare module.exports: any;
+declare module 'redux-immutable/dist/utilities/index' {
+  declare module.exports: any;
 }
 
-declare module "redux-immutable/dist/utilities/validateNextState" {
-	declare module.exports: any;
+declare module 'redux-immutable/dist/utilities/validateNextState' {
+  declare module.exports: any;
 }
 
 // Filename aliases
-declare module "redux-immutable/benchmarks/index.js" {
-	declare module.exports: $Exports<"redux-immutable/benchmarks/index">;
+declare module 'redux-immutable/benchmarks/index.js' {
+  declare module.exports: $Exports<'redux-immutable/benchmarks/index'>;
 }
-declare module "redux-immutable/dist/combineReducers.js" {
-	declare module.exports: $Exports<"redux-immutable/dist/combineReducers">;
+declare module 'redux-immutable/dist/combineReducers.js' {
+  declare module.exports: $Exports<'redux-immutable/dist/combineReducers'>;
 }
-declare module "redux-immutable/dist/index.js" {
-	declare module.exports: $Exports<"redux-immutable/dist/index">;
+declare module 'redux-immutable/dist/index.js' {
+  declare module.exports: $Exports<'redux-immutable/dist/index'>;
 }
-declare module "redux-immutable/dist/utilities/getStateName.js" {
-	declare module.exports: $Exports<
-		"redux-immutable/dist/utilities/getStateName",
-	>;
+declare module 'redux-immutable/dist/utilities/getStateName.js' {
+  declare module.exports: $Exports<'redux-immutable/dist/utilities/getStateName'>;
 }
-declare module "redux-immutable/dist/utilities/getUnexpectedInvocationParameterMessage.js" {
-	declare module.exports: $Exports<
-		"redux-immutable/dist/utilities/getUnexpectedInvocationParameterMessage",
-	>;
+declare module 'redux-immutable/dist/utilities/getUnexpectedInvocationParameterMessage.js' {
+  declare module.exports: $Exports<'redux-immutable/dist/utilities/getUnexpectedInvocationParameterMessage'>;
 }
-declare module "redux-immutable/dist/utilities/index.js" {
-	declare module.exports: $Exports<"redux-immutable/dist/utilities/index">;
+declare module 'redux-immutable/dist/utilities/index.js' {
+  declare module.exports: $Exports<'redux-immutable/dist/utilities/index'>;
 }
-declare module "redux-immutable/dist/utilities/validateNextState.js" {
-	declare module.exports: $Exports<
-		"redux-immutable/dist/utilities/validateNextState",
-	>;
+declare module 'redux-immutable/dist/utilities/validateNextState.js' {
+  declare module.exports: $Exports<'redux-immutable/dist/utilities/validateNextState'>;
 }

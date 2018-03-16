@@ -13,8 +13,8 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module "svg-inline-loader" {
-	declare module.exports: any;
+declare module 'svg-inline-loader' {
+  declare module.exports: any;
 }
 
 /**
@@ -22,38 +22,38 @@ declare module "svg-inline-loader" {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module "svg-inline-loader/config" {
-	declare module.exports: any;
+declare module 'svg-inline-loader/config' {
+  declare module.exports: any;
 }
 
-declare module "svg-inline-loader/lib/component" {
-	declare module.exports: any;
+declare module 'svg-inline-loader/lib/component' {
+  declare module.exports: any;
 }
 
-declare module "svg-inline-loader/lib/conditions" {
-	declare module.exports: any;
+declare module 'svg-inline-loader/lib/conditions' {
+  declare module.exports: any;
 }
 
-declare module "svg-inline-loader/lib/transformer" {
-	declare module.exports: any;
+declare module 'svg-inline-loader/lib/transformer' {
+  declare module.exports: any;
 }
 
 // Filename aliases
-declare module "svg-inline-loader/config.js" {
-	declare module.exports: $Exports<"svg-inline-loader/config">;
+declare module 'svg-inline-loader/config.js' {
+  declare module.exports: $Exports<'svg-inline-loader/config'>;
 }
-declare module "svg-inline-loader/index" {
-	declare module.exports: $Exports<"svg-inline-loader">;
+declare module 'svg-inline-loader/index' {
+  declare module.exports: $Exports<'svg-inline-loader'>;
 }
-declare module "svg-inline-loader/index.js" {
-	declare module.exports: $Exports<"svg-inline-loader">;
+declare module 'svg-inline-loader/index.js' {
+  declare module.exports: $Exports<'svg-inline-loader'>;
 }
-declare module "svg-inline-loader/lib/component.jsx" {
-	declare module.exports: $Exports<"svg-inline-loader/lib/component">;
+declare module 'svg-inline-loader/lib/component.jsx' {
+  declare module.exports: $Exports<'svg-inline-loader/lib/component'>;
 }
-declare module "svg-inline-loader/lib/conditions.js" {
-	declare module.exports: $Exports<"svg-inline-loader/lib/conditions">;
+declare module 'svg-inline-loader/lib/conditions.js' {
+  declare module.exports: $Exports<'svg-inline-loader/lib/conditions'>;
 }
-declare module "svg-inline-loader/lib/transformer.js" {
-	declare module.exports: $Exports<"svg-inline-loader/lib/transformer">;
+declare module 'svg-inline-loader/lib/transformer.js' {
+  declare module.exports: $Exports<'svg-inline-loader/lib/transformer'>;
 }

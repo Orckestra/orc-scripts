@@ -13,8 +13,8 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module "babel-jest" {
-	declare module.exports: any;
+declare module 'babel-jest' {
+  declare module.exports: any;
 }
 
 /**
@@ -22,11 +22,11 @@ declare module "babel-jest" {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module "babel-jest/build/index" {
-	declare module.exports: any;
+declare module 'babel-jest/build/index' {
+  declare module.exports: any;
 }
 
 // Filename aliases
-declare module "babel-jest/build/index.js" {
-	declare module.exports: $Exports<"babel-jest/build/index">;
+declare module 'babel-jest/build/index.js' {
+  declare module.exports: $Exports<'babel-jest/build/index'>;
 }
