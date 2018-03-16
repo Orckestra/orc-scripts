@@ -15,7 +15,14 @@
 		"precommit": "lint-staged",
 		"prepare": "flow-node src build"
 	},
-	"files": ["dist", "webpack.js", "eslint.js", "prettier.js", "jest.js"],
+	"files": [
+		"dist",
+		"flow-typed",
+		"webpack.js",
+		"eslint.js",
+		"prettier.js",
+		"jest.js"
+	],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/Orckestra/orc-scripts.git"
