@@ -9,7 +9,7 @@ const useBuiltInBabelConfig = !hasFile(".babelrc") && !hasPkgProp("babel");
 
 const ignores = ["/node_modules/"];
 
-const jestConfig = {
+const jestConfig: { [string]: any } = {
 	roots: [fromRoot("src")],
 	testEnvironment: isWebpack ? "jsdom" : "node",
 	moduleNameMapper: {
@@ -22,16 +22,14 @@ const jestConfig = {
 	testMatch: ["**/*.test.js"],
 	testPathIgnorePatterns: [...ignores],
 	verbose: true,
-	testURL: undefined,
-	transform: undefined,
 };
 
 if (isWebpack) {
-	jestConfig.testURL = "http://localhost:8000/";
+	jestConfig["testURL"] = "http://localhost:8000/";
 }
 
 if (useBuiltInBabelConfig) {
-	jestConfig.transform = { "^.+\\.js$": here("./babel-transform") };
+	jestConfig["transform"] = { "^.+\\.js$": here("./babel-transform") };
 }
 
 module.exports = jestConfig;
