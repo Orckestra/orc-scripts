@@ -32,11 +32,11 @@ if (result.status !== 0) {
 	process.exit(result.status);
 }
 
-const flowResult = spawn.sync(resolveBin("flow-bin", { executable: "flow" }), [
-	"gen-flow-files",
-	"src",
-	...outDir,
-]);
+const flowResult = spawn.sync(
+	resolveBin("flow-bin", { executable: "flow" }),
+	["gen-flow-files", ...outDir, ...ignore, "src"],
+	{ stdio: "inherit" },
+);
 
 if (result.status !== 0) {
 	console.error(
