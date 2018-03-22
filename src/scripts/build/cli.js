@@ -32,6 +32,10 @@ if (result.status !== 0) {
 	process.exit(result.status);
 }
 
+if (args.includes("--no-flow")) {
+	process.exit(result.status);
+}
+
 const flowResult = spawn.sync(
 	resolveBin("flow-bin", { executable: "flow" }),
 	["gen-flow-files", ...outDir, ...ignore, "src"],
