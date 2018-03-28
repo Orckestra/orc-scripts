@@ -11,6 +11,7 @@ module.exports = {
 	output: {
 		filename: "bundle.js",
 		path: path.resolve(process.cwd(), "dist"),
+		publicPath: process.env.WEBPACK_PUBLIC_PATH || "/",
 	},
 	module: {
 		rules: [
