@@ -18,6 +18,7 @@ const jestConfig: { [string]: any } = {
 	modulePaths: ["src"],
 	moduleFileExtensions: ["js", "json"],
 	collectCoverageFrom: ["src/**/*.js"],
+	setupFiles: [here("jsdom.js")],
 	setupTestFrameworkScriptFile: here("unexpected.js"),
 	testMatch: ["**/*.test.js"],
 	testPathIgnorePatterns: [...ignores],
