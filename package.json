@@ -68,7 +68,7 @@
 		"react-intl": "2.4.0",
 		"react-redux": "5.0.7",
 		"react-test-renderer": "16.3.2",
-		"react-transition-group": "2.2.1",
+		"react-transition-group": "2.3.1",
 		"read-pkg-up": "3.0.0",
 		"recompose": "0.26.0",
 		"redux": "3.7.2",
