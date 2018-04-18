@@ -14,6 +14,11 @@ const jestConfig: { [string]: any } = {
 	testEnvironment: isWebpack ? "jsdom" : "node",
 	moduleNameMapper: {
 		"\\.(jpg|jpeg|png|gif)$": here("../__mocks__/fileMock.js"),
+		"styled-components": path.resolve(
+			process.cwd(),
+			"node_modules",
+			"styled-components",
+		),
 	},
 	modulePaths: ["src"],
 	moduleFileExtensions: ["js", "json"],

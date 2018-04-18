@@ -35,6 +35,14 @@ module.exports = {
 	},
 	resolve: {
 		modules: ["src", "node_modules"],
+		alias: {
+			// Insist on the local instance of styled-components to avoid duplicates
+			"styled-components": path.resolve(
+				process.cwd(),
+				"node_modules",
+				"styled-components",
+			),
+		},
 	},
 	plugins: [
 		// This makes it possible for us to safely use env vars on our code
