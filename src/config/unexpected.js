@@ -1,6 +1,6 @@
-// @flow
 const unexpected = require("unexpected");
 const unexpectedReact = require("unexpected-react");
+const unexpectedStyled = require("./unexpected-styled");
 const unexpectedSinon = require("unexpected-sinon");
 const unexpectedImmutable = require("unexpected-immutable");
 const Immutable = require("immutable");
@@ -8,6 +8,7 @@ const Immutable = require("immutable");
 global.expect = unexpected
 	.clone()
 	.use(unexpectedReact)
+	.use(unexpectedStyled)
 	.use(unexpectedSinon)
 	.use(unexpectedImmutable)
 	.addAssertion(

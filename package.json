@@ -12,6 +12,7 @@
 	"scripts": {
 		"test": "flow-node src test",
 		"build": "flow-node src build",
+		"watch": "flow-node src build --watch",
 		"precommit": "lint-staged",
 		"prepare": "flow-node src build"
 	},
