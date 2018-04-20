@@ -1,5 +1,5 @@
 const eslintrc = {
-	extends: ["plugin:flowtype/recommended", "react-app"],
+	extends: ["react-app"],
 	rules: {
 		"jsx-a11y/href-no-hash": "off",
 	},

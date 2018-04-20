@@ -13,10 +13,7 @@ const envTargets = isTest
 const envOptions = { loose: true, targets: envTargets };
 
 module.exports = {
-	presets: [
-		[require.resolve("babel-preset-env"), envOptions],
-		require.resolve("babel-preset-flow"),
-	],
+	presets: [[require.resolve("babel-preset-env"), envOptions]],
 	plugins: [
 		isReact ? require.resolve("babel-plugin-transform-react-jsx") : null,
 		isReact ? require.resolve("babel-plugin-styled-components") : null,
