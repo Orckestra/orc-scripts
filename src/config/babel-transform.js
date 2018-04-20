@@ -1,4 +1,3 @@
-// @flow
 const babelJest = require("babel-jest");
 const config = require("./babelrc");
 

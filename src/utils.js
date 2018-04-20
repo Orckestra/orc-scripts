@@ -1,4 +1,3 @@
-// @flow
 const fs = require("fs");
 const path = require("path");
 const arrify = require("arrify");
@@ -29,8 +28,8 @@ const { pkg, path: pkgPath } = readPkgUp.sync({
 
 const appDirectory = path.dirname(pkgPath);
 
-const fromRoot = (...p: string[]) => path.join(appDirectory, ...p);
-const hasFile = (...p: string[]) => fs.existsSync(fromRoot(...p));
+const fromRoot = (...p) => path.join(appDirectory, ...p);
+const hasFile = (...p) => fs.existsSync(fromRoot(...p));
 
 const hasPkgProp = props => arrify(props).some(prop => has(pkg, prop));
 
@@ -42,10 +41,9 @@ const hasDep = hasPkgSubProp("dependencies");
 const hasDevDep = hasPkgSubProp("devDependencies");
 const hasAnyDep = args => [hasDep, hasDevDep, hasPeerDep].some(fn => fn(args));
 
-const ifAnyDep = (deps: string[] | string, t: any, f: any) =>
-	hasAnyDep(arrify(deps)) ? t : f;
+const ifAnyDep = (deps, t, f) => (hasAnyDep(arrify(deps)) ? t : f);
 
-function parseEnv(name: string, def: any) {
+function parseEnv(name, def) {
 	if (envIsSet(name)) {
 		try {
 			return JSON.parse(process.env[name] || "<fail>");
@@ -65,11 +63,8 @@ function envIsSet(name) {
 }
 
 function resolveBin(
-	modName: string,
-	{
-		executable = modName,
-		cwd = process.cwd(),
-	}: { executable?: string, cwd?: string } = {},
+	modName,
+	{ executable = modName, cwd = process.cwd() } = {},
 ) {
 	let pathFromWhich;
 	try {

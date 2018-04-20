@@ -1,4 +1,3 @@
-// @flow
 const path = require("path");
 const { resolveBin } = require("../../utils");
 
@@ -29,23 +28,5 @@ fs.unlinkSync(tempConfPath);
 
 if (result.status !== 0) {
 	console.error("Babel finished with non-zero exit code", result.status);
-	process.exit(result.status);
 }
-
-if (args.includes("--no-flow")) {
-	process.exit(result.status);
-}
-
-const flowResult = spawn.sync(
-	resolveBin("flow-bin", { executable: "flow" }),
-	["gen-flow-files", ...outDir, ...ignore, "src"],
-	{ stdio: "inherit" },
-);
-
-if (result.status !== 0) {
-	console.error(
-		"Flow typing generation finished with non-zero exit code",
-		result.status,
-	);
-}
-process.exit(flowResult.status);
+process.exit(result.status);

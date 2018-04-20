@@ -1,4 +1,3 @@
-// @flow
 const path = require("path");
 const { parseEnv, hasFile, hasPkgProp, fromRoot } = require("../utils");
 const isWebpack = parseEnv("BUILD_WEBPACK", false);
@@ -9,7 +8,7 @@ const useBuiltInBabelConfig = !hasFile(".babelrc") && !hasPkgProp("babel");
 
 const ignores = ["/node_modules/"];
 
-const jestConfig: { [string]: any } = {
+const jestConfig = {
 	roots: [fromRoot("src")],
 	testEnvironment: isWebpack ? "jsdom" : "node",
 	moduleNameMapper: {

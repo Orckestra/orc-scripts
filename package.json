@@ -10,20 +10,13 @@
 		"npm": ">= 5"
 	},
 	"scripts": {
-		"test": "flow-node src test",
-		"build": "flow-node src build",
-		"watch": "flow-node src build --watch",
+		"test": "node src test",
+		"build": "node src build",
+		"watch": "node src build --watch",
 		"precommit": "lint-staged",
-		"prepare": "flow-node src build"
+		"prepare": "node src build"
 	},
-	"files": [
-		"dist",
-		"flow-typed",
-		"webpack.js",
-		"eslint.js",
-		"prettier.js",
-		"jest.js"
-	],
+	"files": ["dist", "webpack.js", "eslint.js", "prettier.js", "jest.js"],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/Orckestra/orc-scripts.git"
@@ -54,7 +47,6 @@
 		"eslint-plugin-jsx-a11y": "6.0.3",
 		"eslint-plugin-react": "7.7.0",
 		"file-loader": "1.1.11",
-		"flow-bin": "^0.70.0",
 		"husky": "0.14.3",
 		"img-loader": "2.0.1",
 		"immutable": "4.0.0-rc.9",
@@ -90,10 +82,7 @@
 		"webpack-dev-server": "3.1.3"
 	},
 	"lint-staged": {
-		"!(flow-typed/)*.{js,json,md}": ["prettier --write", "git add"],
-		"!(flow-typed/)*.js": ["eslint"]
-	},
-	"devDependencies": {
-		"flow-remove-types": "^1.2.3"
+		"*.{js,json,md}": ["prettier --write", "git add"],
+		"*.js": ["eslint"]
 	}
 }

@@ -1,4 +1,3 @@
-// @flow
 const webpack = require("webpack");
 const path = require("path");
 const { parseEnv } = require("../utils");

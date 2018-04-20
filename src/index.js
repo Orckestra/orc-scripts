@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// @flow
+
 require("dotenv").config();
 
 global.amOrcScripts = /orc-scripts$/.test(require("pkg-dir").sync() || "");
