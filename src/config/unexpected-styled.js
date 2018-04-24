@@ -24,22 +24,30 @@ module.exports = {
 				},
 			)
 			.addAssertion(
-				"<RenderedSCElement> when extracting style text <assertion?>",
-				function(expect, element) {
-					const sheet = document.querySelector("style[data-styled-components]")
-						.sheet;
+				"<string> as a selector to have style rules <assertion?>",
+				function(expect, selector) {
+					expect.errorMode = "nested";
+					const sheet = document.querySelector("style").sheet;
 					let i = 0,
 						commandList = "";
 					while (i < sheet.cssRules.length) {
-						const selector = sheet.cssRules[i].selectorText;
-						if (
-							selector.indexOf("." + element.state.generatedClassName) !== -1
-						) {
+						const ruleSelector = sheet.cssRules[i].selectorText;
+						if (ruleSelector.indexOf(selector) !== -1) {
 							commandList += sheet.cssRules[i].cssText;
 						}
 						i += 1;
 					}
 					return expect.shift(commandList);
+				},
+			)
+			.addAssertion(
+				"<RenderedSCElement> when extracting style rules <assertion?>",
+				function(expect, element, ...assertion) {
+					return expect(
+						"." + element.state.generatedClassName,
+						"as a selector to have style rules",
+						...assertion,
+					);
 				},
 			)
 			.addAssertion(
@@ -49,7 +57,7 @@ module.exports = {
 						element,
 						"when deeply rendered",
 						"finding first styled component",
-						"when extracting style text",
+						"when extracting style rules",
 						...assertion,
 					);
 				},
