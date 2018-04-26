@@ -35,12 +35,13 @@ module.exports = {
 	resolve: {
 		modules: ["src", "node_modules"],
 		alias: {
-			// Insist on the local instance of styled-components to avoid duplicates
+			// Insist on the local instances of styled-components and react-intl to avoid duplicates
 			"styled-components": path.resolve(
 				process.cwd(),
 				"node_modules",
 				"styled-components",
 			),
+			"react-intl": path.resolve(process.cwd(), "node_modules", "react-intl"),
 		},
 	},
 	plugins: [
