@@ -18,6 +18,12 @@ module.exports = {
 		require.resolve("babel-plugin-transform-es2015-template-literals"),
 		isReact ? require.resolve("babel-plugin-transform-react-jsx") : null,
 		isReact ? require.resolve("babel-plugin-styled-components") : null,
+		isReact
+			? [
+					require.resolve("babel-plugin-react-intl-auto"),
+					{ removePrefix: "src", filebase: true },
+			  ]
+			: null,
 		require.resolve("babel-plugin-transform-object-rest-spread"),
 	].filter(x => !!x),
 };

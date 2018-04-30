@@ -1,6 +1,6 @@
 # Script and dependency toolbox for Orckestra web applications
 
-This package contains a standard set of dependencies and tooling for web applications. It is based on [`kcd-scripts`](https://github.com/kentcdodds/kcd-scripts) (copyright &copy; 2017 Kent C. Dodds, licensed via MIT License).
+This package contains a standard set of dependencies and tooling for web applications. It is based on [`kcd-scripts`](https://github.com/kentcdodds/kcd-scripts) (copyright &copy; 2017 Kent C. Dodds, licensed via MIT License) in both concept and code.
 
 ## Installation and use
 
@@ -8,14 +8,25 @@ Installing this package is done via npm: `npm install orc-scripts`. This will al
 
 ### Scripts
 
-To use the scripts, you can add entries to your package.json under "scripts", invoking the `orc-scripts` command. A typical "scripts" section might look like this:
+Where one exists, these scripts are intended to perform the role of the eponymous `npm` script. The scripts are invoked by running `orc-scripts <script> <options>`.
+
+`build`: Runs the build process, creating the distribution files for the package. This is typically used for preparing a release. Adding the `--watch` option starts a watch for file changes, rebuilding when a source file changes. This is useful for developing in a linked library. For web apps, this will use Webpack, for libraries, it uses Babel.
+
+`start`: Starts a web server locally, with hot module reloading enabled. Intended to support development work. You may set a specific port using the `--port <port>` option.
+
+`test`: Starts the Jest test runner in watch mode. This will run and rerun all tests relating to files changed from the git HEAD by default. Adding the `--no-watch` option instead runs all tests once and exits. The `--coverage` option generates a code coverage report for the test suite under `coverage/`. Jest command-line options are in general applicable.
+
+`extract-messages`: Searches through all JS files in the `src/` directory, extracting any `react-intl` messages found. It creates JSON files under `src/translations/` with all keys, using default values to populate the default language (by default 'en'). Other languages are left empty. Existing keys are not changed. Use this to ensure that translations are made. This script requires the presence of a `.babelrc` file; the simplest way to solve this is to create a `.babelrc.js` file containing only `module.exports = require("orc-scripts/babel");`.
+
+The easiest way to use these scripts is to add entries to your package.json under "scripts", invoking the `orc-scripts` command. A typical "scripts" section might look like this:
 
 ```json
 {
 	"scripts": {
 		"build": "orc-scripts build",
 		"start": "orc-scripts start",
-		"test": "orc-scripts test"
+		"test": "orc-scripts test",
+		"coverage": "orc-scripts test --coverage"
 	}
 }
 ```

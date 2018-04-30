@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
+const pkgConf = require("pkg-conf");
 const { parseEnv } = require("../utils");
 
 const ASSET_PATH = process.env.ASSET_PATH || "/";
@@ -47,6 +48,15 @@ module.exports = {
 	],
 	devtool: undefined,
 };
+
+const locales = Object.values(pkgConf.sync("locales"));
+if (locales.length) {
+	module.exports.plugins.push(
+		new webpack.DefinePlugin({
+			"process.env.SUPPORTED_LOCALES": JSON.stringify(locales),
+		}),
+	);
+}
 
 if (parseEnv("NODE_ENV") === "development") {
 	module.exports.devtool = "inline-source-map";
