@@ -33,16 +33,11 @@ module.exports = {
 		],
 	},
 	resolve: {
-		modules: ["src", "node_modules"],
-		alias: {
-			// Insist on the local instances of styled-components and react-intl to avoid duplicates
-			"styled-components": path.resolve(
-				process.cwd(),
-				"node_modules",
-				"styled-components",
-			),
-			"react-intl": path.resolve(process.cwd(), "node_modules", "react-intl"),
-		},
+		modules: [
+			// Always resolve in local src and node_modules
+			path.resolve(process.cwd(), "src"),
+			path.resolve(process.cwd(), "node_modules"),
+		],
 	},
 	plugins: [
 		// This makes it possible for us to safely use env vars on our code
