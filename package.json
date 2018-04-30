@@ -91,7 +91,12 @@
 		"whatwg-fetch": "2.0.4"
 	},
 	"lint-staged": {
-		"*.{js,json,md}": ["prettier --write", "git add"],
-		"*.js": ["eslint"]
+		"*.{js,json,md}": [
+			"prettier --write",
+			"git add"
+		],
+		"*.js": [
+			"eslint"
+		]
 	}
 }
