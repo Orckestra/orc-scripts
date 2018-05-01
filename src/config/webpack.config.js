@@ -53,7 +53,7 @@ const locales = Object.values(pkgConf.sync("locales"));
 if (locales.length) {
 	module.exports.plugins.push(
 		new webpack.DefinePlugin({
-			"process.env.SUPPORTED_LOCALES": JSON.stringify(locales),
+			SUPPORTED_LOCALES: JSON.stringify(locales),
 		}),
 	);
 }
