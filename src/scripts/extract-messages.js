@@ -10,9 +10,12 @@ if (!locales.length) {
 }
 
 console.log("Extracting react-intl messages for", locales.join(", "));
+console.log("Default locale is", locales[0]);
 
 const baseDir = path.resolve(process.cwd(), "src");
 const input = path.join(baseDir, "**", "*.js");
 const buildDir = path.resolve(baseDir, "translations");
 
-extractReactIntlMessages(locales, input, buildDir);
+extractReactIntlMessages(locales, input, buildDir, {
+	defaultLocale: locales[0],
+});

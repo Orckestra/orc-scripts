@@ -16,7 +16,7 @@ Where one exists, these scripts are intended to perform the role of the eponymou
 
 `test`: Starts the Jest test runner in watch mode. This will run and rerun all tests relating to files changed from the git HEAD by default. Adding the `--no-watch` option instead runs all tests once and exits. The `--coverage` option generates a code coverage report for the test suite under `coverage/`. Jest command-line options are in general applicable.
 
-`extract-messages`: Searches through all JS files in the `src/` directory, extracting any `react-intl` messages found. It creates JSON files under `src/translations/` with all keys, using default values to populate the default language (by default 'en'). Other languages are left empty. Existing keys are not changed. Use this to ensure that translations are made. This script requires the presence of a `.babelrc` file; the simplest way to solve this is to create a `.babelrc.js` file containing only `module.exports = require("orc-scripts/babel");`.
+`extract-messages`: Searches through all JS files in the `src/` directory, extracting any `react-intl` messages found. It creates JSON files under `src/translations/` with all keys, using default values to populate the default language (by default the first supported locale). Other languages are left empty. Existing keys are not changed. Use this to ensure that translations are made. This script requires the presence of a `.babelrc` file; the simplest way to solve this is to create a `.babelrc.js` file containing only `module.exports = require("orc-scripts/babel");`.
 
 The easiest way to use these scripts is to add entries to your package.json under "scripts", invoking the `orc-scripts` command. A typical "scripts" section might look like this:
 
