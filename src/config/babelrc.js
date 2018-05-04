@@ -15,9 +15,9 @@ const envOptions = { loose: true, targets: envTargets };
 module.exports = {
 	presets: [[require.resolve("babel-preset-env"), envOptions]],
 	plugins: [
+		isReact ? require.resolve("babel-plugin-styled-components") : null,
 		require.resolve("babel-plugin-transform-es2015-template-literals"),
 		isReact ? require.resolve("babel-plugin-transform-react-jsx") : null,
-		isReact ? require.resolve("babel-plugin-styled-components") : null,
 		isReact
 			? [
 					require.resolve("babel-plugin-react-intl-auto"),
