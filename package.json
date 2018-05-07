@@ -63,7 +63,7 @@
 		"immutable": "4.0.0-rc.9",
 		"is-ci": "1.1.0",
 		"jest": "22.4.3",
-		"lint-staged": "7.0.5",
+		"lint-staged": "7.1.0",
 		"pkg-conf": "2.1.0",
 		"pkg-dir": "^2.0.0",
 		"prettier": "1.12.1",
