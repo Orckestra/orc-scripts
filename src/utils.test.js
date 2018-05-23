@@ -109,7 +109,7 @@ describe("utils", () => {
 	describe("resolveBin", () => {
 		it("exists", () => expect(resolveBin, "to be a function"));
 
-		test(`resolveBin resolves to the full path when it's not in $PATH`, () => {
+		test.skip(`resolveBin resolves to the full path when it's not in $PATH`, () => {
 			expect(
 				resolveBin("jest"),
 				"to be",
