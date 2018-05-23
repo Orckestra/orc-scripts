@@ -1,6 +1,6 @@
 const path = require("path");
 const { parseEnv, hasFile, hasPkgProp, fromRoot } = require("../utils");
-const isWebpack = parseEnv("BUILD_WEBPACK", false);
+const isWeb = parseEnv("BUILD_REACT", parseEnv("BUILD_WEBPACK", false));
 
 const here = p => path.join(__dirname, p);
 
@@ -10,7 +10,7 @@ const ignores = ["/node_modules/"];
 
 const jestConfig = {
 	roots: [fromRoot("src")],
-	testEnvironment: isWebpack ? "jsdom" : "node",
+	testEnvironment: isWeb ? "jsdom" : "node",
 	moduleNameMapper: {
 		"\\.(jpg|jpeg|png|gif)$": here("../__mocks__/fileMock.js"),
 		"styled-components": path.resolve(
@@ -22,14 +22,13 @@ const jestConfig = {
 	modulePaths: ["src"],
 	moduleFileExtensions: ["js", "json"],
 	collectCoverageFrom: ["src/**/*.js"],
-	setupFiles: [here("jsdom.js")],
 	setupTestFrameworkScriptFile: here("unexpected.js"),
 	testMatch: ["**/*.test.js"],
 	testPathIgnorePatterns: [...ignores],
 	verbose: true,
 };
 
-if (isWebpack) {
+if (isWeb) {
 	jestConfig["testURL"] = "http://localhost:8000/";
 }
 
