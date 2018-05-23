@@ -1,6 +1,6 @@
 # Script and dependency toolbox for Orckestra web applications
 
-[![Build Status](https://travis-ci.org/Orckestra/orc-scripts.svg?branch=master)](https://travis-ci.org/Orckestra/orc-scripts)
+[![Build Status](https://travis-ci.org/Orckestra/orc-scripts.svg?branch=master)](https://travis-ci.org/Orckestra/orc-scripts) [![Coverage Status](https://coveralls.io/repos/github/Orckestra/orc-scripts/badge.svg?branch=master)](https://coveralls.io/github/Orckestra/orc-scripts?branch=master)
 
 This package contains a standard set of dependencies and tooling for web applications. It is based on [`kcd-scripts`](https://github.com/kentcdodds/kcd-scripts) (copyright &copy; 2017 Kent C. Dodds, licensed via MIT License) in both concept and code.
 
