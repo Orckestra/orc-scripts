@@ -11,6 +11,8 @@
 	},
 	"scripts": {
 		"test": "node src test",
+		"coverage": "node src test --coverage",
+		"coveralls": "cat coverage/lcov.info | coveralls",
 		"build": "node src build",
 		"watch": "node src build --watch",
 		"precommit": "lint-staged",
@@ -48,6 +50,7 @@
 		"babel-preset-env": "1.7.0",
 		"babel-preset-react-app": "3.1.1",
 		"core-js": "2.5.6",
+		"coveralls": "3.0.1",
 		"cross-spawn": "6.0.5",
 		"dotenv": "5.0.1",
 		"eslint": "4.19.1",
