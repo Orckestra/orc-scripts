@@ -25,5 +25,6 @@ module.exports = {
 			  ]
 			: null,
 		require.resolve("babel-plugin-transform-object-rest-spread"),
+		require.resolve("babel-plugin-transform-es2015-computed-properties"),
 	].filter(x => !!x),
 };
