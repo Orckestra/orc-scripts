@@ -20,6 +20,12 @@ const options = {
 
 if (HOST !== "localhost") {
 	options.public = HOST;
+}
+if (
+	HOST !== "localhost" ||
+	args.indexOf("--https") !== -1 ||
+	process.env.HTTPS
+) {
 	options.https = true;
 }
 
