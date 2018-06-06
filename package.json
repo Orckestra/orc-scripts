@@ -60,7 +60,7 @@
 		"eslint-plugin-import": "2.12.0",
 		"eslint-plugin-jsx-a11y": "6.0.3",
 		"eslint-plugin-react": "7.9.1",
-		"extract-react-intl-messages": "0.8.2",
+		"extract-react-intl-messages": "0.9.0",
 		"file-loader": "1.1.11",
 		"husky": "0.14.3",
 		"img-loader": "3.0.0",
