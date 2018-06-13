@@ -76,6 +76,7 @@
 		"react": "16.4.0",
 		"react-dom": "16.4.0",
 		"react-intl": "2.4.0",
+		"react-measure": "2.0.2",
 		"react-redux": "5.0.7",
 		"react-test-renderer": "16.4.0",
 		"react-transition-group": "2.3.1",
