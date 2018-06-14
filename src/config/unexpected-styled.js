@@ -16,10 +16,19 @@ module.exports = {
 			.addAssertion(
 				"<RenderedReactElement> finding first styled component <assertion?>",
 				function(expect, element) {
-					const styledElements = ReactTestUtils.findAllInRenderedTree(
-						element,
-						comp => comp && comp.state && comp.state.generatedClassName,
-					);
+					expect.errorMode = "nested";
+					let styledElements;
+					try {
+						styledElements = ReactTestUtils.findAllInRenderedTree(
+							element,
+							comp => comp && comp.state && comp.state.generatedClassName,
+						);
+					} catch (e) {
+						expect.fail(e);
+					}
+					if (styledElements.length < 1) {
+						expect.fail("No styled component was found in {0}", element);
+					}
 					return expect.shift(styledElements[0]);
 				},
 			)
@@ -28,14 +37,12 @@ module.exports = {
 				function(expect, selector) {
 					expect.errorMode = "nested";
 					const sheet = document.querySelector("style").sheet;
-					let i = 0,
-						commandList = "";
-					while (i < sheet.cssRules.length) {
+					let commandList = "";
+					for (let i = 0; i < sheet.cssRules.length; i += 1) {
 						const ruleSelector = sheet.cssRules[i].selectorText;
 						if (ruleSelector.indexOf(selector) !== -1) {
 							commandList += sheet.cssRules[i].cssText;
 						}
-						i += 1;
 					}
 					return expect.shift(commandList);
 				},
@@ -43,6 +50,7 @@ module.exports = {
 			.addAssertion(
 				"<RenderedSCElement> when extracting style rules <assertion?>",
 				function(expect, element, ...assertion) {
+					expect.errorMode = "nested";
 					return expect(
 						"." + element.state.generatedClassName,
 						"as a selector to have style rules",
@@ -53,6 +61,7 @@ module.exports = {
 			.addAssertion(
 				"<ReactElement> to render style rules <assertion?>",
 				function(expect, element, ...assertion) {
+					expect.errorMode = "nested";
 					return expect(
 						element,
 						"when deeply rendered",
