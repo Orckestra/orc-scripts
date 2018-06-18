@@ -36,15 +36,18 @@ module.exports = {
 				"<string> as a selector to have style rules <assertion?>",
 				function(expect, selector) {
 					expect.errorMode = "nested";
-					const sheet = document.querySelector("style").sheet;
-					let commandList = "";
-					for (let i = 0; i < sheet.cssRules.length; i += 1) {
-						const ruleSelector = sheet.cssRules[i].selectorText;
-						if (ruleSelector.indexOf(selector) !== -1) {
-							commandList += sheet.cssRules[i].cssText;
+					const sheets = document.querySelectorAll("style");
+					let declarations = "";
+					for (let j = 0; j < sheets.length; j += 1) {
+						const sheet = sheets[j].sheet;
+						for (let i = 0; i < sheet.cssRules.length; i += 1) {
+							const ruleSelector = sheet.cssRules[i].selectorText;
+							if (ruleSelector.indexOf(selector) !== -1) {
+								declarations += sheet.cssRules[i].cssText;
+							}
 						}
 					}
-					return expect.shift(commandList);
+					return expect.shift(declarations);
 				},
 			)
 			.addAssertion(
