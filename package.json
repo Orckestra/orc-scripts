@@ -1,6 +1,6 @@
 {
 	"name": "orc-scripts",
-	"version": "0.3.32",
+	"version": "0.3.33",
 	"description": "Scripts toolbox for Orckestra",
 	"bin": {
 		"orc-scripts": "dist/index.js"
