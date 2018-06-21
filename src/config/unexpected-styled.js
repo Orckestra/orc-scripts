@@ -41,7 +41,7 @@ module.exports = {
 					for (let j = 0; j < sheets.length; j += 1) {
 						const sheet = sheets[j].sheet;
 						for (let i = 0; i < sheet.cssRules.length; i += 1) {
-							const ruleSelector = sheet.cssRules[i].selectorText;
+							const ruleSelector = sheet.cssRules[i].selectorText || "";
 							if (ruleSelector.indexOf(selector) !== -1) {
 								declarations += sheet.cssRules[i].cssText;
 							}
