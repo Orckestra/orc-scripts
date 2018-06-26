@@ -68,7 +68,7 @@
 		"img-loader": "3.0.0",
 		"immutable": "4.0.0-rc.9",
 		"is-ci": "1.1.0",
-		"jest": "23.1.0",
+		"jest": "23.2.0",
 		"lint-staged": "7.2.0",
 		"normalizr": "3.2.4",
 		"pkg-conf": "2.1.0",
