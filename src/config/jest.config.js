@@ -10,7 +10,7 @@ const ignores = ["/node_modules/"];
 
 const jestConfig = {
 	roots: [fromRoot("src")],
-	testEnvironment: isWeb ? "jsdom" : "node",
+	testEnvironment: isWeb ? "jest-environment-jsdom-global" : "node",
 	moduleNameMapper: {
 		"\\.(jpg|jpeg|png|gif)$": here("../__mocks__/fileMock.js"),
 		"styled-components": path.resolve(

@@ -5,6 +5,7 @@ const eslintrc = {
 	},
 	globals: {
 		SUPPORTED_LOCALES: false,
+		jsdom: false,
 	},
 };
 
