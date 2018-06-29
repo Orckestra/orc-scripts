@@ -17,6 +17,7 @@ module.exports = {
 	plugins: [
 		isReact ? require.resolve("babel-plugin-styled-components") : null,
 		require.resolve("babel-plugin-transform-es2015-template-literals"),
+		isReact ? require.resolve("react-hot-loader/babel") : null,
 		isReact ? require.resolve("babel-plugin-transform-react-jsx") : null,
 		isReact
 			? [
