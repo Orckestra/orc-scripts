@@ -53,6 +53,10 @@ This will run the `lint-staged` tool whenever you commit files to git. Configure
 
 This instructs `lint-staged` to run `prettier` on staged files, rewriting the file to specifications, and then re-staging it for the commit. This ensures that all code in the app lives up to the strict standards set by `prettier`.
 
+### Testing
+
+Testing with Jest and `unexpected` is built into the toolbox, allowing test setup to be as simple as adding a file with a `.test.js` suffix to your file tree. A number of [plugins and custom assertions](docs/assertions.md) are provided as well.
+
 ## License
 
 Copyright &copy; 2018 Orckestra Inc.
