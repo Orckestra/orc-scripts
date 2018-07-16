@@ -29,4 +29,19 @@ global.expect = unexpected
 				Immutable.fromJS(initialState),
 			);
 		},
-	);
+	)
+	.addAssertion("<ReactShallowRenderer> has elements <assertion?>", function(
+		expect,
+		subject,
+	) {
+		expect.errorMode = "nested";
+		const elements = subject.getRenderOutput();
+		expect.shift(elements);
+	})
+	.addAssertion("<ReactElement> renders elements <assertion?>", function(
+		expect,
+		subject,
+		...assertions
+	) {
+		return expect(subject, "when rendered", "has elements", ...assertions);
+	});
