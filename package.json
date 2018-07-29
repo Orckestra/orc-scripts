@@ -76,7 +76,7 @@
 		"pkg-conf": "2.1.0",
 		"pkg-dir": "^3.0.0",
 		"polished": "1.9.3",
-		"prettier": "1.13.7",
+		"prettier": "1.14.0",
 		"react": "16.4.1",
 		"react-dom": "16.4.1",
 		"react-hot-loader": "4.3.4",
