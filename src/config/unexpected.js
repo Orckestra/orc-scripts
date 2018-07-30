@@ -32,16 +32,19 @@ global.expect = unexpected
 	)
 	.addAssertion("<ReactShallowRenderer> has elements <assertion?>", function(
 		expect,
+		renderer,
+	) {
+		expect.errorMode = "nested";
+		return expect.shift(renderer.getRenderOutput());
+	})
+	.addAssertion("<ReactElement> renders elements <assertion>", function(
+		expect,
 		subject,
 	) {
 		expect.errorMode = "nested";
-		const elements = subject.getRenderOutput();
-		expect.shift(elements);
-	})
-	.addAssertion("<ReactElement> renders elements <assertion?>", function(
-		expect,
-		subject,
-		...assertions
-	) {
-		return expect(subject, "when rendered", "has elements", ...assertions);
+		return expect(subject, "when rendered", "has elements").then(function(
+			elements,
+		) {
+			return expect.shift(elements);
+		});
 	});
