@@ -83,7 +83,7 @@
 		"react-intl": "2.4.0",
 		"react-measure": "2.0.2",
 		"react-redux": "5.0.7",
-		"react-test-renderer": "16.4.1",
+		"react-test-renderer": "16.4.2",
 		"react-transition-group": "2.4.0",
 		"read-pkg-up": "4.0.0",
 		"recompose": "0.27.1",
