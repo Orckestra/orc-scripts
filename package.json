@@ -86,7 +86,7 @@
 		"react-test-renderer": "16.4.2",
 		"react-transition-group": "2.4.0",
 		"read-pkg-up": "4.0.0",
-		"recompose": "0.27.1",
+		"recompose": "0.28.1",
 		"redux": "4.0.0",
 		"redux-api-middleware": "2.3.0",
 		"redux-immutable": "4.0.0",
