@@ -63,7 +63,7 @@
 		"eslint-plugin-jsx-a11y": "6.1.1",
 		"eslint-plugin-react": "7.11.1",
 		"extract-react-intl-messages": "0.10.0",
-		"file-loader": "1.1.11",
+		"file-loader": "2.0.0",
 		"husky": "0.14.3",
 		"img-loader": "3.0.0",
 		"immutable": "4.0.0-rc.9",
