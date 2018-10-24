@@ -82,7 +82,7 @@
 		"react-helmet": "5.2.0",
 		"react-hot-loader": "4.3.11",
 		"react-intl": "2.4.0",
-		"react-measure": "2.1.0",
+		"react-measure": "2.1.2",
 		"react-redux": "5.0.7",
 		"react-test-renderer": "16.4.2",
 		"react-transition-group": "2.4.0",
