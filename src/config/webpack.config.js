@@ -7,7 +7,12 @@ const ASSET_PATH = process.env.ASSET_PATH || "/";
 
 module.exports = {
 	mode: "development",
-	entry: path.resolve("./src/index.js"),
+	entry: [
+		"url-polyfill",
+		"core-js",
+		"whatwg-fetch",
+		path.resolve("./src/index.js"),
+	],
 	output: {
 		filename: "bundle.js",
 		path: path.resolve(process.cwd(), "dist"),
