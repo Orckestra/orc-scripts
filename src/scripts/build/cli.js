@@ -20,8 +20,15 @@ const config = useBuiltinConfig
 const ignore = args.includes("--ignore") ? [] : ["--ignore", ".test.js"];
 
 const result = spawn.sync(
-	resolveBin("babel-cli", { executable: "babel" }),
-	[...outDir, ...copyFiles, ...ignore, ...config, "src"].concat(args),
+	"node",
+	[
+		resolveBin("@babel/cli", { executable: "babel" }),
+		...outDir,
+		...copyFiles,
+		...ignore,
+		...config,
+		"src",
+	].concat(args),
 	{ stdio: "inherit" },
 );
 
