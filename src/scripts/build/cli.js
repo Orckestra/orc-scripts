@@ -14,7 +14,7 @@ const copyFiles = args.includes("--no-copy-files") ? [] : ["--copy-files"];
 const useBuiltinConfig =
 	!args.includes("--presets") && !hasFile(".babelrc") && !hasPkgProp("babel");
 const config = useBuiltinConfig
-	? ["--presets", here("../../config/babelrc.js")]
+	? ["--presets", here("../../config/babel-preset.js")]
 	: [];
 
 const ignore = args.includes("--ignore") ? [] : ["--ignore", ".test.js"];
