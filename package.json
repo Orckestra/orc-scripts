@@ -88,7 +88,7 @@
 		"read-pkg-up": "4.0.0",
 		"recompose": "0.30.0",
 		"redux": "4.0.1",
-		"redux-api-middleware": "2.3.0",
+		"redux-api-middleware": "3.0.0",
 		"redux-immutable": "4.0.0",
 		"redux-little-router": "15.1.2",
 		"reselect": "4.0.0",
