@@ -75,7 +75,7 @@
 		"pkg-conf": "2.1.0",
 		"pkg-dir": "^3.0.0",
 		"polished": "2.3.0",
-		"prettier": "1.15.1",
+		"prettier": "1.15.2",
 		"react": "16.5.2",
 		"react-dom": "16.5.2",
 		"react-helmet": "5.2.0",
