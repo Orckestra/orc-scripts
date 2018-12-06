@@ -82,7 +82,7 @@
 		"react-hot-loader": "^4.3.12",
 		"react-intl": "^2.7.2",
 		"react-measure": "^2.1.2",
-		"react-redux": "^5.1.0",
+		"react-redux": "^6.0.0",
 		"react-test-renderer": "16.5.2",
 		"react-transition-group": "^2.5.0",
 		"read-pkg-up": "^4.0.0",
