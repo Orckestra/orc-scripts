@@ -3,7 +3,12 @@ const unexpectedReact = require("unexpected-react");
 const unexpectedStyled = require("./unexpected-styled");
 const unexpectedSinon = require("unexpected-sinon");
 const unexpectedImmutable = require("unexpected-immutable");
+const React = require("react");
 const Immutable = require("immutable");
+const enzyme = require("enzyme");
+const Adapter = require("enzyme-adapter-react-16");
+
+enzyme.configure({ adapter: new Adapter() });
 
 global.expect = unexpected
 	.clone()
@@ -47,4 +52,17 @@ global.expect = unexpected
 		) {
 			return expect.shift(elements);
 		});
+	})
+	.addAssertion("<function> as a React component <assertion?>", function(
+		expect,
+		Subject,
+		assertions,
+	) {
+		expect.errorMode = "bubble";
+		try {
+			const element = React.createElement(Subject);
+			return expect.shift(element);
+		} catch (e) {
+			return expect.fail("Could not create element. ", e.message);
+		}
 	});
