@@ -5,7 +5,7 @@ const eslintrc = {
 	},
 	globals: {
 		SUPPORTED_LOCALES: false,
-		OCSApiHost: false,
+		OCSApiPath: false,
 		jsdom: false,
 	},
 };
