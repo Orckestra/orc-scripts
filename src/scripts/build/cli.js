@@ -17,7 +17,9 @@ const config = useBuiltinConfig
 	? ["--presets", here("../../config/babel-preset.js")]
 	: [];
 
-const ignore = args.includes("--ignore") ? [] : ["--ignore", ".test.js"];
+const verbosity = args.includes("--quiet") ? [] : ["--verbose"];
+
+const ignore = args.includes("--ignore") ? [] : ["--ignore", "**/*.test.js"];
 
 const result = spawn.sync(
 	"node",
@@ -26,6 +28,7 @@ const result = spawn.sync(
 		...outDir,
 		...copyFiles,
 		...ignore,
+		...verbosity,
 		...config,
 		"src",
 	].concat(args),
