@@ -104,7 +104,7 @@
     "styled-transition-group": "^1.0.0",
     "svg-inline-loader": "^0.8.0",
     "unexpected": "^11.1.0",
-    "unexpected-immutable": "^0.2.6",
+    "unexpected-immutable": "^0.3.1",
     "unexpected-react": "^5.0.2",
     "unexpected-sinon": "^10.10.1",
     "url-pattern": "1.0.3",
