@@ -79,7 +79,7 @@
     "normalizr": "^3.3.0",
     "pkg-conf": "^2.1.0",
     "pkg-dir": "^3.0.0",
-    "polished": "^3.0.0",
+    "polished": "3.0.0",
     "prettier": "^1.15.1",
     "react": "16.5.2",
     "react-dom": "16.5.2",
