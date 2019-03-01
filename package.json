@@ -75,7 +75,7 @@
     "jest-environment-jsdom": "^24.0.0",
     "jest-environment-jsdom-global": "^1.1.0",
     "lint-staged": "^8.0.4",
-    "make-dir-cli": "1.0.0",
+    "make-dir-cli": "2.0.0",
     "normalizr": "^3.3.0",
     "pkg-conf": "^2.1.0",
     "pkg-dir": "^3.0.0",
