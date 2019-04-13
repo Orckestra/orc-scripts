@@ -86,7 +86,7 @@
     "react-hot-loader": "^4.3.12",
     "react-intl": "^2.7.2",
     "react-measure": "^2.1.2",
-    "react-redux": "^6.0.0",
+    "react-redux": "^7.0.2",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-test-renderer": "16.5.2",
