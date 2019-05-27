@@ -73,6 +73,7 @@
     "immutable": "4.0.0-rc.12",
     "is-ci": "^2.0.0",
     "jest": "^24.1.0",
+    "kalendaryo": "1.11.1",
     "lint-staged": "^8.0.4",
     "make-dir-cli": "2.0.0",
     "normalizr": "^3.3.0",
