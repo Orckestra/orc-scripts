@@ -22,9 +22,10 @@ const hasPath = (obj, keys) => {
 
 const has = (obj, keypath) => hasPath(obj, keypath.split(/[./]/));
 
-const { pkg, path: pkgPath } = readPkgUp.sync({
-	cwd: fs.realpathSync(process.cwd()),
-});
+const { package: pkg, path: pkgPath } =
+	readPkgUp.sync({
+		cwd: fs.realpathSync(process.cwd()),
+	}) || {};
 
 const appDirectory = path.dirname(pkgPath);
 
