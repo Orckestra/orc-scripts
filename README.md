@@ -37,36 +37,53 @@ The easiest way to use these scripts is to add entries to your package.json unde
 
 The toolbox contains support for `eslint` and `prettier`, both for use with development tools (such as Atom or VS Code) and in git hooks. To integrate with your development tool of choice, ensure the suitable plugin is installed if applicable, and create a config file or `package.json` entry that points to the `orc-scripts` preset for that tool (`orc-scripts/eslint`, resp. `orc-scripts/prettier`).
 
-To set up a git commit hook that runs `prettier` on all staged files, add an entry to the "scripts" section of `package.json` as follows:
+To set up a git commit hook that runs `prettier` on all staged files, add the following section to `package.json`:
 
 ```json
-	"precommit": "lint-staged"
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	}
+```
+
+This will run the `lint-staged` tool whenever you commit files to git. Configure this tool with a section in your `package.json` as follows:
+
+```json
+"li
 ```
 
-This will run the `lint-staged` tool whenever you commit files to git. Configure this tool with a section in your package.json as follows:
+This will run the `lint-staged` tool whenever you commit files to git. Configure this tool with a section in your `package.json` as follows:
 
-```json
-"lint-staged": {
-	"linters": {
-		"*.{js,json,md}": ["prettier --write", "git add"]
-	},
-	"ignore": [
-		"package.json",
-		"package-lock.json",
-		"src/translations/*.json"
-	]
-}
-```
+    "lint-staged": {
+
+    	"linters": {
+
+    		"*.{js,json,md}": ["prettier --write", "git add"]
+
+    	},
+
+    	"ignore": [
+
+    		"package.json",
+
+    		"package-lock.json",
+
+    		"src/translations/*.json"
+
+    	]
+
+    }
 
 This instructs `lint-staged` to run `prettier` on staged files, rewriting the file to specifications, and then re-staging it for the commit. This ensures that all code in the app lives up to the strict standards set by `prettier`. It will also not process package files from npm, and translation files.
 
 ### Testing
 
-Testing with Jest and `unexpected` is built into the toolbox, allowing test setup to be as simple as adding a file with a `.test.js` suffix to your file tree. A number of [plugins and custom assertions](docs/assertions.md) are provided as well.
+Testing with Jest and `unexpected` is built into the toolbox, allowing test setup to be as simple as adding a file with a `.test.js` suffix to your file tree. A number of CULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHAL are provided as well.
 
 ## License
 
-Copyright &copy; 2018 Orckestra Inc.
+Copyright COPYR 2018 Orckestra Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
