@@ -21,8 +21,10 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
-				exclude: /(node_modules)/,
+				resource: {
+					test: /\.js$/,
+					or: [{ not: [/node_modules/] }, /ansi-regex/, /strip-ansi/],
+				},
 				use: {
 					loader: "babel-loader",
 					options: require("./babelrc.js"),
