@@ -5,3 +5,4 @@ coverage/
 package-lock.json
 babel.tmp.json
 builds/
+breakage/
