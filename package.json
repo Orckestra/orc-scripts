@@ -17,7 +17,6 @@
     "watch": "node src build --watch",
     "build:clean": "npm run clean && npm run build",
     "clean": "rimraf dist && make-dir dist",
-    "precommit": "lint-staged",
     "prepublishOnly": "npm run build:clean"
   },
   "files": [
@@ -41,6 +40,7 @@
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "7.2.0",
     "@babel/plugin-transform-computed-properties": "^7.0.0",
     "@babel/plugin-transform-react-jsx": "^7.0.0",
     "@babel/plugin-transform-template-literals": "^7.0.0",
@@ -87,6 +87,7 @@
     "react-helmet": "^5.2.0",
     "react-hot-loader": "^4.3.12",
     "react-intl": "^2.7.2",
+    "react-loadable": "5.5.0",
     "react-measure": "^2.1.2",
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",
@@ -111,9 +112,11 @@
     "url-pattern": "1.0.3",
     "url-polyfill": "^1.1.0",
     "webpack": "^4.25.1",
+    "webpack-bundle-analyzer": "3.3.2",
     "webpack-dev-server": "^3.1.10",
     "whatwg-fetch": "^3.0.0"
   },
+  "sideEffects": false,
   "lint-staged": {
     "*.{js,json,md}": [
       "prettier --write",

@@ -8,13 +8,14 @@ const isReact = parseEnv("BUILD_REACT", isWebpack);
 const envTargets = isTest
 	? { node: "current" }
 	: isWebpack
-		? ["defaults", "IE 11"]
-		: { node: "4.5" };
+	? ["defaults", "IE 11"]
+	: { node: "4.5" };
 
 const envOptions = { loose: true, targets: envTargets };
 module.exports = {
 	presets: [[require.resolve("@babel/preset-env"), envOptions]],
 	plugins: [
+		require.resolve("@babel/plugin-syntax-dynamic-import"),
 		isReact ? require.resolve("babel-plugin-styled-components") : null,
 		require.resolve("@babel/plugin-transform-template-literals"),
 		isReact ? require.resolve("react-hot-loader/babel") : null,

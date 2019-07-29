@@ -6,7 +6,6 @@ const { parseEnv } = require("../utils");
 const ASSET_PATH = process.env.ASSET_PATH || "/";
 
 module.exports = {
-	mode: "development",
 	entry: [
 		"url-polyfill",
 		"core-js",
@@ -23,7 +22,12 @@ module.exports = {
 			{
 				resource: {
 					test: /\.js$/,
-					or: [{ not: [/node_modules/] }, /ansi-regex/, /strip-ansi/],
+					or: [
+						{ not: [/node_modules/] },
+						/ansi-regex/,
+						/strip-ansi/,
+						/connected-react-router/,
+					],
 				},
 				use: {
 					loader: "babel-loader",
@@ -53,7 +57,6 @@ module.exports = {
 			"process.env.ASSET_PATH": JSON.stringify(ASSET_PATH),
 		}),
 	],
-	devtool: undefined,
 };
 
 const locales = Object.values(pkgConf.sync("locales"));
@@ -65,10 +68,15 @@ if (locales.length) {
 	);
 }
 
-if (parseEnv("NODE_ENV") === "development") {
+if (parseEnv("NODE_ENV") === "production") {
+	module.exports.devtool = "source-map";
+	module.exports.mode = "production";
+} else {
 	module.exports.devtool = "inline-source-map";
+	module.exports.optimization = { usedExports: true };
 	module.exports.plugins.push(
 		new webpack.NamedModulesPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 	);
+	module.exports.mode = "development";
 }
