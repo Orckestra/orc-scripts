@@ -4,7 +4,8 @@ const isWeb = parseEnv("BUILD_REACT", parseEnv("BUILD_WEBPACK", false));
 
 const here = p => path.join(__dirname, p);
 
-const useBuiltInBabelConfig = !hasFile(".babelrc") && !hasPkgProp("babel");
+const useBuiltInBabelConfig =
+	(!hasFile(".babelrc") || !hasFile("babel.config.js")) && !hasPkgProp("babel");
 
 const ignores = ["/node_modules/"];
 
