@@ -12,7 +12,9 @@ const outDir = useSpecifiedOutDir ? [] : ["--out-dir", "dist"];
 const copyFiles = args.includes("--no-copy-files") ? [] : ["--copy-files"];
 
 const useBuiltinConfig =
-	!args.includes("--presets") && !hasFile(".babelrc") && !hasPkgProp("babel");
+	!args.includes("--presets") &&
+	(!hasFile(".babelrc") || !hasFile("babel.config.js")) &&
+	!hasPkgProp("babel");
 const config = useBuiltinConfig
 	? ["--presets", here("../../config/babel-preset.js")]
 	: [];
