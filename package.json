@@ -76,7 +76,7 @@
     "kalendaryo": "1.11.1",
     "lint-staged": "^9.0.2",
     "make-dir-cli": "2.0.0",
-    "mockdate": "2.0.3",
+    "mockdate": "2.0.4",
     "normalizr": "^3.3.0",
     "pkg-conf": "^3.0.0",
     "pkg-dir": "^4.0.0",
