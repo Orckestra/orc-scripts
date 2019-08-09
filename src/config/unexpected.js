@@ -1,6 +1,7 @@
 const unexpected = require("unexpected");
 const unexpectedReact = require("unexpected-react");
 const unexpectedStyled = require("./unexpected-styled");
+const unexpectedModule = require("./unexpected-module");
 const unexpectedSinon = require("unexpected-sinon");
 const unexpectedImmutable = require("unexpected-immutable");
 const React = require("react");
@@ -14,6 +15,7 @@ global.expect = unexpected
 	.clone()
 	.use(unexpectedReact)
 	.use(unexpectedStyled)
+	.use(unexpectedModule)
 	.use(unexpectedSinon)
 	.use(unexpectedImmutable)
 	.addAssertion(
@@ -64,5 +66,15 @@ global.expect = unexpected
 			return expect.shift(element);
 		} catch (e) {
 			return expect.fail("Could not create element. ", e.message);
+		}
+	})
+	.addAssertion("<any> to be a label", function(expect, subject) {
+		if (typeof subject == "object") {
+			expect(subject, "to satisfy", {
+				id: expect.it("to be a string"),
+				defaultMessage: expect.it("to be a string"),
+			});
+		} else {
+			expect(subject, "to be a string");
 		}
 	});
