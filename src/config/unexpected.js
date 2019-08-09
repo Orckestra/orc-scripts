@@ -6,10 +6,6 @@ const unexpectedSinon = require("unexpected-sinon");
 const unexpectedImmutable = require("unexpected-immutable");
 const React = require("react");
 const Immutable = require("immutable");
-const enzyme = require("enzyme");
-const Adapter = require("enzyme-adapter-react-16");
-
-enzyme.configure({ adapter: new Adapter() });
 
 global.expect = unexpected
 	.clone()
