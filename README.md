@@ -40,40 +40,27 @@ The toolbox contains support for `eslint` and `prettier`, both for use with deve
 To set up a git commit hook that runs `prettier` on all staged files, add the following section to `package.json`:
 
 ```json
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
-	}
-```
-
-This will run the `lint-staged` tool whenever you commit files to git. Configure this tool with a section in your `package.json` as follows:
-
-```json
-"li
+{
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	}
+}
 ```
 
 This will run the `lint-staged` tool whenever you commit files to git. Configure this tool with a section in your `package.json` as follows:
 
-    "lint-staged": {
-
-    	"linters": {
-
-    		"*.{js,json,md}": ["prettier --write", "git add"]
-
-    	},
-
-    	"ignore": [
-
-    		"package.json",
-
-    		"package-lock.json",
-
-    		"src/translations/*.json"
-
-    	]
-
-    }
+```json
+{
+	"lint-staged": {
+		"linters": {
+			"*.{js,json,md}": ["prettier --write", "git add"]
+		},
+		"ignore": ["package.json", "package-lock.json", "src/translations/*.json"]
+	}
+}
+```
 
 This instructs `lint-staged` to run `prettier` on staged files, rewriting the file to specifications, and then re-staging it for the commit. This ensures that all code in the app lives up to the strict standards set by `prettier`. It will also not process package files from npm, and translation files.
 
