@@ -258,13 +258,14 @@ describe("Module structure plugin for Unexpected", () => {
 				"not to throw",
 			));
 
-		it("passes with a string label, component and page list", () =>
+		it("passes with an object label, data path, component and page list", () =>
 			expect(
 				() =>
 					expect(
 						{
 							component: FakeComponent,
-							label: "A label",
+							label: { id: "test.msg", defaultMessage: "A label" },
+							dataPath: ["support", "index"],
 							pages: {
 								"/foo": { component: FakeComponent, label: "A label" },
 								"/bar": {
@@ -279,6 +280,152 @@ describe("Module structure plugin for Unexpected", () => {
 						"to be a segment",
 					),
 				"not to throw",
+			));
+
+		it("passes with an object label, data path, data ID, and component", () =>
+			expect(
+				() =>
+					expect(
+						{
+							component: FakeComponent,
+							label: { id: "test.msg", defaultMessage: "A label" },
+							dataPath: ["support", 2],
+							dataIdParam: "identity",
+						},
+						"to be a segment",
+					),
+				"not to throw",
+			));
+
+		it("fails if data path is not an array", () =>
+			expect(
+				() =>
+					expect(
+						{
+							component: FakeComponent,
+							label: { id: "test.msg", defaultMessage: "A label" },
+							dataPath: "support",
+							dataIdParam: "identity",
+						},
+						"to be a segment",
+					),
+				"to throw",
+				"expected\n" +
+					"{\n" +
+					"  component: () => null,\n" +
+					"  label: { id: 'test.msg', defaultMessage: 'A label' },\n" +
+					"  dataPath: 'support',\n" +
+					"  dataIdParam: 'identity'\n" +
+					"}\n" +
+					"to be a segment\n" +
+					"\n" +
+					"{\n" +
+					"  component: () => null,\n" +
+					"  label: { id: 'test.msg', defaultMessage: 'A label' },\n" +
+					"  dataPath:\n" +
+					"    'support', // ⨯ should be an array and\n" +
+					"               // ⨯ should have items satisfying\n" +
+					"               //   expect.it('to be a string')\n" +
+					"               //         .or('to be a number')\n" +
+					"  dataIdParam: 'identity'\n" +
+					"}",
+			));
+
+		it("fails if data path contains non-strings/numbers", () =>
+			expect(
+				() =>
+					expect(
+						{
+							component: FakeComponent,
+							label: { id: "test.msg", defaultMessage: "A label" },
+							dataPath: ["support", { foo: "foo" }],
+							dataIdParam: "identity",
+						},
+						"to be a segment",
+					),
+				"to throw",
+				"expected\n" +
+					"{\n" +
+					"  component: () => null,\n" +
+					"  label: { id: 'test.msg', defaultMessage: 'A label' },\n" +
+					"  dataPath: [ 'support', { foo: 'foo' } ],\n" +
+					"  dataIdParam: 'identity'\n" +
+					"}\n" +
+					"to be a segment\n" +
+					"\n" +
+					"{\n" +
+					"  component: () => null,\n" +
+					"  label: { id: 'test.msg', defaultMessage: 'A label' },\n" +
+					"  dataPath:\n" +
+					"    [ 'support', { foo: 'foo' } ], // ✓ should be an array and\n" +
+					"                                   // ⨯ should have items satisfying\n" +
+					"                                   //   expect.it('to be a string')\n" +
+					"                                   //         .or('to be a number')\n" +
+					"                                   //\n" +
+					"                                   //   [\n" +
+					"                                   //     'support',\n" +
+					"                                   //     { foo: 'foo' } // ⨯ should be a string or\n" +
+					"                                   //                    // ⨯ should be a number\n" +
+					"                                   //   ]\n" +
+					"  dataIdParam: 'identity'\n" +
+					"}",
+			));
+
+		it("fails if data ID is invalid", () =>
+			expect(
+				() =>
+					expect(
+						{
+							component: FakeComponent,
+							label: { id: "test.msg", defaultMessage: "A label" },
+							dataPath: ["support", 2],
+							dataIdParam: "ident!ity",
+						},
+						"to be a segment",
+					),
+				"to throw",
+				"expected\n" +
+					"{\n" +
+					"  component: () => null,\n" +
+					"  label: { id: 'test.msg', defaultMessage: 'A label' },\n" +
+					"  dataPath: [ 'support', 2 ],\n" +
+					"  dataIdParam: 'ident!ity'\n" +
+					"}\n" +
+					"to be a segment\n" +
+					"\n" +
+					"{\n" +
+					"  component: () => null,\n" +
+					"  label: { id: 'test.msg', defaultMessage: 'A label' },\n" +
+					"  dataPath: [ 'support', 2 ],\n" +
+					"  dataIdParam: 'ident!ity' // should match /^\\w+$/\n" +
+					"}",
+			));
+
+		it("fails with a string label and data path", () =>
+			expect(
+				() =>
+					expect(
+						{
+							component: FakeComponent,
+							label: "A label",
+							dataPath: ["support", "index"],
+						},
+						"to be a segment",
+					),
+				"to throw",
+				"expected\n" +
+					"{\n" +
+					"  component: () => null, label: 'A label',\n" +
+					"  dataPath: [ 'support', 'index' ]\n" +
+					"}\n" +
+					"to be a segment\n" +
+					"\n" +
+					"{\n" +
+					"  component: () => null,\n" +
+					"  label: 'A label', // ⨯ should be an object and\n" +
+					"                    // ✓ should be a label\n" +
+					"  dataPath: [ 'support', 'index' ]\n" +
+					"}",
 			));
 
 		it("fails with a segment list", () =>
@@ -565,7 +712,7 @@ describe("Module structure plugin for Unexpected", () => {
 				"not to throw",
 			));
 
-		it("passes with a label, component and page list", () =>
+		it("passes with an object label, component and page list", () =>
 			expect(
 				() =>
 					expect(
@@ -586,6 +733,74 @@ describe("Module structure plugin for Unexpected", () => {
 						"to be a page",
 					),
 				"not to throw",
+			));
+
+		it("passes with an object label and data path", () =>
+			expect(
+				() =>
+					expect(
+						{
+							label: { id: "test.msg", defaultMessage: "A label" },
+							dataPath: ["support", 2],
+							component: FakeComponent,
+						},
+						"to be a page",
+					),
+				"not to throw",
+			));
+
+		it("passes with an object label, data path and id parameter", () =>
+			expect(
+				() =>
+					expect(
+						{
+							label: { id: "test.msg", defaultMessage: "A label" },
+							dataPath: ["support", 2],
+							dataIdParam: "identity",
+							component: FakeComponent,
+						},
+						"to be a page",
+					),
+				"not to throw",
+			));
+
+		it("fails if id parameter contains non-word chars", () =>
+			expect(
+				() =>
+					expect(
+						{
+							label: { id: "test.msg", defaultMessage: "A label" },
+							dataPath: ["support", 2],
+							dataIdParam: "ident!ity",
+							component: FakeComponent,
+						},
+						"to be a page",
+					),
+				"to throw",
+				"expected\n" +
+					"{\n" +
+					"  label: { id: 'test.msg', defaultMessage: 'A label' },\n" +
+					"  dataPath: [ 'support', 2 ],\n" +
+					"  dataIdParam: 'ident!ity',\n" +
+					"  component: () => null\n" +
+					"}\n" +
+					"to satisfy\n" +
+					"{\n" +
+					"  label: expect.it('to be an object')\n" +
+					"                 .and('to be a label'),\n" +
+					"  dataPath:\n" +
+					"    expect.it('to be an array')\n" +
+					"            .and('to have items satisfying', expect.it('to be a string')\n" +
+					"          .or('to be a number')),\n" +
+					"  dataIdParam: expect.it('to match', /^\\w+$/)\n" +
+					"}\n" +
+					"\n" +
+					"{\n" +
+					"  label: { id: 'test.msg', defaultMessage: 'A label' },\n" +
+					"  dataPath: [ 'support', 2 ],\n" +
+					"  dataIdParam: 'ident!ity', // should match /^\\w+$/\n" +
+					"  component: () => null\n" +
+					"}",
 			));
 
 		it("passes with a string label and segment list", () =>

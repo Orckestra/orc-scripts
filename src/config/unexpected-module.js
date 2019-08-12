@@ -20,6 +20,18 @@ module.exports = {
 					label: expect.it("to be a label"),
 					component: expect.it("to be a function"),
 				};
+				if (subject.dataPath) {
+					pattern.label = expect.it("to be an object").and("to be a label");
+					pattern.dataPath = expect
+						.it("to be an array")
+						.and(
+							"to have items satisfying",
+							expect.it("to be a string").or("to be a number"),
+						);
+					if (subject.dataIdParam) {
+						pattern.dataIdParam = expect.it("to match", /^\w+$/);
+					}
+				}
 				if (subject.pages) {
 					pattern.pages = expect.it("to be a page list");
 				}
@@ -30,9 +42,25 @@ module.exports = {
 			})
 			.addAssertion("<object> to be a page", function(expect, subject) {
 				expect.errorMode = "bubble";
-				expect(subject, "to satisfy", {
-					label: expect.it("to be a label"),
-				});
+				if (subject.dataPath) {
+					const pattern = {
+						label: expect.it("to be an object").and("to be a label"),
+						dataPath: expect
+							.it("to be an array")
+							.and(
+								"to have items satisfying",
+								expect.it("to be a string").or("to be a number"),
+							),
+					};
+					if (subject.dataIdParam) {
+						pattern.dataIdParam = expect.it("to match", /^\w+$/);
+					}
+					expect(subject, "to satisfy", pattern);
+				} else {
+					expect(subject, "to satisfy", {
+						label: expect.it("to be a label"),
+					});
+				}
 				if (subject.component) {
 					expect(subject, "to satisfy", {
 						component: expect.it("to be a function"),

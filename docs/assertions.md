@@ -49,3 +49,7 @@ This is a utility assertion which simply extracts a shallow renderer's content, 
 ### `<ReactElement> renders elements <assertion?>`
 
 A chain of the `"when rendered"` assertion from `unexpected-react` and `"has elements"` above, allowing a further 'layer' of rendering to take place. It is typically combined with `"to render as"` as a prefix in order to render e.g. HOC-wrapped components.
+
+### `<object> is a module structure`
+
+Verifies that the subject fits the expected rules for a module object, gives useful error messages if it does not.
