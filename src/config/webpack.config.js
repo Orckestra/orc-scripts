@@ -3,10 +3,11 @@ const path = require("path");
 const pkgConf = require("pkg-conf");
 const { parseEnv } = require("../utils");
 
-const ASSET_PATH = process.env.ASSET_PATH || "/";
+const here = p => path.join(__dirname, p);
 
 module.exports = {
 	entry: [
+		here("setAssetPath.js"),
 		"url-polyfill",
 		"core-js",
 		"whatwg-fetch",
@@ -15,7 +16,6 @@ module.exports = {
 	output: {
 		filename: "bundle.js",
 		path: path.resolve(process.cwd(), "dist"),
-		publicPath: ASSET_PATH,
 	},
 	module: {
 		rules: [
@@ -51,11 +51,7 @@ module.exports = {
 			path.resolve(process.cwd(), "node_modules"),
 		],
 	},
-	plugins: [
-		new webpack.DefinePlugin({
-			"process.env.ASSET_PATH": JSON.stringify(ASSET_PATH),
-		}),
-	],
+	plugins: [],
 };
 
 const locales = Object.values(pkgConf.sync("locales"));
