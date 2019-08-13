@@ -15,7 +15,7 @@ module.exports = {
 	output: {
 		filename: "bundle.js",
 		path: path.resolve(process.cwd(), "dist"),
-		publicPath: process.env.WEBPACK_PUBLIC_PATH || "/",
+		publicPath: ASSET_PATH,
 	},
 	module: {
 		rules: [
@@ -52,7 +52,6 @@ module.exports = {
 		],
 	},
 	plugins: [
-		// This makes it possible for us to safely use env vars on our code
 		new webpack.DefinePlugin({
 			"process.env.ASSET_PATH": JSON.stringify(ASSET_PATH),
 		}),
