@@ -12,9 +12,11 @@ Installing this package is done via npm: `npm install orc-scripts`. This will al
 
 Where one exists, these scripts are intended to perform the role of the eponymous `npm` script. The scripts are invoked by running `orc-scripts <script> <options>`.
 
-`build`: Runs the build process, creating the distribution files for the package. This is typically used for preparing a release. Adding the `--watch` option starts a watch for file changes, rebuilding when a source file changes. This is useful for developing in a linked library. For web apps, this will use Webpack, for libraries, it uses Babel.
+`prep`: Sets up for the build script (below). This creates the `dist/` directory and copies `src/content/` to `dist/content/`. If not production building, also copies any files in `src/static` to `dist/`.
 
-`start`: Starts a web server locally, with hot module reloading enabled. Intended to support development work. You may set a specific port using the `--port <port>` option, or with the `PORT` environment variable. If a `HOST` environment variable is supplied, it will set up as an HTTPS server, expecting to be accessed at that hostname.
+`build`: Runs the build process, creating the distribution files for the package. This is typically used for preparing a release. Adding the `--watch` option starts a watch for file changes, rebuilding when a source file changes. This is useful for developing in a linked library. For web apps, this will use Webpack, for libraries, it uses Babel. Expects to have `prep` (above) run before it.
+
+`start`: Starts a web server locally, with hot module reloading enabled. Intended to support development work. You may set a specific port using the `--port <port>` option, or with the `PORT` environment variable. If a `HOST` environment variable is supplied, it will set up as an HTTPS server, expecting to be accessed at that hostname. Expects to have `prep` (above) run before it.
 
 `test`: Starts the Jest test runner in watch mode. This will run and rerun all tests relating to files changed from the git HEAD by default. Adding the `--no-watch` option instead runs all tests once and exits. The `--coverage` option generates a code coverage report for the test suite under `coverage/`. Jest command-line options are in general applicable.
 
@@ -25,8 +27,9 @@ The easiest way to use these scripts is to add entries to your package.json unde
 ```json
 {
 	"scripts": {
-		"build": "orc-scripts build",
-		"start": "orc-scripts start",
+		"clean": "orc-scripts clean",
+		"build": "orc-scripts prep && orc-scripts build",
+		"start": "orc-scripts prep && orc-scripts start",
 		"test": "orc-scripts test",
 		"coverage": "orc-scripts test --coverage"
 	}
@@ -62,15 +65,19 @@ This will run the `lint-staged` tool whenever you commit files to git. Configure
 }
 ```
 
-This instructs `lint-staged` to run `prettier` on staged files, rewriting the file to specifications, and then re-staging it for the commit. This ensures that all code in the app lives up to the strict standards set by `prettier`. It will also not process package files from npm, and translation files.
+This instructs `lint-staged` to run `prettier` on staged files, rewriting the file to specifications, and then re-staging it for the commit. This ensures that all code in the app lives up to the strict standards set by `prettier`. It is recommended to not let it process `package.json`, `package-lock.json` and translation files, as these are automatically processed and changed. Prettier can be told to ignore these by adding a `.prettierignore` file using the same syntax as `.gitignore`.
 
 ### Testing
 
-Testing with Jest and `unexpected` is built into the toolbox, allowing test setup to be as simple as adding a file with a `.test.js` suffix to your file tree. A number of CULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHAL are provided as well.
+Testing with Jest and `unexpected` is built into the toolbox, allowing test setup to be as simple as adding a file with a `.test.js` suffix to your file tree. A number of [plugins and custom assertions](docs/assertions.md) are provided as well.
+
+### Deploying
+
+An application that employs code splitting (resulting in multiple output bundle files) and is to be deployed to a CDN will need to pass the CDN location to the entry bundle to ensure that further bundles are fetched from the right location. To do this, include a script in the header of the `index.html` file which sets `window.ASSET_PATH` to the CDN location (a slash-terminated url, i.e. `"https://foo.cdn.org/my-bundle/"`). This needs to be executed before the entry bundle.
 
 ## License
 
-Copyright COPYR 2018 Orckestra Inc.
+Copyright &copy; 2018 Orckestra Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
