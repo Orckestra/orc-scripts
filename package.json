@@ -13,10 +13,10 @@
     "test": "node src test",
     "coverage": "node src test --coverage",
     "coveralls": "cat coverage/lcov.info | coveralls",
-    "build": "node src build",
+    "build": "node src prep && node src build",
     "watch": "node src build --watch",
     "build:clean": "npm run clean && npm run build",
-    "clean": "rimraf dist && make-dir dist",
+    "clean": "node src clean",
     "prepublishOnly": "npm run build:clean"
   },
   "files": [
