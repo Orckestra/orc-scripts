@@ -65,6 +65,7 @@ global.expect = unexpected
 		}
 	})
 	.addAssertion("<any> to be a label", function(expect, subject) {
+		expect.errorMode = "nested";
 		if (typeof subject == "object") {
 			expect(subject, "to satisfy", {
 				id: expect.it("to be a string"),
@@ -72,5 +73,64 @@ global.expect = unexpected
 			});
 		} else {
 			expect(subject, "to be a string");
+		}
+	})
+	.addAssertion("<object> to be a column definition", function(
+		expect,
+		subject,
+	) {
+		if (subject.type === "select") {
+			expect(subject, "to exhaustively satisfy", { type: "select" });
+		} else {
+			const pattern = {
+				fieldName: expect
+					.it("to be a string")
+					.or("to be an array")
+					.and(
+						"to have items satisfying",
+						expect.it("to be a string").or("to be a number"),
+					),
+			};
+			if (subject.type) {
+				pattern.type = expect
+					.it("to be", "number")
+					.or("to be", "date")
+					.or("to be", "datetime")
+					.or("to be", "currency")
+					.or("to be", "switch")
+					.or("to be", "custom");
+				if (subject.type === "currency") {
+					pattern.currency = expect
+						.it("to be a string")
+						.and("to have length", 3)
+						.or("to be an array")
+						.and("to have items satisfying", "to be a string");
+				}
+				if (subject.type === "switch" && subject.switch) {
+					pattern.switch = expect.it("to be an object");
+				}
+				if (subject.type === "custom") {
+					pattern.component = expect.it("to be a function");
+					if (subject.funcs) {
+						pattern.funcs = expect.it(
+							"to have values satisfying",
+							"to be a function",
+						);
+					}
+				}
+			}
+			if (subject.transform) {
+				pattern.transform = expect.it("to be a function");
+			}
+			if (subject.label) {
+				pattern.label = expect.it("to be a label");
+			}
+			if (subject.sort) {
+				pattern.sort = expect.it("to be a function");
+			}
+			if (subject.defaultValue) {
+				pattern.defaultValue = expect.it("to be defined");
+			}
+			expect(subject, "to exhaustively satisfy", pattern);
 		}
 	});

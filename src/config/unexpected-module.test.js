@@ -514,6 +514,7 @@ describe("Module structure plugin for Unexpected", () => {
 					"  component: () => null,\n" +
 					"  subpages: { '/foo': { component: ... } }\n" +
 					"  // missing: label: should be a label\n" +
+					"                       should be a string\n" +
 					"}",
 			));
 
@@ -541,6 +542,7 @@ describe("Module structure plugin for Unexpected", () => {
 					"{\n" +
 					"  component: () => null,\n" +
 					"  label: 3, // should be a label\n" +
+					"            //   should be a string\n" +
 					"  subpages: { '/foo': { component: ... } }\n" +
 					"}",
 			));

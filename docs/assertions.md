@@ -50,6 +50,14 @@ This is a utility assertion which simply extracts a shallow renderer's content, 
 
 A chain of the `"when rendered"` assertion from `unexpected-react` and `"has elements"` above, allowing a further 'layer' of rendering to take place. It is typically combined with `"to render as"` as a prefix in order to render e.g. HOC-wrapped components.
 
-### `<object> is a module structure`
+### `<any> to be a label`
+
+Checks that the subject is either a string, or an object with `defaultMessage` and `id` keys with string values, making it a legal `react-intl` message descriptor.
+
+### `<object> to be a module structure`
 
 Verifies that the subject fits the expected rules for a module object, gives useful error messages if it does not.
+
+### `<object> to be a column definition`
+
+Checks that the subject is a valid column defintion as used by [List components](https://github.com/Orckestra/orc-shared/blob/master/docs/lists.md#column-configuration).
