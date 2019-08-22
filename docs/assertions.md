@@ -61,3 +61,7 @@ Verifies that the subject fits the expected rules for a module object, gives use
 ### `<object> to be a column definition`
 
 Checks that the subject is a valid column defintion as used by [List components](https://github.com/Orckestra/orc-shared/blob/master/docs/lists.md#column-configuration).
+
+### `<array-like> to be a form definition`
+
+Checks that the array is a valid definition for a [Form component](https://github.com/Orckestra/orc-shared/blob/master/docs/forms.md), q.v.
