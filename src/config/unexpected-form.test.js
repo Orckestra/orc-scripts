@@ -1429,7 +1429,7 @@ describe("<array-like> to be a form definition", () => {
 	});
 
 	describe("<object> to be a form combination field", () => {
-		it("passes with a list of fields", () =>
+		it("passes with a array of fields", () =>
 			expect(
 				() =>
 					expect(
@@ -1477,18 +1477,10 @@ describe("<array-like> to be a form definition", () => {
 					"    { name: 'fieldA', type: 'TextInput' }\n" +
 					"  ]\n" +
 					"}\n" +
-					"to be a form combination field\n" +
-					"\n" +
-					"{\n" +
-					"  fields: [\n" +
-					"    { name: 'labelA', type: 'LineLabel' },\n" +
-					"    { name: 'fieldA', type: 'TextInput' }\n" +
-					"  ]\n" +
-					"  // missing type: 'Combination'\n" +
-					"}",
+					"to be a form combination field",
 			));
 
-		it("fails if field list missing", () =>
+		it("fails if field array missing", () =>
 			expect(
 				() => expect({ type: "Combination" }, "to be a form combination field"),
 				"to throw",
@@ -1501,7 +1493,7 @@ describe("<array-like> to be a form definition", () => {
 					"}",
 			));
 
-		it("fails if field list empty", () =>
+		it("fails if field array empty", () =>
 			expect(
 				() =>
 					expect(
@@ -1520,7 +1512,7 @@ describe("<array-like> to be a form definition", () => {
 					"}",
 			));
 
-		it("passes with a list of fields and proportions", () =>
+		it("passes with equal-length arrays of fields and proportions", () =>
 			expect(
 				() =>
 					expect(
@@ -1606,6 +1598,9 @@ describe("<array-like> to be a form definition", () => {
 					"  ],\n" +
 					"  proportions:\n" +
 					"    [ '50px', 90, 10 ] // ✓ should be an array and\n" +
+					"                       // ✓ should have items satisfying and\n" +
+					"                       //   expect.it('to be a string')\n" +
+					"                       //         .or('to be a number')\n" +
 					"                       // ⨯ should be shorter than or same length as\n" +
 					"                       //   [\n" +
 					"                       //     { name: 'labelA', type: 'LineLabel' },\n" +
@@ -1613,5 +1608,633 @@ describe("<array-like> to be a form definition", () => {
 					"                       //   ]\n" +
 					"}",
 			));
+
+		it("fails if proportion contents not string or number", () =>
+			expect(
+				() =>
+					expect(
+						{
+							type: "Combination",
+							fields: [
+								{
+									name: "label",
+									type: "LineLabel",
+								},
+								{
+									name: "fieldA",
+									type: "TextInput",
+								},
+								{
+									name: "fieldB",
+									type: "TextInput",
+								},
+								{
+									name: "fieldC",
+									type: "TextInput",
+								},
+							],
+							proportions: [null, {}, [90], true],
+						},
+						"to be a form combination field",
+					),
+				"to throw",
+				"expected\n" +
+					"{\n" +
+					"  type: 'Combination',\n" +
+					"  fields: [\n" +
+					"    { name: 'label', type: 'LineLabel' },\n" +
+					"    { name: 'fieldA', type: 'TextInput' },\n" +
+					"    { name: 'fieldB', type: 'TextInput' },\n" +
+					"    { name: 'fieldC', type: 'TextInput' }\n" +
+					"  ],\n" +
+					"  proportions: [ null, {}, [ 90 ], true ]\n" +
+					"}\n" +
+					"to be a form combination field\n" +
+					"\n" +
+					"{\n" +
+					"  type: 'Combination',\n" +
+					"  fields: [\n" +
+					"    { name: 'label', type: 'LineLabel' },\n" +
+					"    { name: 'fieldA', type: 'TextInput' },\n" +
+					"    { name: 'fieldB', type: 'TextInput' },\n" +
+					"    { name: 'fieldC', type: 'TextInput' }\n" +
+					"  ],\n" +
+					"  proportions:\n" +
+					"    [ null, {}, [ 90 ], true ] // ✓ should be an array and\n" +
+					"                               // ⨯ should have items satisfying         and\n" +
+					"                               //   expect.it('to be a string')\n" +
+					"                               //         .or('to be a number')\n" +
+					"                               //\n" +
+					"                               //   [\n" +
+					"                               //     null, // ⨯ should be a string or\n" +
+					"                               //           // ⨯ should be a number\n" +
+					"                               //     {}, // ⨯ should be a string or\n" +
+					"                               //         // ⨯ should be a number\n" +
+					"                               //     [ 90 ], // ⨯ should be a string or\n" +
+					"                               //             // ⨯ should be a number\n" +
+					"                               //     true // ⨯ should be a string or\n" +
+					"                               //          // ⨯ should be a number\n" +
+					"                               //   ]\n" +
+					"                               // ✓ should be shorter than or same length as\n" +
+					"                               //   [\n" +
+					"                               //     { name: 'label', type: 'LineLabel' },\n" +
+					"                               //     { name: 'fieldA', type: 'TextInput' },\n" +
+					"                               //     { name: 'fieldB', type: 'TextInput' },\n" +
+					"                               //     { name: 'fieldC', type: 'TextInput' }\n" +
+					"                               //   ]\n" +
+					"}",
+			));
 	});
+
+	describe("<object> to be a form list", () => {
+		it("passes with a name and single field definition", () =>
+			expect(
+				() =>
+					expect(
+						{
+							type: "List",
+							name: "ListA",
+							rowField: {
+								name: "fieldA",
+								type: "TextInput",
+							},
+						},
+						"to be a form list",
+					),
+				"not to throw",
+			));
+
+		it("passes with a name and combination field definition", () =>
+			expect(
+				() =>
+					expect(
+						{
+							type: "List",
+							name: "ListA",
+							rowField: {
+								type: "Combination",
+								fields: [
+									{
+										name: "labelA",
+										type: "LineLabel",
+									},
+									{
+										name: "fieldA",
+										type: "TextInput",
+									},
+								],
+							},
+						},
+						"to be a form list",
+					),
+				"not to throw",
+			));
+
+		it("passes with a name, rowCount and field definition", () =>
+			expect(
+				() =>
+					expect(
+						{
+							type: "List",
+							name: "ListA",
+							rowCount: 1,
+							rowField: {
+								name: "fieldA",
+								type: "TextInput",
+							},
+						},
+						"to be a form list",
+					),
+				"not to throw",
+			));
+
+		it("fails if rowCount not numeric", () =>
+			expect(
+				() =>
+					expect(
+						{
+							type: "List",
+							name: "ListA",
+							rowCount: "1",
+							rowField: {
+								name: "fieldA",
+								type: "TextInput",
+							},
+						},
+						"to be a form list",
+					),
+				"to throw",
+				"expected\n" +
+					"{\n" +
+					"  type: 'List',\n" +
+					"  name: 'ListA',\n" +
+					"  rowCount: '1',\n" +
+					"  rowField: { name: 'fieldA', type: 'TextInput' }\n" +
+					"}\n" +
+					"to be a form list\n" +
+					"\n" +
+					"{\n" +
+					"  type: 'List',\n" +
+					"  name: 'ListA',\n" +
+					"  rowCount: '1', // should be a number\n" +
+					"  rowField: { name: 'fieldA', type: 'TextInput' }\n" +
+					"}",
+			));
+
+		it("passes with a name, rowCount, static values and field definition", () =>
+			expect(
+				() =>
+					expect(
+						{
+							type: "List",
+							name: "ListA",
+							rowCount: 1,
+							staticValues: ["Foo"],
+							rowField: {
+								name: "fieldA",
+								type: "TextInput",
+							},
+						},
+						"to be a form list",
+					),
+				"not to throw",
+			));
+
+		it("fails with static values but no row count", () =>
+			expect(
+				() =>
+					expect(
+						{
+							type: "List",
+							name: "ListA",
+							staticValues: ["Foo"],
+							rowField: {
+								name: "fieldA",
+								type: "TextInput",
+							},
+						},
+						"to be a form list",
+					),
+				"to throw",
+				"expected\n" +
+					"{\n" +
+					"  type: 'List',\n" +
+					"  name: 'ListA',\n" +
+					"  staticValues: [ 'Foo' ],\n" +
+					"  rowField: { name: 'fieldA', type: 'TextInput' }\n" +
+					"}\n" +
+					"to be a form list\n" +
+					"  Form list without row count cannot have static values",
+			));
+
+		it("passes with a name, single field definition and string add button label", () =>
+			expect(
+				() =>
+					expect(
+						{
+							type: "List",
+							name: "ListA",
+							rowField: {
+								name: "fieldA",
+								type: "TextInput",
+							},
+							add: "Add Thing",
+						},
+						"to be a form list",
+					),
+				"not to throw",
+			));
+
+		it("passes with a name, single field definition and object add button label", () =>
+			expect(
+				() =>
+					expect(
+						{
+							type: "List",
+							name: "ListA",
+							rowField: {
+								name: "fieldA",
+								type: "TextInput",
+							},
+							add: { id: "test.add", defaultMessage: "Add Thing" },
+						},
+						"to be a form list",
+					),
+				"not to throw",
+			));
+
+		it("fails with row count and add button text", () =>
+			expect(
+				() =>
+					expect(
+						{
+							type: "List",
+							name: "ListA",
+							rowCount: 2,
+							rowField: {
+								name: "fieldA",
+								type: "TextInput",
+							},
+							add: "Add Thing",
+						},
+						"to be a form list",
+					),
+				"to throw",
+				"expected\n" +
+					"{\n" +
+					"  type: 'List',\n" +
+					"  name: 'ListA',\n" +
+					"  rowCount: 2,\n" +
+					"  rowField: { name: 'fieldA', type: 'TextInput' },\n" +
+					"  add: 'Add Thing'\n" +
+					"}\n" +
+					"to be a form list\n" +
+					"  Form list with row count cannot have 'add' label",
+			));
+	});
+
+	describe("<object> to be a form fieldset", () => {
+		it("passes with a string label and fields array", () =>
+			expect(
+				() =>
+					expect(
+						{
+							type: "Fieldset",
+							label: "A field set",
+							fields: [
+								{ name: "field1", type: "CheckboxInput" },
+								{
+									type: "Combination",
+									fields: [
+										{
+											name: "labelA",
+											type: "LineLabel",
+										},
+										{
+											name: "fieldA",
+											type: "TextInput",
+										},
+									],
+								},
+								{
+									type: "List",
+									name: "ListA",
+									rowField: {
+										name: "fieldA",
+										type: "TextInput",
+									},
+								},
+							],
+						},
+						"to be a form fieldset",
+					),
+				"not to throw",
+			));
+
+		it("fails if missing label or fields", () =>
+			expect(
+				() =>
+					expect(
+						{
+							type: "Fieldset",
+						},
+						"to be a form fieldset",
+					),
+				"to throw",
+				"expected { type: 'Fieldset' } to be a form fieldset\n" +
+					"\n" +
+					"{\n" +
+					"  type: 'Fieldset'\n" +
+					"  // missing: label: should be a label\n" +
+					"                       should be a string\n" +
+					"  // missing: fields: ⨯ should be an array and\n" +
+					"              ⨯ should have items satisfying\n" +
+					"                expect.it('to be a form field')\n" +
+					"                      .or('to be a form combination field')\n" +
+					"                      .or('to be a form list')\n" +
+					"}",
+			));
+
+		it("fails if fields malformed", () =>
+			expect(
+				() =>
+					expect(
+						{
+							type: "Fieldset",
+							label: "A field set",
+							fields: [
+								{ name: "field1", type: "ChockboxInput" },
+								{
+									type: "Combination",
+									proportions: [30, 50, 30],
+									fields: [
+										{
+											name: "labelA",
+											type: "LineLabel",
+										},
+										{
+											name: "fieldA",
+											type: "TextInput",
+										},
+									],
+								},
+								{
+									type: "List",
+									name: "ListA",
+									rowField: {
+										name: "fieldA",
+										type: "TextInput",
+									},
+									add: "Foo",
+									rowCount: 13,
+								},
+							],
+						},
+						"to be a form fieldset",
+					),
+				"to throw",
+				"expected\n" +
+					"{\n" +
+					"  type: 'Fieldset',\n" +
+					"  label: 'A field set',\n" +
+					"  fields: [\n" +
+					"    { name: 'field1', type: 'ChockboxInput' },\n" +
+					"    { type: 'Combination', proportions: ..., fields: ... },\n" +
+					"    { type: 'List', name: 'ListA', rowField: ..., add: 'Foo', rowCount: 13 }\n" +
+					"  ]\n" +
+					"}\n" +
+					"to be a form fieldset\n" +
+					"\n" +
+					"{\n" +
+					"  type: 'Fieldset',\n" +
+					"  label: 'A field set',\n" +
+					"  fields:\n" +
+					"    [\n" +
+					"      { name: 'field1', type: 'ChockboxInput' },\n" +
+					"      { type: 'Combination', proportions: ..., fields: ... },\n" +
+					"      { type: 'List', name: 'ListA', rowField: ..., add: 'Foo', rowCount: 13 }\n" +
+					"    ]\n" +
+					"    // ✓ should be an array and\n" +
+					"    // ⨯ should have items satisfying\n" +
+					"    //   expect.it('to be a form field')\n" +
+					"    //         .or('to be a form combination field')\n" +
+					"    //         .or('to be a form list')\n" +
+					"    //\n" +
+					"    //   [\n" +
+					"    //     { name: 'field1', type: 'ChockboxInput' },\n" +
+					"    //     // ⨯ should be a form field         or\n" +
+					"    //     //     Invalid type 'ChockboxInput'\n" +
+					"    //     // ⨯ should be a form combination field or\n" +
+					"    //     // ⨯ should be a form list\n" +
+					"    //     { type: 'Combination', proportions: [ 30, 50, 30 ], fields: [ ..., ... ] },\n" +
+					"    //     // ⨯ should be a form field or\n" +
+					"    //     // ⨯ should be a form combination field                                or\n" +
+					"    //     //\n" +
+					"    //     //   {\n" +
+					"    //     //     type: 'Combination',\n" +
+					"    //     //     proportions:\n" +
+					"    //     //       [ 30, 50, 30 ], // ✓ should be an array and\n" +
+					"    //     //                       // ✓ should have items satisfying and\n" +
+					"    //     //                       //   expect.it('to be a string')\n" +
+					"    //     //                       //         .or('to be a number')\n" +
+					"    //     //                       // ⨯ should be shorter than or same length as\n" +
+					"    //     //                       //   [\n" +
+					"    //     //                       //     { name: 'labelA', type: 'LineLabel' },\n" +
+					"    //     //                       //     { name: 'fieldA', type: 'TextInput' }\n" +
+					"    //     //                       //   ]\n" +
+					"    //     //     fields: [\n" +
+					"    //     //       { name: 'labelA', type: 'LineLabel' },\n" +
+					"    //     //       { name: 'fieldA', type: 'TextInput' }\n" +
+					"    //     //     ]\n" +
+					"    //     //   }\n" +
+					"    //     // ⨯ should be a form list\n" +
+					"    //     {\n" +
+					"    //       type: 'List',\n" +
+					"    //       name: 'ListA',\n" +
+					"    //       rowField: { name: 'fieldA', type: 'TextInput' },\n" +
+					"    //       add: 'Foo',\n" +
+					"    //       rowCount: 13\n" +
+					"    //     }\n" +
+					"    //     // ⨯ should be a form field or\n" +
+					"    //     // ⨯ should be a form combination field or\n" +
+					"    //     // ⨯ should be a form list\n" +
+					"    //     //     Form list with row count cannot have 'add' label\n" +
+					"    //   ]\n" +
+					"}",
+			));
+	});
+
+	it("passes if field definition is valid", () =>
+		expect(
+			() =>
+				expect(
+					[
+						{ name: "field1", type: "CheckboxInput" },
+						{
+							type: "Combination",
+							fields: [
+								{
+									name: "labelA",
+									type: "LineLabel",
+								},
+								{
+									name: "fieldA",
+									type: "TextInput",
+								},
+							],
+						},
+						{
+							type: "List",
+							name: "ListA",
+							rowField: {
+								name: "fieldB",
+								type: "TextInput",
+							},
+						},
+						{
+							type: "Fieldset",
+							label: "A field set",
+							fields: [
+								{ name: "field2", type: "CheckboxInput" },
+								{
+									type: "Combination",
+									fields: [
+										{
+											name: "labelC",
+											type: "LineLabel",
+										},
+										{
+											name: "fieldC",
+											type: "TextInput",
+										},
+									],
+								},
+								{
+									type: "List",
+									name: "ListB",
+									rowField: {
+										name: "fieldD",
+										type: "TextInput",
+									},
+								},
+							],
+						},
+					],
+					"to be a form definition",
+				),
+			"not to throw",
+		));
+
+	it("fails if field definition is valid", () =>
+		expect(
+			() =>
+				expect(
+					[
+						{ type: "CheckboxInput" },
+						{
+							type: "Combination",
+							fields: [],
+						},
+						{
+							type: "List",
+							name: "ListA",
+							rowField: {
+								name: "fieldB",
+							},
+						},
+						{
+							type: "Fieldset",
+							fields: [
+								{ name: "field2", type: "CheckboxInput" },
+								{
+									type: "Combination",
+									fields: [
+										{
+											name: "labelC",
+											type: "LineLabel",
+										},
+										{
+											name: "fieldC",
+											type: "TextInput",
+										},
+									],
+								},
+								{
+									type: "List",
+									name: "ListB",
+									rowField: {
+										name: "fieldD",
+										type: "TextInput",
+									},
+								},
+							],
+						},
+					],
+					"to be a form definition",
+				),
+			"to throw",
+			"expected\n" +
+				"[\n" +
+				"  { type: 'CheckboxInput' },\n" +
+				"  { type: 'Combination', fields: [] },\n" +
+				"  { type: 'List', name: 'ListA', rowField: { name: 'fieldB' } },\n" +
+				"  { type: 'Fieldset', fields: [ ..., ..., ... ] }\n" +
+				"]\n" +
+				"to be a form definition\n" +
+				"\n" +
+				"[\n" +
+				"  { type: 'CheckboxInput' }, // ⨯ should be a form field                 or\n" +
+				"                             //\n" +
+				"                             //   {\n" +
+				"                             //     type: 'CheckboxInput'\n" +
+				"                             //     // missing: name: should be a string\n" +
+				"                             //   }\n" +
+				"                             // ⨯ should be a form combination field or\n" +
+				"                             // ⨯ should be a form list or\n" +
+				"                             // ⨯ should be a form fieldset\n" +
+				"  { type: 'Combination', fields: [] },\n" +
+				"  // ⨯ should be a form field or\n" +
+				"  // ⨯ should be a form combination field                          or\n" +
+				"  //\n" +
+				"  //   {\n" +
+				"  //     type: 'Combination',\n" +
+				"  //     fields:\n" +
+				"  //       [] // ✓ should be an array and\n" +
+				"  //          // ⨯ should have items satisfying to be a form field\n" +
+				"  //          //     should not be empty\n" +
+				"  //   }\n" +
+				"  // ⨯ should be a form list or\n" +
+				"  // ⨯ should be a form fieldset\n" +
+				"  { type: 'List', name: 'ListA', rowField: { name: 'fieldB' } },\n" +
+				"  // ⨯ should be a form field or\n" +
+				"  // ⨯ should be a form combination field or\n" +
+				"  // ⨯ should be a form list                                          or\n" +
+				"  //\n" +
+				"  //   {\n" +
+				"  //     type: 'List',\n" +
+				"  //     name: 'ListA',\n" +
+				"  //     rowField:\n" +
+				"  //       { name: 'fieldB' } // ⨯ should be a form field   or\n" +
+				"  //                          //     Invalid type undefined\n" +
+				"  //                          // ⨯ should be a form combination field\n" +
+				"  //   }\n" +
+				"  // ⨯ should be a form fieldset\n" +
+				"  { type: 'Fieldset', fields: [ ..., ..., ... ] }\n" +
+				"  // ⨯ should be a form field or\n" +
+				"  // ⨯ should be a form combination field or\n" +
+				"  // ⨯ should be a form list or\n" +
+				"  // ⨯ should be a form fieldset\n" +
+				"  //\n" +
+				"  //   {\n" +
+				"  //     type: 'Fieldset',\n" +
+				"  //     fields: [\n" +
+				"  //       { name: 'field2', type: 'CheckboxInput' },\n" +
+				"  //       { type: 'Combination', fields: ... },\n" +
+				"  //       { type: 'List', name: 'ListB', rowField: ... }\n" +
+				"  //     ]\n" +
+				"  //     // missing: label: should be a label\n" +
+				"  //                          should be a string\n" +
+				"  //   }\n" +
+				"]",
+		));
 });

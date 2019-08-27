@@ -78,15 +78,22 @@ module.exports = {
 					addTextInputProps(expect, subject, pattern);
 					break;
 				default:
+					if (["Fieldset", "Combination", "List"].includes(type)) {
+						return expect.fail();
+					}
 					expect.errorMode = "nested";
 					return expect.fail("Invalid type {0}", type);
 			}
 			return expect(subject, "to satisfy", pattern);
 		});
+
 		expect.addAssertion("<object> to be a form combination field", function(
 			expect,
 			subject,
 		) {
+			if (subject.type !== "Combination") {
+				expect.fail();
+			}
 			const pattern = {
 				type: "Combination",
 				fields: expect
@@ -96,10 +103,100 @@ module.exports = {
 			if (subject.hasOwnProperty("proportions")) {
 				pattern.proportions = expect
 					.it("to be an array")
+					.and(
+						"to have items satisfying",
+						expect.it("to be a string").or("to be a number"),
+					)
 					.and("to be shorter than or same length as", subject.fields);
 			}
 			return expect(subject, "to satisfy", pattern);
 		});
+
+		expect.addAssertion("<object> to be a form list", function(
+			expect,
+			subject,
+		) {
+			if (subject.type !== "List") {
+				expect.fail();
+			}
+			const pattern = {
+				type: "List",
+				name: expect.it("to be a string"),
+				rowField: expect
+					.it("to be a form field")
+					.or("to be a form combination field"),
+			};
+			if (subject.hasOwnProperty("rowCount")) {
+				pattern.rowCount = expect.it("to be a number");
+			}
+			if (subject.hasOwnProperty("add")) {
+				if (subject.rowCount) {
+					expect.errorMode = "nested";
+					return expect.fail(
+						"Form list with row count cannot have 'add' label",
+					);
+				}
+				pattern.add = expect.it("to be a label");
+			}
+			if (subject.hasOwnProperty("staticValues")) {
+				if (!subject.rowCount) {
+					expect.errorMode = "nested";
+					return expect.fail(
+						"Form list without row count cannot have static values",
+					);
+				}
+				pattern.staticValues = expect.it("to be an array");
+			}
+			return expect(subject, "to satisfy", pattern);
+		});
+
+		expect.addAssertion("<object> to be a form fieldset", function(
+			expect,
+			subject,
+		) {
+			if (subject.type !== "Fieldset") {
+				expect.fail();
+			}
+			const pattern = {
+				type: "Fieldset",
+				label: expect.it("to be a label"),
+				fields: expect.it("to be an array").and(
+					"to have items satisfying",
+					expect
+						.it("to be a form field")
+						.or("to be a form combination field")
+						.or("to be a form list"),
+				),
+			};
+			expect(subject, "to satisfy", pattern);
+		});
+
+		expect.addAssertion("<array-like> to be a form definition", function(
+			expect,
+			subject,
+		) {
+			return expect(
+				subject,
+				"to have items satisfying",
+				expect
+					.it("to be a form field")
+					.or("to be a form combination field")
+					.or("to be a form list")
+					.or("to be a form fieldset"),
+			);
+		});
+
+		expect.addAssertion(
+			[
+				"<undefined> to be a form field",
+				"<undefined> to be a form combination field",
+				"<undefined> to be a form list",
+				"<undefined> to be a form fieldset",
+			],
+			function(expect) {
+				return expect.fail();
+			},
+		);
 	},
 };
 
