@@ -413,7 +413,10 @@ describe("<array-like> to be a form definition", () => {
 								minlength: 3,
 								multiple: true,
 								pattern: /olo/,
-								placeholder: "Placeholder here",
+								placeholder: {
+									id: "test.placeholder",
+									defaultMessage: "Placeholder here",
+								},
 								size: 18,
 								spellcheck: "",
 							},
@@ -459,7 +462,19 @@ describe("<array-like> to be a form definition", () => {
 						"        // ⨯ should be greater than 0\n" +
 						"  multiple: 'no', // should be a boolean\n" +
 						"  pattern: 33, // should be a regular expression\n" +
-						"  placeholder: { foo: 'Placeholder here' }, // should be a string\n" +
+						"  placeholder:\n" +
+						"    { foo: 'Placeholder here' }, // should be a label\n" +
+						"                                 //   should satisfy\n" +
+						"                                 //   {\n" +
+						"                                 //     id: expect.it('to be a string'),\n" +
+						"                                 //     defaultMessage: expect.it('to be a string')\n" +
+						"                                 //   }\n" +
+						"                                 //\n" +
+						"                                 //   {\n" +
+						"                                 //     foo: 'Placeholder here'\n" +
+						"                                 //     // missing: id: should be a string\n" +
+						"                                 //     // missing: defaultMessage: should be a string\n" +
+						"                                 //   }\n" +
 						"  size: 0, // ✓ should be a number and\n" +
 						"           // ⨯ should be greater than 0\n" +
 						"  spellcheck:\n" +
@@ -708,7 +723,10 @@ describe("<array-like> to be a form definition", () => {
 								type: "NumberInput",
 								max: 200,
 								min: 2,
-								placeholder: 16,
+								placeholder: {
+									id: "test.placeholder",
+									defaultMessage: "Placeholder here",
+								},
 								step: 2,
 							},
 							"to be a form field",
@@ -743,7 +761,13 @@ describe("<array-like> to be a form definition", () => {
 						"  type: 'NumberInput',\n" +
 						"  max: '200', // should be a number\n" +
 						"  min: [ 2 ], // should be a number\n" +
-						"  placeholder: null, // should be a number\n" +
+						"  placeholder:\n" +
+						"    null, // should be a label\n" +
+						"          //   should equal\n" +
+						"          //   {\n" +
+						"          //     id: expect.it('to be a string'),\n" +
+						"          //     defaultMessage: expect.it('to be a string')\n" +
+						"          //   }\n" +
 						"  step: NaN // expected NaN to be a number\n" +
 						"}",
 				));
@@ -1253,7 +1277,19 @@ describe("<array-like> to be a form definition", () => {
 						"    'three', // ⨯ should be a number and\n" +
 						"             // ⨯ should be greater than 0\n" +
 						"  pattern: {}, // should be a regular expression\n" +
-						"  placeholder: [ 'Placeholder here' ], // should be a string\n" +
+						"  placeholder:\n" +
+						"    [ 'Placeholder here' ], // should be a label\n" +
+						"                            //   should satisfy\n" +
+						"                            //   {\n" +
+						"                            //     id: expect.it('to be a string'),\n" +
+						"                            //     defaultMessage: expect.it('to be a string')\n" +
+						"                            //   }\n" +
+						"                            //\n" +
+						"                            //   [\n" +
+						"                            //     'Placeholder here'\n" +
+						"                            //     // missing: id: should be a string\n" +
+						"                            //     // missing: defaultMessage: should be a string\n" +
+						"                            //   ]\n" +
 						"  size: -15, // ✓ should be a number and\n" +
 						"             // ⨯ should be greater than 0\n" +
 						"  spellcheck:\n" +
@@ -1557,7 +1593,19 @@ describe("<array-like> to be a form definition", () => {
 						"    'three', // ⨯ should be a number and\n" +
 						"             // ⨯ should be greater than 0\n" +
 						"  pattern: {}, // should be a regular expression\n" +
-						"  placeholder: [ 'Placeholder here' ], // should be a string\n" +
+						"  placeholder:\n" +
+						"    [ 'Placeholder here' ], // should be a label\n" +
+						"                            //   should satisfy\n" +
+						"                            //   {\n" +
+						"                            //     id: expect.it('to be a string'),\n" +
+						"                            //     defaultMessage: expect.it('to be a string')\n" +
+						"                            //   }\n" +
+						"                            //\n" +
+						"                            //   [\n" +
+						"                            //     'Placeholder here'\n" +
+						"                            //     // missing: id: should be a string\n" +
+						"                            //     // missing: defaultMessage: should be a string\n" +
+						"                            //   ]\n" +
 						"  size: -15, // ✓ should be a number and\n" +
 						"             // ⨯ should be greater than 0\n" +
 						"  spellcheck:\n" +

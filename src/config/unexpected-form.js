@@ -274,7 +274,7 @@ const addTextInputProps = (expect, subject, pattern) => {
 		pattern.pattern = expect.it("to be a regular expression");
 	}
 	if (subject.hasOwnProperty("placeholder")) {
-		pattern.placeholder = expect.it("to be a string");
+		pattern.placeholder = expect.it("to be a label");
 	}
 	if (subject.hasOwnProperty("size")) {
 		pattern.size = expect.it("to be a number").and("to be greater than", 0);
@@ -291,11 +291,11 @@ const addNumberInputProps = (expect, subject, pattern) => {
 	if (subject.hasOwnProperty("min")) {
 		pattern.min = expect.it("to be a number");
 	}
-	if (subject.hasOwnProperty("placeholder")) {
-		pattern.placeholder = expect.it("to be a number");
-	}
 	if (subject.hasOwnProperty("step")) {
 		pattern.step = expect.it("to be a number");
+	}
+	if (subject.hasOwnProperty("placeholder")) {
+		pattern.placeholder = expect.it("to be a label");
 	}
 };
 
