@@ -252,7 +252,7 @@ const addInputProps = (expect, subject, pattern, textual = true) => {
 		pattern.readonly = expect.it("to be a boolean");
 	}
 	if (subject.hasOwnProperty("required")) {
-		pattern.required = expect.it("to be a boolean");
+		pattern.required = expect.it("to be a label");
 	}
 	if (subject.hasOwnProperty("tabindex")) {
 		pattern.tabindex = expect.it("to be a number");

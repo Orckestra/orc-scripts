@@ -153,7 +153,10 @@ describe("<array-like> to be a form definition", () => {
 								type: "CheckboxInput",
 								autofocus: true,
 								disabled: true,
-								required: true,
+								required: {
+									id: "test.required",
+									defaultMessage: "Field is Required",
+								},
 								tabindex: 12,
 							},
 							"to be a form field",
@@ -188,7 +191,18 @@ describe("<array-like> to be a form definition", () => {
 						"  type: 'CheckboxInput',\n" +
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 1, // should be a boolean\n" +
-						"  required: [], // should be a boolean\n" +
+						"  required:\n" +
+						"    [], // should be a label\n" +
+						"        //   should satisfy\n" +
+						"        //   {\n" +
+						"        //     id: expect.it('to be a string'),\n" +
+						"        //     defaultMessage: expect.it('to be a string')\n" +
+						"        //   }\n" +
+						"        //\n" +
+						"        //   [\n" +
+						"        //     // missing: id: should be a string\n" +
+						"        //     // missing: defaultMessage: should be a string\n" +
+						"        //   ]\n" +
 						"  tabindex: '' // should be a number\n" +
 						"}",
 				));
@@ -206,7 +220,10 @@ describe("<array-like> to be a form definition", () => {
 								autofocus: true,
 								disabled: true,
 								readonly: true,
-								required: true,
+								required: {
+									id: "test.required",
+									defaultMessage: "Field is Required",
+								},
 								tabindex: 12,
 							},
 							"to be a form field",
@@ -246,7 +263,18 @@ describe("<array-like> to be a form definition", () => {
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 0, // should be a boolean\n" +
 						"  readonly: { t: true }, // should be a boolean\n" +
-						"  required: [], // should be a boolean\n" +
+						"  required:\n" +
+						"    [], // should be a label\n" +
+						"        //   should satisfy\n" +
+						"        //   {\n" +
+						"        //     id: expect.it('to be a string'),\n" +
+						"        //     defaultMessage: expect.it('to be a string')\n" +
+						"        //   }\n" +
+						"        //\n" +
+						"        //   [\n" +
+						"        //     // missing: id: should be a string\n" +
+						"        //     // missing: defaultMessage: should be a string\n" +
+						"        //   ]\n" +
 						"  tabindex: 'foo' // should be a number\n" +
 						"}",
 				));
@@ -315,7 +343,10 @@ describe("<array-like> to be a form definition", () => {
 								autofocus: true,
 								disabled: true,
 								readonly: true,
-								required: true,
+								required: {
+									id: "test.required",
+									defaultMessage: "Field is Required",
+								},
 								tabindex: 12,
 							},
 							"to be a form field",
@@ -355,7 +386,18 @@ describe("<array-like> to be a form definition", () => {
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 0, // should be a boolean\n" +
 						"  readonly: { t: true }, // should be a boolean\n" +
-						"  required: [], // should be a boolean\n" +
+						"  required:\n" +
+						"    [], // should be a label\n" +
+						"        //   should satisfy\n" +
+						"        //   {\n" +
+						"        //     id: expect.it('to be a string'),\n" +
+						"        //     defaultMessage: expect.it('to be a string')\n" +
+						"        //   }\n" +
+						"        //\n" +
+						"        //   [\n" +
+						"        //     // missing: id: should be a string\n" +
+						"        //     // missing: defaultMessage: should be a string\n" +
+						"        //   ]\n" +
 						"  tabindex: 'foo' // should be a number\n" +
 						"}",
 				));
@@ -491,7 +533,10 @@ describe("<array-like> to be a form definition", () => {
 								autofocus: true,
 								disabled: true,
 								readonly: true,
-								required: true,
+								required: {
+									id: "test.required",
+									defaultMessage: "Field is Required",
+								},
 								tabindex: 12,
 							},
 							"to be a form field",
@@ -534,7 +579,18 @@ describe("<array-like> to be a form definition", () => {
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 0, // should be a boolean\n" +
 						"  readonly: { t: true }, // should be a boolean\n" +
-						"  required: [], // should be a boolean\n" +
+						"  required:\n" +
+						"    [], // should be a label\n" +
+						"        //   should satisfy\n" +
+						"        //   {\n" +
+						"        //     id: expect.it('to be a string'),\n" +
+						"        //     defaultMessage: expect.it('to be a string')\n" +
+						"        //   }\n" +
+						"        //\n" +
+						"        //   [\n" +
+						"        //     // missing: id: should be a string\n" +
+						"        //     // missing: defaultMessage: should be a string\n" +
+						"        //   ]\n" +
 						"  tabindex: 'foo' // should be a number\n" +
 						"}",
 				));
@@ -584,7 +640,10 @@ describe("<array-like> to be a form definition", () => {
 								autofocus: true,
 								disabled: true,
 								readonly: true,
-								required: true,
+								required: {
+									id: "test.required",
+									defaultMessage: "Field is Required",
+								},
 								tabindex: 12,
 							},
 							"to be a form field",
@@ -624,7 +683,18 @@ describe("<array-like> to be a form definition", () => {
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 0, // should be a boolean\n" +
 						"  readonly: { t: true }, // should be a boolean\n" +
-						"  required: [], // should be a boolean\n" +
+						"  required:\n" +
+						"    [], // should be a label\n" +
+						"        //   should satisfy\n" +
+						"        //   {\n" +
+						"        //     id: expect.it('to be a string'),\n" +
+						"        //     defaultMessage: expect.it('to be a string')\n" +
+						"        //   }\n" +
+						"        //\n" +
+						"        //   [\n" +
+						"        //     // missing: id: should be a string\n" +
+						"        //     // missing: defaultMessage: should be a string\n" +
+						"        //   ]\n" +
 						"  tabindex: 'foo' // should be a number\n" +
 						"}",
 				));
@@ -750,7 +820,10 @@ describe("<array-like> to be a form definition", () => {
 								autofocus: true,
 								disabled: true,
 								readonly: true,
-								required: true,
+								required: {
+									id: "test.required",
+									defaultMessage: "Field is Required",
+								},
 								tabindex: 12,
 							},
 							"to be a form field",
@@ -793,7 +866,18 @@ describe("<array-like> to be a form definition", () => {
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 0, // should be a boolean\n" +
 						"  readonly: { t: true }, // should be a boolean\n" +
-						"  required: [], // should be a boolean\n" +
+						"  required:\n" +
+						"    [], // should be a label\n" +
+						"        //   should satisfy\n" +
+						"        //   {\n" +
+						"        //     id: expect.it('to be a string'),\n" +
+						"        //     defaultMessage: expect.it('to be a string')\n" +
+						"        //   }\n" +
+						"        //\n" +
+						"        //   [\n" +
+						"        //     // missing: id: should be a string\n" +
+						"        //     // missing: defaultMessage: should be a string\n" +
+						"        //   ]\n" +
 						"  tabindex: 'foo' // should be a number\n" +
 						"}",
 				));
@@ -927,7 +1011,10 @@ describe("<array-like> to be a form definition", () => {
 								type: "SwitchInput",
 								autofocus: true,
 								disabled: true,
-								required: true,
+								required: {
+									id: "test.required",
+									defaultMessage: "Field is Required",
+								},
 								tabindex: 12,
 							},
 							"to be a form field",
@@ -962,7 +1049,18 @@ describe("<array-like> to be a form definition", () => {
 						"  type: 'SwitchInput',\n" +
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 1, // should be a boolean\n" +
-						"  required: [], // should be a boolean\n" +
+						"  required:\n" +
+						"    [], // should be a label\n" +
+						"        //   should satisfy\n" +
+						"        //   {\n" +
+						"        //     id: expect.it('to be a string'),\n" +
+						"        //     defaultMessage: expect.it('to be a string')\n" +
+						"        //   }\n" +
+						"        //\n" +
+						"        //   [\n" +
+						"        //     // missing: id: should be a string\n" +
+						"        //     // missing: defaultMessage: should be a string\n" +
+						"        //   ]\n" +
 						"  tabindex: '' // should be a number\n" +
 						"}",
 				));
@@ -1042,7 +1140,10 @@ describe("<array-like> to be a form definition", () => {
 								autofocus: true,
 								disabled: true,
 								readonly: true,
-								required: true,
+								required: {
+									id: "test.required",
+									defaultMessage: "Field is Required",
+								},
 								tabindex: 12,
 							},
 							"to be a form field",
@@ -1082,7 +1183,18 @@ describe("<array-like> to be a form definition", () => {
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 0, // should be a boolean\n" +
 						"  readonly: { t: true }, // should be a boolean\n" +
-						"  required: [], // should be a boolean\n" +
+						"  required:\n" +
+						"    [], // should be a label\n" +
+						"        //   should satisfy\n" +
+						"        //   {\n" +
+						"        //     id: expect.it('to be a string'),\n" +
+						"        //     defaultMessage: expect.it('to be a string')\n" +
+						"        //   }\n" +
+						"        //\n" +
+						"        //   [\n" +
+						"        //     // missing: id: should be a string\n" +
+						"        //     // missing: defaultMessage: should be a string\n" +
+						"        //   ]\n" +
 						"  tabindex: 'foo' // should be a number\n" +
 						"}",
 				));
@@ -1163,7 +1275,10 @@ describe("<array-like> to be a form definition", () => {
 								autofocus: true,
 								disabled: true,
 								readonly: true,
-								required: true,
+								required: {
+									id: "test.required",
+									defaultMessage: "Field is Required",
+								},
 								tabindex: 12,
 							},
 							"to be a form field",
@@ -1203,7 +1318,18 @@ describe("<array-like> to be a form definition", () => {
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 0, // should be a boolean\n" +
 						"  readonly: { t: true }, // should be a boolean\n" +
-						"  required: [], // should be a boolean\n" +
+						"  required:\n" +
+						"    [], // should be a label\n" +
+						"        //   should satisfy\n" +
+						"        //   {\n" +
+						"        //     id: expect.it('to be a string'),\n" +
+						"        //     defaultMessage: expect.it('to be a string')\n" +
+						"        //   }\n" +
+						"        //\n" +
+						"        //   [\n" +
+						"        //     // missing: id: should be a string\n" +
+						"        //     // missing: defaultMessage: should be a string\n" +
+						"        //   ]\n" +
 						"  tabindex: 'foo' // should be a number\n" +
 						"}",
 				));
@@ -1313,7 +1439,10 @@ describe("<array-like> to be a form definition", () => {
 								autofocus: true,
 								disabled: true,
 								readonly: true,
-								required: true,
+								required: {
+									id: "test.required",
+									defaultMessage: "Field is Required",
+								},
 								tabindex: 12,
 							},
 							"to be a form field",
@@ -1355,7 +1484,18 @@ describe("<array-like> to be a form definition", () => {
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 0, // should be a boolean\n" +
 						"  readonly: { t: true }, // should be a boolean\n" +
-						"  required: [], // should be a boolean\n" +
+						"  required:\n" +
+						"    [], // should be a label\n" +
+						"        //   should satisfy\n" +
+						"        //   {\n" +
+						"        //     id: expect.it('to be a string'),\n" +
+						"        //     defaultMessage: expect.it('to be a string')\n" +
+						"        //   }\n" +
+						"        //\n" +
+						"        //   [\n" +
+						"        //     // missing: id: should be a string\n" +
+						"        //     // missing: defaultMessage: should be a string\n" +
+						"        //   ]\n" +
 						"  tabindex: 'foo' // should be a number\n" +
 						"}",
 				));
