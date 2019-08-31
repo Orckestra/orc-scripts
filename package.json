@@ -57,7 +57,7 @@
     "coveralls": "^3.0.2",
     "cross-spawn": "^6.0.5",
     "dotenv": "^8.0.0",
-    "eslint": "^5.8.0",
+    "eslint": "^6.3.0",
     "eslint-config-react-app": "^3.0.8",
     "eslint-plugin-flowtype": "^3.2.0",
     "eslint-plugin-import": "^2.14.0",
