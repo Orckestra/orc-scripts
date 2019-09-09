@@ -1,6 +1,5 @@
 module.exports = {
 	name: "unexpected-form",
-	version: "0.0.1",
 	installInto: function(expect) {
 		expect.addAssertion("<object> to be a form field", function(
 			expect,

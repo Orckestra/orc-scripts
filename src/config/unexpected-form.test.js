@@ -1,3 +1,5 @@
+expect.output.preferredWidth = 80;
+
 describe("<array-like> to be a form definition", () => {
 	describe("<object> to be a form field", () => {
 		it("passes with a name only", () =>
@@ -219,7 +221,7 @@ describe("<array-like> to be a form definition", () => {
 								autocomplete: "on",
 								autofocus: true,
 								disabled: true,
-								readonly: true,
+								readOnly: true,
 								required: {
 									id: "test.required",
 									defaultMessage: "Field is Required",
@@ -241,7 +243,7 @@ describe("<array-like> to be a form definition", () => {
 								autocomplete: "on",
 								autofocus: "true",
 								disabled: 0,
-								readonly: { t: true },
+								readOnly: { t: true },
 								required: [],
 								tabindex: "foo",
 							},
@@ -251,7 +253,7 @@ describe("<array-like> to be a form definition", () => {
 					"expected\n" +
 						"{\n" +
 						"  name: 'Field1', type: 'DateInput', autocomplete: 'on',\n" +
-						"  autofocus: 'true', disabled: 0, readonly: { t: true }, required: [],\n" +
+						"  autofocus: 'true', disabled: 0, readOnly: { t: true }, required: [],\n" +
 						"  tabindex: 'foo'\n" +
 						"}\n" +
 						"to be a form field\n" +
@@ -262,7 +264,7 @@ describe("<array-like> to be a form definition", () => {
 						"  autocomplete: 'on',\n" +
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 0, // should be a boolean\n" +
-						"  readonly: { t: true }, // should be a boolean\n" +
+						"  readOnly: { t: true }, // should be a boolean\n" +
 						"  required:\n" +
 						"    [], // should be a label\n" +
 						"        //   should satisfy\n" +
@@ -342,7 +344,7 @@ describe("<array-like> to be a form definition", () => {
 								autocomplete: "on",
 								autofocus: true,
 								disabled: true,
-								readonly: true,
+								readOnly: true,
 								required: {
 									id: "test.required",
 									defaultMessage: "Field is Required",
@@ -364,7 +366,7 @@ describe("<array-like> to be a form definition", () => {
 								autocomplete: "on",
 								autofocus: "true",
 								disabled: 0,
-								readonly: { t: true },
+								readOnly: { t: true },
 								required: [],
 								tabindex: "foo",
 							},
@@ -374,7 +376,7 @@ describe("<array-like> to be a form definition", () => {
 					"expected\n" +
 						"{\n" +
 						"  name: 'Field1', type: 'EmailInput', autocomplete: 'on',\n" +
-						"  autofocus: 'true', disabled: 0, readonly: { t: true }, required: [],\n" +
+						"  autofocus: 'true', disabled: 0, readOnly: { t: true }, required: [],\n" +
 						"  tabindex: 'foo'\n" +
 						"}\n" +
 						"to be a form field\n" +
@@ -385,7 +387,7 @@ describe("<array-like> to be a form definition", () => {
 						"  autocomplete: 'on',\n" +
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 0, // should be a boolean\n" +
-						"  readonly: { t: true }, // should be a boolean\n" +
+						"  readOnly: { t: true }, // should be a boolean\n" +
 						"  required:\n" +
 						"    [], // should be a label\n" +
 						"        //   should satisfy\n" +
@@ -547,7 +549,7 @@ describe("<array-like> to be a form definition", () => {
 								autocomplete: "on",
 								autofocus: true,
 								disabled: true,
-								readonly: true,
+								readOnly: true,
 								required: {
 									id: "test.required",
 									defaultMessage: "Field is Required",
@@ -570,7 +572,7 @@ describe("<array-like> to be a form definition", () => {
 								autocomplete: "on",
 								autofocus: "true",
 								disabled: 0,
-								readonly: { t: true },
+								readOnly: { t: true },
 								required: [],
 								tabindex: "foo",
 							},
@@ -581,7 +583,7 @@ describe("<array-like> to be a form definition", () => {
 						"{\n" +
 						"  name: 'Field1', type: 'MultiSelector',\n" +
 						"  options: [ { label: 'Foo', value: 'foo' } ], autocomplete: 'on',\n" +
-						"  autofocus: 'true', disabled: 0, readonly: { t: true }, required: [],\n" +
+						"  autofocus: 'true', disabled: 0, readOnly: { t: true }, required: [],\n" +
 						"  tabindex: 'foo'\n" +
 						"}\n" +
 						"to be a form field\n" +
@@ -593,7 +595,7 @@ describe("<array-like> to be a form definition", () => {
 						"  autocomplete: 'on',\n" +
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 0, // should be a boolean\n" +
-						"  readonly: { t: true }, // should be a boolean\n" +
+						"  readOnly: { t: true }, // should be a boolean\n" +
 						"  required:\n" +
 						"    [], // should be a label\n" +
 						"        //   should satisfy\n" +
@@ -654,7 +656,7 @@ describe("<array-like> to be a form definition", () => {
 								autocomplete: "on",
 								autofocus: true,
 								disabled: true,
-								readonly: true,
+								readOnly: true,
 								required: {
 									id: "test.required",
 									defaultMessage: "Field is Required",
@@ -676,7 +678,7 @@ describe("<array-like> to be a form definition", () => {
 								autocomplete: "on",
 								autofocus: "true",
 								disabled: 0,
-								readonly: { t: true },
+								readOnly: { t: true },
 								required: [],
 								tabindex: "foo",
 							},
@@ -686,7 +688,7 @@ describe("<array-like> to be a form definition", () => {
 					"expected\n" +
 						"{\n" +
 						"  name: 'Field1', type: 'NumberInput', autocomplete: 'on',\n" +
-						"  autofocus: 'true', disabled: 0, readonly: { t: true }, required: [],\n" +
+						"  autofocus: 'true', disabled: 0, readOnly: { t: true }, required: [],\n" +
 						"  tabindex: 'foo'\n" +
 						"}\n" +
 						"to be a form field\n" +
@@ -697,7 +699,7 @@ describe("<array-like> to be a form definition", () => {
 						"  autocomplete: 'on',\n" +
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 0, // should be a boolean\n" +
-						"  readonly: { t: true }, // should be a boolean\n" +
+						"  readOnly: { t: true }, // should be a boolean\n" +
 						"  required:\n" +
 						"    [], // should be a label\n" +
 						"        //   should satisfy\n" +
@@ -843,7 +845,7 @@ describe("<array-like> to be a form definition", () => {
 								autocomplete: "on",
 								autofocus: true,
 								disabled: true,
-								readonly: true,
+								readOnly: true,
 								required: {
 									id: "test.required",
 									defaultMessage: "Field is Required",
@@ -866,7 +868,7 @@ describe("<array-like> to be a form definition", () => {
 								autocomplete: "on",
 								autofocus: "true",
 								disabled: 0,
-								readonly: { t: true },
+								readOnly: { t: true },
 								required: [],
 								tabindex: "foo",
 							},
@@ -877,7 +879,7 @@ describe("<array-like> to be a form definition", () => {
 						"{\n" +
 						"  name: 'Field1', type: 'Selector',\n" +
 						"  options: [ { label: 'Foo', value: 'foo' } ], autocomplete: 'on',\n" +
-						"  autofocus: 'true', disabled: 0, readonly: { t: true }, required: [],\n" +
+						"  autofocus: 'true', disabled: 0, readOnly: { t: true }, required: [],\n" +
 						"  tabindex: 'foo'\n" +
 						"}\n" +
 						"to be a form field\n" +
@@ -889,7 +891,7 @@ describe("<array-like> to be a form definition", () => {
 						"  autocomplete: 'on',\n" +
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 0, // should be a boolean\n" +
-						"  readonly: { t: true }, // should be a boolean\n" +
+						"  readOnly: { t: true }, // should be a boolean\n" +
 						"  required:\n" +
 						"    [], // should be a label\n" +
 						"        //   should satisfy\n" +
@@ -1163,7 +1165,7 @@ describe("<array-like> to be a form definition", () => {
 								autocomplete: "on",
 								autofocus: true,
 								disabled: true,
-								readonly: true,
+								readOnly: true,
 								required: {
 									id: "test.required",
 									defaultMessage: "Field is Required",
@@ -1185,7 +1187,7 @@ describe("<array-like> to be a form definition", () => {
 								autocomplete: "on",
 								autofocus: "true",
 								disabled: 0,
-								readonly: { t: true },
+								readOnly: { t: true },
 								required: [],
 								tabindex: "foo",
 							},
@@ -1195,7 +1197,7 @@ describe("<array-like> to be a form definition", () => {
 					"expected\n" +
 						"{\n" +
 						"  name: 'Field1', type: 'TextInput', autocomplete: 'on',\n" +
-						"  autofocus: 'true', disabled: 0, readonly: { t: true }, required: [],\n" +
+						"  autofocus: 'true', disabled: 0, readOnly: { t: true }, required: [],\n" +
 						"  tabindex: 'foo'\n" +
 						"}\n" +
 						"to be a form field\n" +
@@ -1206,7 +1208,7 @@ describe("<array-like> to be a form definition", () => {
 						"  autocomplete: 'on',\n" +
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 0, // should be a boolean\n" +
-						"  readonly: { t: true }, // should be a boolean\n" +
+						"  readOnly: { t: true }, // should be a boolean\n" +
 						"  required:\n" +
 						"    [], // should be a label\n" +
 						"        //   should satisfy\n" +
@@ -1310,7 +1312,7 @@ describe("<array-like> to be a form definition", () => {
 								autocomplete: "on",
 								autofocus: true,
 								disabled: true,
-								readonly: true,
+								readOnly: true,
 								required: {
 									id: "test.required",
 									defaultMessage: "Field is Required",
@@ -1332,7 +1334,7 @@ describe("<array-like> to be a form definition", () => {
 								autocomplete: "on",
 								autofocus: "true",
 								disabled: 0,
-								readonly: { t: true },
+								readOnly: { t: true },
 								required: [],
 								tabindex: "foo",
 							},
@@ -1342,7 +1344,7 @@ describe("<array-like> to be a form definition", () => {
 					"expected\n" +
 						"{\n" +
 						"  name: 'Field1', type: 'TimeInput', autocomplete: 'on',\n" +
-						"  autofocus: 'true', disabled: 0, readonly: { t: true }, required: [],\n" +
+						"  autofocus: 'true', disabled: 0, readOnly: { t: true }, required: [],\n" +
 						"  tabindex: 'foo'\n" +
 						"}\n" +
 						"to be a form field\n" +
@@ -1353,7 +1355,7 @@ describe("<array-like> to be a form definition", () => {
 						"  autocomplete: 'on',\n" +
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 0, // should be a boolean\n" +
-						"  readonly: { t: true }, // should be a boolean\n" +
+						"  readOnly: { t: true }, // should be a boolean\n" +
 						"  required:\n" +
 						"    [], // should be a label\n" +
 						"        //   should satisfy\n" +
@@ -1474,7 +1476,7 @@ describe("<array-like> to be a form definition", () => {
 								autocomplete: "on",
 								autofocus: true,
 								disabled: true,
-								readonly: true,
+								readOnly: true,
 								required: {
 									id: "test.required",
 									defaultMessage: "Field is Required",
@@ -1497,7 +1499,7 @@ describe("<array-like> to be a form definition", () => {
 								autocomplete: "on",
 								autofocus: "true",
 								disabled: 0,
-								readonly: { t: true },
+								readOnly: { t: true },
 								required: [],
 								tabindex: "foo",
 							},
@@ -1508,7 +1510,7 @@ describe("<array-like> to be a form definition", () => {
 						"{\n" +
 						"  name: 'Field1', type: 'TranslationInput', moreLabel: 'More',\n" +
 						"  autocomplete: 'on', autofocus: 'true', disabled: 0,\n" +
-						"  readonly: { t: true }, required: [], tabindex: 'foo'\n" +
+						"  readOnly: { t: true }, required: [], tabindex: 'foo'\n" +
 						"}\n" +
 						"to be a form field\n" +
 						"\n" +
@@ -1519,7 +1521,7 @@ describe("<array-like> to be a form definition", () => {
 						"  autocomplete: 'on',\n" +
 						"  autofocus: 'true', // should be a boolean\n" +
 						"  disabled: 0, // should be a boolean\n" +
-						"  readonly: { t: true }, // should be a boolean\n" +
+						"  readOnly: { t: true }, // should be a boolean\n" +
 						"  required:\n" +
 						"    [], // should be a label\n" +
 						"        //   should satisfy\n" +

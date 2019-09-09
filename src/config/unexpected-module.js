@@ -1,6 +1,5 @@
 module.exports = {
 	name: "unexpected-module",
-	version: "0.0.1",
 	installInto: function(expect) {
 		expect
 			.addAssertion("<object> to be a subpage", function(expect, subject) {
