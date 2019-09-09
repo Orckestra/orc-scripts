@@ -248,8 +248,8 @@ const addInputProps = (expect, subject, pattern, textual = true) => {
 	if (subject.hasOwnProperty("disabled")) {
 		pattern.disabled = expect.it("to be a boolean");
 	}
-	if (textual && subject.hasOwnProperty("readonly")) {
-		pattern.readonly = expect.it("to be a boolean");
+	if (textual && subject.hasOwnProperty("readOnly")) {
+		pattern.readOnly = expect.it("to be a boolean");
 	}
 	if (subject.hasOwnProperty("required")) {
 		pattern.required = expect.it("to be a label");
