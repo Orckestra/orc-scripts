@@ -29,12 +29,22 @@ if (
 	options.https = true;
 }
 
+const location =
+	"http" + (options.https ? "s" : "") + "://" + HOST + ":" + PORT;
+
+// /mockData/ contains json files to simulate API endpoints
+options.before = (app, server) => {
+	app.get("/mockData/*", (req, res, next) => {
+		const parsedUrl = new URL(req.url, location);
+		parsedUrl.pathname = parsedUrl.pathname + ".json";
+		req.url = parsedUrl.href.replace(location, "");
+		next();
+	});
+};
+
 webpackDevServer.addDevServerEntrypoints(config, options);
 const compiler = webpack(config);
 const server = new webpackDevServer(compiler, options);
-
-const location =
-	"http" + (options.https ? "s" : "") + "://" + HOST + ":" + PORT;
 
 server.listen(PORT, "localhost", () => {
 	console.log("dev server listening at " + location);
