@@ -11,8 +11,7 @@
   },
   "scripts": {
     "test": "node src test",
-    "test:deps": "make-dir builds & npm run build:orc-shared",
-    "build:orc-shared": "node src buildDep git@github.com:Orckestra/orc-shared.git",
+    "test:orc-shared": "node src buildDep git@github.com:Orckestra/orc-shared.git",
     "coverage": "node src test --coverage",
     "coveralls": "cat coverage/lcov.info | coveralls",
     "build": "node src prep && node src build",
@@ -57,7 +56,6 @@
     "copyfiles": "2.1.1",
     "core-js": "^3.0.0",
     "coveralls": "^3.0.2",
-    "cp-cli": "2.0.0",
     "cross-spawn": "^7.0.0",
     "dotenv": "^8.0.0",
     "eslint": "^6.3.0",

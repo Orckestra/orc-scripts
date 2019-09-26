@@ -9,5 +9,5 @@ env:
   - BUILD_REACT=true
 script:
   - "npm run coverage"
-  - "npm run build:orc-shared"
+  - "npm run test:orc-shared"
 after_success: "npm run coveralls"

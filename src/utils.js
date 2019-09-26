@@ -79,6 +79,9 @@ function resolveBin(
 		const { bin } = require(modPkgPath);
 		const binPath = typeof bin === "string" ? bin : bin[executable];
 		const fullPathToBin = path.join(modPkgDir, binPath);
+		if (pathFromWhich.startsWith(cwd)) {
+			return pathFromWhich.replace(cwd, ".");
+		}
 		if (fullPathToBin === pathFromWhich) {
 			return executable;
 		}
