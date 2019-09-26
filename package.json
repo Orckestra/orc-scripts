@@ -11,6 +11,8 @@
   },
   "scripts": {
     "test": "node src test",
+    "test:deps": "make-dir builds & npm run build:orc-shared",
+    "build:orc-shared": "node src buildDep git@github.com:Orckestra/orc-shared.git",
     "coverage": "node src test --coverage",
     "coveralls": "cat coverage/lcov.info | coveralls",
     "build": "node src prep && node src build",
@@ -55,6 +57,7 @@
     "copyfiles": "2.1.1",
     "core-js": "^3.0.0",
     "coveralls": "^3.0.2",
+    "cp-cli": "2.0.0",
     "cross-spawn": "^7.0.0",
     "dotenv": "^8.0.0",
     "eslint": "^6.3.0",
@@ -113,7 +116,7 @@
     "webpack": "^4.25.1",
     "webpack-bundle-analyzer": "3.5.0",
     "webpack-dev-server": "^3.1.10",
-    "whatwg-fetch": "^3.0.0"
+    "whatwg-fetch": "2.0.4"
   },
   "sideEffects": false,
   "lint-staged": {
