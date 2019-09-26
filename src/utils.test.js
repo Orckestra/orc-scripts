@@ -109,15 +109,15 @@ describe("utils", () => {
 	describe("resolveBin", () => {
 		it("exists", () => expect(resolveBin, "to be a function"));
 
-		test.skip(`resolveBin resolves to the full path when it's not in $PATH`, () => {
+		it("resolveBin resolves to the full path when it's not in $PATH", () => {
 			expect(
-				resolveBin("jest"),
+				resolveBin("@babel/cli", { executable: "babel" }),
 				"to be",
-				require.resolve("jest/bin/jest").replace(process.cwd(), "."),
+				require.resolve("@babel/cli/bin/babel").replace(process.cwd(), "."),
 			);
 		});
 
-		test(`resolveBin resolves to the binary if it's in $PATH`, () => {
+		it("resolveBin resolves to the binary if it's in $PATH", () => {
 			expect(resolveBin("node"), "to be", "node");
 		});
 	});
