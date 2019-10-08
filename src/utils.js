@@ -22,7 +22,7 @@ const hasPath = (obj, keys) => {
 
 const has = (obj, keypath) => hasPath(obj, keypath.split(/[./]/));
 
-const { package: pkg, path: pkgPath } =
+const { packageJson: pkg, path: pkgPath } =
 	readPkgUp.sync({
 		cwd: fs.realpathSync(process.cwd()),
 	}) || {};
