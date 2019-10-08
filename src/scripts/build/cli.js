@@ -26,16 +26,10 @@ const ignore = args.includes("--ignore")
 	: ["--ignore", "**/*.test.js,**/__mocks__"];
 
 const result = spawn.sync(
-	"node",
-	[
-		resolveBin("@babel/cli", { executable: "babel" }),
-		...outDir,
-		...copyFiles,
-		...ignore,
-		...verbosity,
-		...config,
-		"src",
-	].concat(args),
+	resolveBin("@babel/cli", { executable: "babel" }),
+	[...outDir, ...copyFiles, ...ignore, ...verbosity, ...config, "src"].concat(
+		args,
+	),
 	{ stdio: "inherit" },
 );
 

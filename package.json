@@ -11,7 +11,7 @@
   },
   "scripts": {
     "test": "node src test",
-    "test:orc-shared": "node src buildDep git@github.com:Orckestra/orc-shared.git",
+    "test:orc-shared": "node src buildDep https://github.com/Orckestra/orc-shared.git",
     "coverage": "node src test --coverage",
     "coveralls": "cat coverage/lcov.info | coveralls",
     "build": "node src prep && node src build",
