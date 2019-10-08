@@ -11,6 +11,7 @@
   },
   "scripts": {
     "test": "node src test",
+    "test:orc-shared": "node src buildDep https://github.com/Orckestra/orc-shared.git",
     "coverage": "node src test --coverage",
     "coveralls": "cat coverage/lcov.info | coveralls",
     "build": "node src prep && node src build",
@@ -113,7 +114,7 @@
     "webpack": "^4.25.1",
     "webpack-bundle-analyzer": "3.5.0",
     "webpack-dev-server": "^3.1.10",
-    "whatwg-fetch": "^3.0.0"
+    "whatwg-fetch": "2.0.4"
   },
   "sideEffects": false,
   "lint-staged": {
