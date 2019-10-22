@@ -9,7 +9,7 @@ const envTargets = isTest
 	? { node: "current" }
 	: isWebpack
 	? ["defaults", "IE 11"]
-	: { node: "4.5" };
+	: { node: "10" };
 
 const envOptions = { loose: true, targets: envTargets };
 module.exports = {
