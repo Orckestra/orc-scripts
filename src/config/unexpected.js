@@ -1,6 +1,7 @@
 const unexpected = require("unexpected");
-const unexpectedReact = require("unexpected-react");
-const unexpectedStyled = require("./unexpected-styled");
+const unexpectedStyles = require("./unexpected-styles");
+const unexpectedDom = require("unexpected-dom");
+const unexpectedReaction = require("unexpected-reaction");
 const unexpectedModule = require("./unexpected-module");
 const unexpectedForm = require("./unexpected-form");
 const unexpectedSinon = require("unexpected-sinon");
@@ -10,8 +11,9 @@ const Immutable = require("immutable");
 
 global.expect = unexpected
 	.clone()
-	.use(unexpectedReact)
-	.use(unexpectedStyled)
+	.use(unexpectedDom)
+	.use(unexpectedReaction)
+	.use(unexpectedStyles)
 	.use(unexpectedModule)
 	.use(unexpectedForm)
 	.use(unexpectedSinon)
@@ -49,24 +51,6 @@ global.expect = unexpected
 			);
 		},
 	)
-	.addAssertion("<ReactShallowRenderer> has elements <assertion?>", function(
-		expect,
-		renderer,
-	) {
-		expect.errorMode = "nested";
-		return expect.shift(renderer.getRenderOutput());
-	})
-	.addAssertion("<ReactElement> renders elements <assertion>", function(
-		expect,
-		subject,
-	) {
-		expect.errorMode = "nested";
-		return expect(subject, "when rendered", "has elements").then(function(
-			elements,
-		) {
-			return expect.shift(elements);
-		});
-	})
 	.addAssertion("<function> as a React component <assertion?>", function(
 		expect,
 		Subject,
