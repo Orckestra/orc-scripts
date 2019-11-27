@@ -25,10 +25,14 @@ const ignore = args.includes("--ignore")
 	? []
 	: ["--ignore", "**/*.test.js,**/__mocks__"];
 
+const babelUnacceptedArgs = ["--no-copy-files"];
+
+const filteredArgs = args.filter(arg => !babelUnacceptedArgs.includes(arg));
+
 const result = spawn.sync(
 	resolveBin("@babel/cli", { executable: "babel" }),
 	[...outDir, ...copyFiles, ...ignore, ...verbosity, ...config, "src"].concat(
-		args,
+		filteredArgs,
 	),
 	{ stdio: "inherit" },
 );
