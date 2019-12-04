@@ -25,7 +25,7 @@ const jestConfig = {
 	moduleFileExtensions: ["js", "json"],
 	collectCoverageFrom: ["src/**/*.js"],
 	setupFiles: [require.resolve("whatwg-fetch")],
-	setupFilesAfterEnv: [here("unexpected.js"), here("consoleMock.js")],
+	setupFilesAfterEnv: [here("unexpected.js")],
 	testMatch: ["**/*.test.js"],
 	testPathIgnorePatterns: [...ignores],
 	verbose: true,
