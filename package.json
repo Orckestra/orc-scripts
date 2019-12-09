@@ -68,7 +68,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
-    "extract-react-intl-messages": "1.1.0",
+    "extract-react-intl-messages": "2.3.5",
     "file-loader": "^5.0.2",
     "fugl": "1.4.1",
     "husky": "^3.0.0",
