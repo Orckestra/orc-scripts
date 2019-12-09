@@ -63,7 +63,7 @@
     "date-fns-2": "npm:date-fns@2.8.1",
     "dotenv": "^8.0.0",
     "eslint": "^6.3.0",
-    "eslint-config-react-app": "^3.0.8",
+    "eslint-config-react-app": "^5.1.0",
     "eslint-plugin-flowtype": "^4.3.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
