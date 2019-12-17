@@ -12,22 +12,55 @@ const SvgStyled = styled.svg`
 `;
 
 describe("Styled component plugin for unexpected", () => {
-	describe("<string> as a selector to have style rules <assertion?>", () => {
-		let sheet;
-		beforeEach(() => {
-			sheet = document.styleSheets[0];
-			sheet.insertRule(".foo { color: green }");
-		});
-		afterEach(() => {
-			sheet.deleteRule(0);
-		});
+	let sheet, secondSheet;
+	beforeEach(() => {
+		sheet = document.styleSheets[0];
+		sheet.insertRule("html { margin: 0; }", 0);
+		sheet.insertRule("body { padding: 0; }", 1);
+		sheet.insertRule(".foo { color: green; }", 2);
+		secondSheet = document.createElement("style");
+		secondSheet.appendChild(document.createTextNode(""));
+		document.head.appendChild(secondSheet);
+		secondSheet.sheet.insertRule(".bar { color: blue; }", 0);
+	});
+	afterEach(() => {
+		sheet.deleteRule(2);
+		sheet.deleteRule(1);
+		sheet.deleteRule(0);
+		document.head.removeChild(secondSheet);
+	});
 
+	describe("<string> as a selector to have style rules <assertion?>", () => {
 		it("passes when a style matches", () =>
 			expect(
 				".foo",
 				"as a selector to have style rules",
 				"to contain",
 				"green",
+			));
+
+		it("works with html tag", () =>
+			expect(
+				"html",
+				"as a selector to have style rules",
+				"to contain",
+				"margin",
+			));
+
+		it("works with body tag", () =>
+			expect(
+				"body",
+				"as a selector to have style rules",
+				"to contain",
+				"padding",
+			));
+
+		it("works on a second style sheet", () =>
+			expect(
+				".bar",
+				"as a selector to have style rules",
+				"to contain",
+				"color: blue;",
 			));
 
 		it("gives a decent diff", () =>
@@ -49,10 +82,20 @@ describe("Styled component plugin for unexpected", () => {
 	describe("<DOMElement> to have style rules satisfying <assertion>", () => {
 		it("passes with DOM element", () =>
 			expect(
-				<TestStyled />,
+				<div className="ban foo boof" />,
 				"when mounted",
 				"to have style rules satisfying",
-				expect.it("to be a", "string").and("to contain", "color: red;"),
+				"to contain",
+				"color: green;",
+			));
+
+		it("passes with DOM element referencing second style sheet", () =>
+			expect(
+				<div className="ban bar boof" />,
+				"when mounted",
+				"to have style rules satisfying",
+				"to contain",
+				"color: blue;",
 			));
 
 		it("passes with SVG element", () =>
@@ -61,6 +104,14 @@ describe("Styled component plugin for unexpected", () => {
 				"when mounted",
 				"to have style rules satisfying",
 				expect.it("to be a", "string").and("to contain", "width: 100px;"),
+			));
+
+		it("passes with a styled component", () =>
+			expect(
+				<TestStyled />,
+				"when mounted",
+				"to have style rules satisfying",
+				expect.it("to be a", "string").and("to contain", "color: red;"),
 			));
 
 		it("gives a detailed diff", () =>
@@ -105,10 +156,11 @@ describe("Styled component plugin for unexpected", () => {
 						<div id="foo" className="" />,
 						"when mounted",
 						"to have style rules satisfying",
-						"to be ok",
+						"to be a string",
 					),
 				"to throw",
-				'expected <div id="foo" class=""></div> to have style rules satisfying to be ok\n' +
+				'expected <div id="foo" class=""></div>\n' +
+					"to have style rules satisfying to be a string\n" +
 					'  <div id="foo" class=""></div> has no class name',
 			));
 	});
