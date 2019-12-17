@@ -127,10 +127,8 @@ describe("Styled component plugin for unexpected", () => {
 				"to throw",
 				'expected <div class="unexpected-stylestest__TestStyled-waex4f-0 grRYoI"></div>\n' +
 					"to have style rules satisfying to contain 'color: blue;'\n" +
-					"  expected '.unexpected-stylestest__TestStyled-waex4f-0 {}\\n.grRYoI {color: red; background-color: green;}'\n" +
-					"  to contain 'color: blue;'\n" +
+					"  expected '.grRYoI {color: red; background-color: green;}' to contain 'color: blue;'\n" +
 					"\n" +
-					"  .unexpected-stylestest__TestStyled-waex4f-0 {}\n" +
 					"  .grRYoI {color: red; background-color: green;}\n" +
 					"           ^^^^^^^                ^^^^^^^",
 			));
