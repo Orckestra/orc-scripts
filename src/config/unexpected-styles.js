@@ -16,8 +16,8 @@ module.exports = {
 						declarations += sheet.cssRules[i].cssText;
 					}
 				}
-				return declarations;
 			}
+			return declarations;
 		};
 
 		expect.addAssertion(
