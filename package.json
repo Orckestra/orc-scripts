@@ -43,7 +43,7 @@
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.7.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-transform-computed-properties": "^7.0.0",
     "@babel/plugin-transform-react-jsx": "^7.0.0",
     "@babel/plugin-transform-template-literals": "^7.0.0",
