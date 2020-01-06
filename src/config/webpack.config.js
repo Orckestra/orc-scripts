@@ -42,6 +42,19 @@ module.exports = {
 				test: /\.(jpe?g|png|gif)$/i,
 				use: ["file-loader", "img-loader"],
 			},
+			{
+				test: /\.css$/i,
+				use: ["style-loader", "css-loader"],
+			},
+			{
+				test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+				use: {
+					loader: "url-loader",
+					options: {
+						limit: 50000,
+					},
+				},
+			},
 		],
 	},
 	resolve: {
