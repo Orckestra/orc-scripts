@@ -1,10 +1,48 @@
-// import React from "react";
+import React from "react";
 
 const FakeComponent = () => null;
+
+class ClassComponent extends React.Component {
+	render() {
+		return <div />;
+	}
+}
 
 const fakeSelector = () => {};
 
 describe("Module structure plugin for Unexpected", () => {
+	describe("<object> to be a component", () => {
+		it("accepts function components", () =>
+			expect(FakeComponent, "to be a component"));
+
+		it("accepts class components", () =>
+			expect(ClassComponent, "to be a component"));
+
+		it("accepts memoized components", () =>
+			expect(React.memo(FakeComponent), "to be a component"));
+
+		it("fails with undefined", () =>
+			expect(
+				() => expect(undefined, "to be a component"),
+				"to throw",
+				"expected undefined to be a component",
+			));
+
+		it("fails with null", () =>
+			expect(
+				() => expect(null, "to be a component"),
+				"to throw",
+				"expected null to be a component",
+			));
+
+		it("fails with string", () =>
+			expect(
+				() => expect("FakeComponent", "to be a component"),
+				"to throw",
+				"expected 'FakeComponent' to be a component",
+			));
+	});
+
 	describe("<object> to be a subpage", () => {
 		it("handles a minimal subpage", () =>
 			expect(
@@ -90,7 +128,7 @@ describe("Module structure plugin for Unexpected", () => {
 					"\n" +
 					"{\n" +
 					"  wrong_component: () => null // should be removed\n" +
-					"  // missing: component: should be a function\n" +
+					"  // missing: component: should be a component\n" +
 					"}",
 			));
 
@@ -490,7 +528,7 @@ describe("Module structure plugin for Unexpected", () => {
 					"{\n" +
 					"  label: { id: 'test.msg', defaultMessage: 'A label' },\n" +
 					"  subpages: { '/foo': { component: ... } }\n" +
-					"  // missing: component: should be a function\n" +
+					"  // missing: component: should be a component\n" +
 					"}",
 			));
 
@@ -578,7 +616,7 @@ describe("Module structure plugin for Unexpected", () => {
 					"    //\n" +
 					"    // {\n" +
 					"    //   '/foo': {\n" +
-					"    //     component: 'FakeComponent' // should be a function\n" +
+					"    //     component: 'FakeComponent' // should be a component\n" +
 					"    //   }\n" +
 					"    // }\n" +
 					"}",
@@ -677,7 +715,7 @@ describe("Module structure plugin for Unexpected", () => {
 					"  '/bar': {\n" +
 					"    label: { id: 'test.msg', defaultMessage: 'A label' },\n" +
 					"    subpages: { '/foo': { component: ... } }\n" +
-					"    // missing: component: should be a function\n" +
+					"    // missing: component: should be a component\n" +
 					"  }\n" +
 					"}",
 			));

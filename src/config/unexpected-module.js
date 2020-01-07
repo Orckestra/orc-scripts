@@ -2,9 +2,20 @@ module.exports = {
 	name: "unexpected-module",
 	installInto: function(expect) {
 		expect
+			.addAssertion("<object> to be a component", function(expect, subject) {
+				return expect(
+					subject,
+					expect
+						.it("to have property", "$$typeof", Symbol.for("react.memo"))
+						.or("to be a function"),
+				);
+			})
+			.addAssertion("<any> to be a component", function(expect) {
+				return expect.fail();
+			})
 			.addAssertion("<object> to be a subpage", function(expect, subject) {
 				const pattern = {
-					component: expect.it("to be a function"),
+					component: expect.it("to be a component"),
 				};
 				if (subject.toolStateSelector) {
 					pattern.toolStateSelector = expect.it("to be a function");
@@ -17,7 +28,7 @@ module.exports = {
 			.addAssertion("<object> to be a segment", function(expect, subject) {
 				const pattern = {
 					label: expect.it("to be a label"),
-					component: expect.it("to be a function"),
+					component: expect.it("to be a component"),
 				};
 				if (subject.dataPath) {
 					pattern.label = expect.it("to be an object").and("to be a label");
@@ -62,7 +73,7 @@ module.exports = {
 				}
 				if (subject.component) {
 					expect(subject, "to satisfy", {
-						component: expect.it("to be a function"),
+						component: expect.it("to be a component"),
 					});
 					if (subject.pages) {
 						expect(subject, "to satisfy", {
