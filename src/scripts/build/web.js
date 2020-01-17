@@ -10,9 +10,16 @@ if (args.includes("--stats")) {
 }
 
 webpack(config, (err, stats) => {
+	if (err) {
+		console.error(err.stack || err);
+		process.exit(-2);
+	}
 	console.log(
 		stats.toString({
 			colors: true,
 		}),
 	);
+	if (stats.hasErrors()) {
+		process.exit(-1);
+	}
 });
