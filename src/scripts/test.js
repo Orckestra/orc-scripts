@@ -1,10 +1,11 @@
 process.env.BABEL_ENV = "test";
 process.env.NODE_ENV = "test";
 
-const isCI = require("is-ci");
 const { hasPkgProp, parseEnv, hasFile } = require("../utils");
 
 const args = process.argv.slice(2);
+
+const isCI = require("is-ci") || args.includes("--ci");
 
 const watch =
 	!isCI &&
@@ -15,6 +16,8 @@ const watch =
 		? ["--watch"]
 		: [];
 
+const ci = isCI ? ["--reporters=default", "--reporters=jest-junit"] : [];
+
 const config =
 	!args.includes("--config") &&
 	!hasFile("jest.config.js") &&
@@ -22,4 +25,4 @@ const config =
 		? ["--config", JSON.stringify(require("../config/jest.config"))]
 		: [];
 
-require("jest").run([...config, ...watch, ...args]);
+require("jest").run([...config, ...watch, ...ci, ...args]);
