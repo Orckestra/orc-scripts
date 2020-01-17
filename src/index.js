@@ -14,7 +14,7 @@ try {
 
 if (shouldThrow) {
 	const msg =
-		"You must use Node version 8 or greater to run the scripts within orc-scripts " +
+		"You must use Node version 10 or greater to run the scripts within orc-scripts " +
 		"because we dogfood the untranspiled version of the scripts.";
 	throw new Error(msg);
 }
