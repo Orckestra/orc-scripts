@@ -107,6 +107,11 @@ global.expect = unexpected
 						expect.it("to be a string").or("to be a number"),
 					),
 			};
+			if (subject.hasOwnProperty("width")) {
+				pattern.width = expect
+					.it("to be a string")
+					.and("not to match", /[;:{[]/);
+			}
 			if (subject.hasOwnProperty("type")) {
 				pattern.type = expect
 					.it("to be", "number")

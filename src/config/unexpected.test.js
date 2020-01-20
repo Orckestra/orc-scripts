@@ -85,6 +85,42 @@ describe("<object> to be a column definition", () => {
 			"not to throw",
 		));
 
+	it("passes with no type, string field name, width", () =>
+		expect(
+			() =>
+				expect(
+					{
+						fieldName: "ColumnA",
+						width: "400px",
+					},
+					"to be a column definition",
+				),
+			"not to throw",
+		));
+
+	it("fails if width contains suspicious characters", () =>
+		expect(
+			() =>
+				expect(
+					{
+						fieldName: "ColumnA",
+						width: "400px;",
+					},
+					"to be a column definition",
+				),
+			"to throw",
+			"expected { fieldName: 'ColumnA', width: '400px;' } to be a column definition\n" +
+				"\n" +
+				"{\n" +
+				"  fieldName: 'ColumnA',\n" +
+				"  width: '400px;' // ✓ should be a string and\n" +
+				"                  // ⨯ should not match /[;:{[]/\n" +
+				"                  //\n" +
+				"                  //   400px;\n" +
+				"                  //        ^\n" +
+				"}",
+		));
+
 	it("fails if there are unknown parameters", () =>
 		expect(
 			() =>
