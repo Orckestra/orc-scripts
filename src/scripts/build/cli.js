@@ -29,7 +29,7 @@ const babelUnacceptedArgs = ["--no-copy-files"];
 
 const filteredArgs = args.filter(arg => !babelUnacceptedArgs.includes(arg));
 
-const result = spawn.sync(
+const child = spawn(
 	resolveBin("@babel/cli", { executable: "babel" }),
 	[...outDir, ...copyFiles, ...ignore, ...verbosity, ...config, "src"].concat(
 		filteredArgs,
@@ -37,7 +37,15 @@ const result = spawn.sync(
 	{ stdio: "inherit" },
 );
 
-if (result.status !== 0) {
-	console.error("Babel finished with non-zero exit code", result.status);
-}
-process.exit(result.status);
+child.on("error", err => {
+	console.error("An error occurred:");
+	console.error(err);
+	process.exit(-1);
+});
+
+child.on("exit", exitCode => {
+	if (exitCode !== 0) {
+		console.error("Babel finished with non-zero exit code", exitCode);
+	}
+	process.exit(exitCode);
+});
