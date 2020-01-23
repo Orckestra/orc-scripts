@@ -1,7 +1,7 @@
 const util = require("util");
 const path = require("path");
 const makeDir = require("make-dir");
-const rimraf = require("rimraf");
+const rimraf = util.promisify(require("rimraf"));
 const copyFile = util.promisify(require("ncp").ncp);
 const spawn = require("cross-spawn");
 
@@ -13,12 +13,18 @@ if (!repos) {
 	process.exit(-1);
 }
 
+let release;
+if (process.argv.includes("--release")) {
+	release = process.argv[process.argv.indexOf("--release") + 1];
+}
+
 async function build(repos) {
 	const name = repos.match(/([^/]*)\.git$/)[1];
 	const folder = path.resolve(process.cwd(), "builds/" + name);
 	let pack;
 
-	console.log(`Building ${name} from repository ${repos}
+	console.log(`Building ${name +
+		(release ? " " + release : "")} from repository ${repos}
 		in ${folder}`);
 
 	const buildResult = spawn.sync("npm", ["run", "build"]);
@@ -29,26 +35,30 @@ async function build(repos) {
 	const packResult = spawn.sync("npm", ["pack"]);
 	if (packResult.status !== 0) {
 		console.error(packResult.stderr.toString("utf-8"));
-		return -1;
+		return -2;
 	}
 	const packName = packResult.stdout.toString("utf-8").trim();
 	console.log("Packaged to " + packName);
 
 	try {
-		rimraf.sync(folder);
+		await rimraf(folder);
 	} catch (err) {
 		console.error(err.message);
-		return -1;
+		return -3;
 	}
 
 	try {
 		await makeDir("builds");
 	} catch (_) {}
 
-	const gitResult = spawn.sync("git", ["clone", repos, folder]);
+	const releaseArgs = release
+		? ["--branch", "release/" + release, "--single-branch"]
+		: ["--single-branch"];
+
+	const gitResult = spawn.sync("git", ["clone", repos, ...releaseArgs, folder]);
 	if (gitResult.status !== 0) {
 		console.error(gitResult.stderr.toString("utf-8"));
-		return -1;
+		return -4;
 	}
 	console.log("Git repository was cloned");
 
@@ -59,13 +69,13 @@ async function build(repos) {
 		);
 	} catch (err) {
 		console.error(err.message);
-		return -1;
+		return -5;
 	}
 
 	const installResult = spawn.sync("npm", ["install"], { cwd: folder });
 	if (installResult.status !== 0) {
 		console.error(installResult.stderr.toString("utf-8"));
-		return -1;
+		return -6;
 	}
 	console.log("Dependencies installed");
 
@@ -75,7 +85,7 @@ async function build(repos) {
 	});
 	if (packInstallResult.status !== 0) {
 		console.error(packInstallResult.stderr.toString("utf-8"));
-		return -1;
+		return -7;
 	}
 	console.log("Package installed");
 
@@ -84,11 +94,11 @@ async function build(repos) {
 		stdio: "inherit",
 	});
 	if (testResult.status !== 0) {
-		return -1;
+		return 1;
 	}
 
 	console.log("Tests passed");
-	if (pack) rimraf.sync(pack);
+	if (pack) await rimraf(pack);
 	return 0;
 }
 
