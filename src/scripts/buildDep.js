@@ -13,9 +13,9 @@ if (!repos) {
 	process.exit(-1);
 }
 
-let release = process.argv[process.argv.indexOf("--release") + 1];
-if (release === process.argv0) {
-	release = undefined;
+let release;
+if (process.argv.includes("--release")) {
+	release = process.argv[process.argv.indexOf("--release") + 1];
 }
 
 async function build(repos) {
