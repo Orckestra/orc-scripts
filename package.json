@@ -19,7 +19,7 @@
     "prepublishOnly": "npm run build:clean",
     "test": "node src test",
     "test:ci": "npm run lint && npm run coverage && npm run test:orc-shared",
-    "test:orc-shared": "node src buildDep https://github.com/Orckestra/orc-shared.git",
+    "test:orc-shared": "node src buildDep https://github.com/Orckestra/orc-shared.git --release v0.7",
     "watch": "node src prep && node src build --watch"
   },
   "files": [
