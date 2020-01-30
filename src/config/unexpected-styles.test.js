@@ -126,12 +126,14 @@ describe("Styled component plugin for unexpected", () => {
 						"color: blue;",
 					),
 				"to throw",
-				'expected <div class="unexpected-stylestest__TestStyled-waex4f-0 grRYoI"></div>\n' +
-					"to have style rules satisfying to contain 'color: blue;'\n" +
-					"  expected '.grRYoI {color: red; background-color: green;}' to contain 'color: blue;'\n" +
-					"\n" +
-					"  .grRYoI {color: red; background-color: green;}\n" +
-					"           ^^^^^^^                ^^^^^^^",
+				new RegExp(
+					'expected <div class="unexpected-stylestest__TestStyled-\\w+-0 \\w+"></div>\n' +
+						"to have style rules satisfying to contain 'color: blue;'\n" +
+						"  expected '\\.\\w+ \\{color: red; background-color: green;\\}' to contain 'color: blue;'\n" +
+						"\n" +
+						"  \\.\\w+ \\{color: red; background-color: green;\\}\n" +
+						"           \\^\\^\\^\\^\\^\\^\\^                \\^\\^\\^\\^\\^\\^\\^",
+				),
 			));
 
 		it("fails if no class name", () =>
