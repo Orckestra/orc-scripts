@@ -12,9 +12,12 @@ const SvgStyled = styled.svg`
 `;
 
 describe("Styled component plugin for unexpected", () => {
-	let sheet, secondSheet;
+	let firstSheet, secondSheet;
 	beforeEach(() => {
-		sheet = document.styleSheets[0];
+		firstSheet = document.createElement("style");
+		firstSheet.appendChild(document.createTextNode(""));
+		document.head.appendChild(firstSheet);
+		const sheet = firstSheet.sheet;
 		sheet.insertRule("html { margin: 0; }", 0);
 		sheet.insertRule("body { padding: 0; }", 1);
 		sheet.insertRule(".foo { color: green; }", 2);
@@ -24,9 +27,7 @@ describe("Styled component plugin for unexpected", () => {
 		secondSheet.sheet.insertRule(".bar { color: blue; }", 0);
 	});
 	afterEach(() => {
-		sheet.deleteRule(2);
-		sheet.deleteRule(1);
-		sheet.deleteRule(0);
+		document.head.removeChild(firstSheet);
 		document.head.removeChild(secondSheet);
 	});
 
@@ -147,7 +148,7 @@ describe("Styled component plugin for unexpected", () => {
 					'  <div id="foo"></div> has no class name',
 			));
 
-		it("fails if no class name", () =>
+		it("fails if empty class name", () =>
 			expect(
 				() =>
 					expect(
