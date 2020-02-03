@@ -4,6 +4,9 @@ const isWeb = parseEnv("BUILD_REACT", parseEnv("BUILD_WEBPACK", false));
 
 const here = p => path.join(__dirname, p);
 
+const args = process.argv.slice(2);
+const isCI = require("is-ci") || args.includes("--ci");
+
 const useBuiltInBabelConfig =
 	(!hasFile(".babelrc") || !hasFile("babel.config.js")) && !hasPkgProp("babel");
 
@@ -30,6 +33,10 @@ const jestConfig = {
 	testPathIgnorePatterns: [...ignores],
 	verbose: true,
 };
+
+if (!isCI) {
+	jestConfig["coverageReporters"] = ["html", "text-summary"];
+}
 
 if (isWeb) {
 	jestConfig["testURL"] = "http://localhost:8000/";
