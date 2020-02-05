@@ -1,6 +1,5 @@
 const path = require("path");
-const { parseEnv, hasFile, hasPkgProp, fromRoot } = require("../utils");
-const isWeb = parseEnv("BUILD_REACT", parseEnv("BUILD_WEBPACK", false));
+const { hasFile, hasPkgProp, fromRoot } = require("../utils");
 
 const here = p => path.join(__dirname, p);
 
@@ -11,7 +10,7 @@ const ignores = ["/node_modules/"];
 
 const jestConfig = {
 	roots: [fromRoot("src")],
-	testEnvironment: isWeb ? "jsdom" : "node",
+	testEnvironment: "jsdom",
 	moduleNameMapper: {
 		"\\.(jpg|jpeg|png|gif)$": here("../__mocks__/fileMock.js"),
 		"styled-components": path.resolve(
@@ -28,12 +27,9 @@ const jestConfig = {
 	setupFilesAfterEnv: [here("unexpected.js"), here("consoleMock.js")],
 	testMatch: ["**/*.test.js"],
 	testPathIgnorePatterns: [...ignores],
+	testURL: "http://localhost:8000/",
 	verbose: true,
 };
-
-if (isWeb) {
-	jestConfig["testURL"] = "http://localhost:8000/";
-}
 
 if (useBuiltInBabelConfig) {
 	jestConfig["transform"] = { "^.+\\.js$": here("./babel-transform") };
