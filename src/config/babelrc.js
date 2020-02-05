@@ -7,9 +7,11 @@ const isReact = parseEnv("BUILD_REACT", isWebpack);
 
 const envTargets = isTest
 	? { node: "current" }
-	: isWebpack
+	: isReact
 	? "defaults, IE 11"
 	: { node: "10" };
+
+console.log("Using targets", envTargets);
 
 const envOptions = { loose: true, targets: envTargets };
 module.exports = {
