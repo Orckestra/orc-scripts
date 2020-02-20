@@ -14,6 +14,7 @@ module.exports = {
 		path.resolve("./src/index.js"),
 	],
 	output: {
+		chunkFilename: "[id].[chunkhash].js",
 		filename: "bundle.js",
 		path: path.resolve(process.cwd(), "dist"),
 	},
