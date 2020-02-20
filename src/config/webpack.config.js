@@ -73,6 +73,8 @@ if (locales.length) {
 	module.exports.plugins.push(
 		new webpack.DefinePlugin({
 			SUPPORTED_LOCALES: JSON.stringify(locales),
+			BUILD_ID: process.env.BUILD_BUILDID,
+			BUILD_NUMBER: process.env.BUILD_BUILDNUMBER,
 		}),
 	);
 }
