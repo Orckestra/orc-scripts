@@ -17,27 +17,23 @@ These plugins provide a wide array of tools to make for a pleasant testing exper
 
 ## Custom assertions
 
-`orc-scripts` defines a type to help test `styled-components` rendering, and a number of custom assertions. The below documentation expects an at least cursory familiarity with `unexpected` itself and the above mentioned plugins.
+`orc-scripts` defines a number of custom assertions. The below documentation expects an at least cursory familiarity with `unexpected` itself and the above mentioned plugins.
+
+### `<array-like> to be shorter than [or same length as] <array-like>`
+
+Compares two array-like values' length.
 
 ### `<string> as a selector to have style rules <assertion?>`
 
 Will go through the stylesheets of the DOM environment of the test, looking for styles fitting the selector string givenm, which are passed on to the later assertions.
 
-### `<DOMElement> to render style rules satisfying <assertion?>`
+### `<DOMElement> to have style rules satisfying <assertion>`
 
 This assertion will identify and search out styles matching any class name in the subject DOM element, in stylesheets rendered into the DOM. These will be passed on as a string to following assertions, enabling testing of the style output.
 
 ### `<function> to be a reducer with initial state <object>`
 
 This is a baseline test for reducer functions, ensuring that they behave as expected in standard cases. Specifically, it tests two things: That the reducer does not modify a state object passed to it along with an action of an unrelated type, and that in the case of initialization, it will return an initial state fitting the passed object pattern, turned into an Immutable data structure.
-
-### `<ReactShallowRenderer> has elements <assertion?>`
-
-This is a utility assertion which simply extracts a shallow renderer's content, allowing it to be handled as a normal `<ReactElement>` type by following assertions.
-
-### `<ReactElement> renders elements <assertion?>`
-
-A chain of the `"when rendered"` assertion from `unexpected-react` and `"has elements"` above, allowing a further 'layer' of rendering to take place. It is typically combined with `"to render as"` as a prefix in order to render e.g. HOC-wrapped components.
 
 ### `<any> to be a label`
 
