@@ -26,6 +26,10 @@ const jestConfig = {
 	modulePaths: ["<rootDir>/src/", "<rootDir>/node_modules/"],
 	moduleFileExtensions: ["js", "json"],
 	collectCoverageFrom: ["src/**/*.js"],
+	globals: {
+		BUILD_ID: "000",
+		BUILD_NUMBER: "000",
+	},
 	setupFiles: [require.resolve("whatwg-fetch")],
 	setupFilesAfterEnv: [here("unexpected.js")],
 	testMatch: ["**/*.test.js"],
