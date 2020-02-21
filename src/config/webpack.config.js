@@ -65,7 +65,12 @@ module.exports = {
 			path.resolve(process.cwd(), "node_modules"),
 		],
 	},
-	plugins: [],
+	plugins: [
+		new webpack.DefinePlugin({
+			BUILD_ID: `"${process.env.BUILD_BUILDID}"`,
+			BUILD_NUMBER: `"${process.env.BUILD_BUILDNUMBER}"`,
+		}),
+	],
 };
 
 const locales = Object.values(pkgConf.sync("locales"));
@@ -73,8 +78,6 @@ if (locales.length) {
 	module.exports.plugins.push(
 		new webpack.DefinePlugin({
 			SUPPORTED_LOCALES: JSON.stringify(locales),
-			BUILD_ID: process.env.BUILD_BUILDID,
-			BUILD_NUMBER: process.env.BUILD_BUILDNUMBER,
 		}),
 	);
 }
