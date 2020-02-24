@@ -28,6 +28,8 @@ module.exports = {
 						/ansi-regex/,
 						/strip-ansi/,
 						/connected-react-router/,
+						/react-intl/,
+						/\/intl-/,
 					],
 				},
 				use: {
