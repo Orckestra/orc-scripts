@@ -21,6 +21,7 @@ deploy:
   tag: dev
   on:
     repo: Orckestra/orc-scripts
+    all_branches: true
     # tags: true
     condition: ( $TRAVIS_BRANCH = develop || $TRAVIS_BRANCH = feature/* ) && $TRAVIS_NODE_VERSION = 12
     # - tags: true
