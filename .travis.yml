@@ -10,23 +10,36 @@ env:
   - BUILD_REACT=true
 script:
   - npm run test:ci
-  # - npm run test:orc-shared
+  - npm run test:orc-shared
 after_success: npm run coveralls
 deploy:
-  provider: npm
-  edge: true
-  email: gert.sonderby@gmail.com
-  api_token:
-    secure: fgTVVktEOU+FdZ0d6VeChdAp3Op5OnrXrhlNpeSUmTJdi1UqXsnUr+mFIqtUMPexraUZ8BHoTOPVewBoB7bMqvAagW3FsVZ/ZF+fefGZACsdYwgXEN2K69m5WM1rgxToE2CKjPvEfhir6ehXxMfZZocr0Zzt68SxjmCZEv/MBqede7uxyr5Tg5edyiRloRAnUFASVdHSpdOmX8Liu5nDqI3iL+glhf7VkgN6FmyBNFBY7yjS5bqZXk3XDhpd3MnFDlk01uQy5DPdscUM9xa/4pKa23Jcq8IPO0m/BLa2YETtugWs4zuGUTFghu5y/yUWpiIxAr1lhgSHGzR9W67T1p1thf/Hk8ZDKwgTC7ZweF+YL84q31xvNm6FL8rDgmZOlRE2hJKtxoQz7HD7bIidHM7rAGqY4AlPwTFbtmw2KBPxxOuQhJpvquJMlaxt4HATV5lI447feMtrEoMfwYqThsUkxcl3eMif4gmOixO2fWqiO3QLYQqbMuDVeAIj8SWJc5hi2p0U/eIWTFoFBu0zwoLnmYszchVd4HV6iIuPKcTc3kSO5ze6CmHu7VIS0QBreEcSYWtKjqeaJ83O+kX4XGOVSAidAi2Ct5I0NhHMlmjW50d0L52a9OVVr/BwwIXvS1dRNkPmvNo98Oghx2h+jwe+2Xvl8JucQe1B7SP6c7Q=
-  tag: dev
-  on:
-    repo: Orckestra/orc-scripts
-    all_branches: true
-    # tags: true
-    condition: ( $TRAVIS_BRANCH = develop || $TRAVIS_BRANCH = feature/* ) && $TRAVIS_NODE_VERSION = 12
-    # - tags: true
-    #   condition: $TRAVIS_BRANCH = master
-    #   tag: latest
-    # - tags: true
-    #   condition: $TRAVIS_BRANCH =~ ^release/
-    #   tag: beta
+  - provider: npm
+    edge: true
+    email: gert.sonderby@orckestra.com
+    api_token:
+      secure: fgTVVktEOU+FdZ0d6VeChdAp3Op5OnrXrhlNpeSUmTJdi1UqXsnUr+mFIqtUMPexraUZ8BHoTOPVewBoB7bMqvAagW3FsVZ/ZF+fefGZACsdYwgXEN2K69m5WM1rgxToE2CKjPvEfhir6ehXxMfZZocr0Zzt68SxjmCZEv/MBqede7uxyr5Tg5edyiRloRAnUFASVdHSpdOmX8Liu5nDqI3iL+glhf7VkgN6FmyBNFBY7yjS5bqZXk3XDhpd3MnFDlk01uQy5DPdscUM9xa/4pKa23Jcq8IPO0m/BLa2YETtugWs4zuGUTFghu5y/yUWpiIxAr1lhgSHGzR9W67T1p1thf/Hk8ZDKwgTC7ZweF+YL84q31xvNm6FL8rDgmZOlRE2hJKtxoQz7HD7bIidHM7rAGqY4AlPwTFbtmw2KBPxxOuQhJpvquJMlaxt4HATV5lI447feMtrEoMfwYqThsUkxcl3eMif4gmOixO2fWqiO3QLYQqbMuDVeAIj8SWJc5hi2p0U/eIWTFoFBu0zwoLnmYszchVd4HV6iIuPKcTc3kSO5ze6CmHu7VIS0QBreEcSYWtKjqeaJ83O+kX4XGOVSAidAi2Ct5I0NhHMlmjW50d0L52a9OVVr/BwwIXvS1dRNkPmvNo98Oghx2h+jwe+2Xvl8JucQe1B7SP6c7Q=
+    tag: dev
+    on:
+      repo: Orckestra/orc-scripts
+      tags: true
+      condition: ( $TRAVIS_BRANCH = develop || $TRAVIS_BRANCH = feature/* ) && $TRAVIS_NODE_VERSION = 12
+  - provider: npm
+    edge: true
+    email: gert.sonderby@orckestra.com
+    api_token:
+      secure: fgTVVktEOU+FdZ0d6VeChdAp3Op5OnrXrhlNpeSUmTJdi1UqXsnUr+mFIqtUMPexraUZ8BHoTOPVewBoB7bMqvAagW3FsVZ/ZF+fefGZACsdYwgXEN2K69m5WM1rgxToE2CKjPvEfhir6ehXxMfZZocr0Zzt68SxjmCZEv/MBqede7uxyr5Tg5edyiRloRAnUFASVdHSpdOmX8Liu5nDqI3iL+glhf7VkgN6FmyBNFBY7yjS5bqZXk3XDhpd3MnFDlk01uQy5DPdscUM9xa/4pKa23Jcq8IPO0m/BLa2YETtugWs4zuGUTFghu5y/yUWpiIxAr1lhgSHGzR9W67T1p1thf/Hk8ZDKwgTC7ZweF+YL84q31xvNm6FL8rDgmZOlRE2hJKtxoQz7HD7bIidHM7rAGqY4AlPwTFbtmw2KBPxxOuQhJpvquJMlaxt4HATV5lI447feMtrEoMfwYqThsUkxcl3eMif4gmOixO2fWqiO3QLYQqbMuDVeAIj8SWJc5hi2p0U/eIWTFoFBu0zwoLnmYszchVd4HV6iIuPKcTc3kSO5ze6CmHu7VIS0QBreEcSYWtKjqeaJ83O+kX4XGOVSAidAi2Ct5I0NhHMlmjW50d0L52a9OVVr/BwwIXvS1dRNkPmvNo98Oghx2h+jwe+2Xvl8JucQe1B7SP6c7Q=
+    tag: latest
+    on:
+      repo: Orckestra/orc-scripts
+      tags: true
+      condition: $TRAVIS_BRANCH = master && $TRAVIS_NODE_VERSION = 12
+  - provider: npm
+    edge: true
+    email: gert.sonderby@orckestra.com
+    api_token:
+      secure: fgTVVktEOU+FdZ0d6VeChdAp3Op5OnrXrhlNpeSUmTJdi1UqXsnUr+mFIqtUMPexraUZ8BHoTOPVewBoB7bMqvAagW3FsVZ/ZF+fefGZACsdYwgXEN2K69m5WM1rgxToE2CKjPvEfhir6ehXxMfZZocr0Zzt68SxjmCZEv/MBqede7uxyr5Tg5edyiRloRAnUFASVdHSpdOmX8Liu5nDqI3iL+glhf7VkgN6FmyBNFBY7yjS5bqZXk3XDhpd3MnFDlk01uQy5DPdscUM9xa/4pKa23Jcq8IPO0m/BLa2YETtugWs4zuGUTFghu5y/yUWpiIxAr1lhgSHGzR9W67T1p1thf/Hk8ZDKwgTC7ZweF+YL84q31xvNm6FL8rDgmZOlRE2hJKtxoQz7HD7bIidHM7rAGqY4AlPwTFbtmw2KBPxxOuQhJpvquJMlaxt4HATV5lI447feMtrEoMfwYqThsUkxcl3eMif4gmOixO2fWqiO3QLYQqbMuDVeAIj8SWJc5hi2p0U/eIWTFoFBu0zwoLnmYszchVd4HV6iIuPKcTc3kSO5ze6CmHu7VIS0QBreEcSYWtKjqeaJ83O+kX4XGOVSAidAi2Ct5I0NhHMlmjW50d0L52a9OVVr/BwwIXvS1dRNkPmvNo98Oghx2h+jwe+2Xvl8JucQe1B7SP6c7Q=
+    tag: beta
+    on:
+      repo: Orckestra/orc-scripts
+      tags: true
+      condition: $TRAVIS_BRANCH = release/* && $TRAVIS_NODE_VERSION = 12
