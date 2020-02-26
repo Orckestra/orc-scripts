@@ -6,7 +6,7 @@ const { inc, prerelease } = require("semver");
 const gitResult = spawn.sync("git", ["rev-parse", "--abbrev-ref", "HEAD"]);
 if (gitResult.status !== 0) {
 	console.error(gitResult.stderr.toString("utf-8"));
-	return -1;
+	process.exit(-1);
 }
 const currentBranch = gitResult.stdout.toString("utf-8").trim();
 
@@ -46,5 +46,5 @@ const tagResult = spawn.sync("npm", ["version", tag], {
 	stdio: "inherit",
 });
 if (tagResult.status !== 0) {
-	return 1;
+	process.exit(1);
 }
