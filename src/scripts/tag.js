@@ -1,29 +1,35 @@
-const fs = require("fs");
 const spawn = require("cross-spawn");
 const readPkgUp = require("read-pkg-up");
 const { inc, prerelease } = require("semver");
 
-const gitResult = spawn.sync("git", ["rev-parse", "--abbrev-ref", "HEAD"]);
-if (gitResult.status !== 0) {
-	console.error(gitResult.stderr.toString("utf-8"));
+const gitDiffResult = spawn.sync("git", ["diff", "HEAD"]);
+if (gitDiffResult.status !== 0) {
+	console.error("Working directory not clean, cannot tag release");
 	process.exit(-1);
 }
-const currentBranch = gitResult.stdout.toString("utf-8").trim();
+
+const gitBranchResult = spawn.sync("git", ["rev-parse", "--abbrev-ref", "HEAD"]);
+if (gitBranchResult.status !== 0) {
+	console.error(gitBranchResult.stderr.toString("utf-8"));
+	process.exit(-2);
+}
+const currentBranch = gitBranchResult.stdout.toString("utf-8").trim();
 
 const isMaster = currentBranch === "master";
-const isDevelopment = currentBranch === "develop";
+const isDevelopment = currentBranch === "develop" || currentBranch.startsWith("feature/");
 const isRelease = currentBranch.startsWith("release/");
 const isLegacy = currentBranch.startsWith("legacy/");
 
-const { packageJson } =
-	readPkgUp.sync({
-		cwd: fs.realpathSync(process.cwd()),
-	}) || {};
+const { packageJson } = readPkgUp.sync({ normalize: false }) || {};
 const currentVersion = packageJson.version;
 let tag = "";
 if (isMaster) {
-	// TODO: Should this happen here?
-	// semver increment major/minor/patch
+	// TODO: Should semver increment major/minor/patch - but which is hard to discover
+	// Fail out and tag manually for now
+	console.error(
+		"Tags from master branch should be made manyually with the npm version command",
+	);
+	process.exit(2);
 } else if (isRelease) {
 	const pre = prerelease(currentVersion);
 	if (pre && pre.length === 0 && pre[0] !== "pre") {
@@ -37,10 +43,16 @@ if (isMaster) {
 	const versionLevels = ["major", "minor", "patch"];
 	const branchVersion = currentBranch.replace(/^.*\/v/, "").split(".");
 	tag = inc(currentVersion, versionLevels[branchVersion.length]) + "+legacy";
-} else if (isDevelopment || true) {
+} else if (isDevelopment) {
 	tag = inc(currentVersion, "prerelease", "dev");
 }
-console.log("npm version", tag);
+
+const gitTagcheckResult = spawn.sync("git", ["rev-parse", tag]);
+// Failure == no tag == go ahead
+if (gitTagcheckResult.status === 0) {
+	console.error("Tag", tag, "already exists, tagging aborted");
+	process.exit(-3);
+}
 
 const tagResult = spawn.sync("npm", ["version", tag], {
 	stdio: "inherit",

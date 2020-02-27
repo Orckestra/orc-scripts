@@ -11,6 +11,18 @@ env:
     - BUILD_REACT=true
 script:
   - npm run lint
-  - npm run test
+  - npm run coverage
   - npm run test:orc-shared
 after_success: npm run coveralls
+before_deploy: export NPM_TAG=`node src getDist`
+deploy:
+  - provider: npm
+    edge: true
+    email: gert.sonderby@gmail.com
+    api_token:
+      secure: "XzSqdM2556um7Kp//BlStufJhKJ/dPyLhFqfr6X9ed9C9OU3kbA1HnbHf6Nrrao1pqPaUkslgat/JYyfcWUXbCtHznolH+wHJHPOMWHQlyXiv5qH05czBrCaMzdZFViC3ut24QzD7O6VyYPrbRfgihSpP3KYLzhqmMwbCHYH5RQhsqtAN9wUVf5EB9e8tWzyhjHC8VEF7hNm65FZXXPB6T5IhsX3Zrm9DyeJ2cGDzRdAdqPeBDp8hygKPakLUU2mIf6ygHomH7agq4d211qxq+6QBdoAKbh7zysId/rduu9PAjVcQJ8KYq7KxFSlkR1jp2tR5okme1mCJQW036ra2B1GbKeYLbXfH61m6kYbBdUct/N9UVCr3MZUZ3FfmKXu0gaOfz1mVN/Jy685JgC74Kz1WuWq9L6N9o/0KAhjgjNfQImmLDAYRSGLXZEfJ+IcDPPi4FFKC8A7b9B07+uQjguVRSHyD8iyrTAyoqOapeABbZSiaDID+4s02y3XcyXwn1+VuwQSYcyBhVQqivuDErbNNKVhoqg3CsCxbqvR2iK5oblKk8HvqxXi82tYnc3lvu20gT1QAfLsMQcoV3GBkRC2CDRwE9gpiWA5HBtQ5d4c1BMGAOyVztjsjkTVa8F1Fr4i3qv+07WxJh/RpRfJ6XmPud8zeYIvqkdYp1Fi2B4="
+    tag: "$NPM_TAG"
+    on:
+      repo: Orckestra/orc-scripts
+      tags: true
+      condition: "$TRAVIS_NODE_VERSION = 12"
