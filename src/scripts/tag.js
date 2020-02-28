@@ -27,7 +27,7 @@ if (isMaster) {
 	// TODO: Should semver increment major/minor/patch - but which is hard to discover
 	// Fail out and tag manually for now
 	console.error(
-		"Tags from master branch should be made manyually with the npm version command",
+		"Tags from master branch should be made manually with the npm version command",
 	);
 	process.exit(2);
 } else if (isRelease) {
