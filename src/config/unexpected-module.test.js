@@ -12,11 +12,9 @@ const fakeSelector = () => {};
 
 describe("Module structure plugin for Unexpected", () => {
 	describe("<object> to be a component", () => {
-		it("accepts function components", () =>
-			expect(FakeComponent, "to be a component"));
+		it("accepts function components", () => expect(FakeComponent, "to be a component"));
 
-		it("accepts class components", () =>
-			expect(ClassComponent, "to be a component"));
+		it("accepts class components", () => expect(ClassComponent, "to be a component"));
 
 		it("accepts memoized components", () =>
 			expect(React.memo(FakeComponent), "to be a component"));
@@ -272,11 +270,7 @@ describe("Module structure plugin for Unexpected", () => {
 	describe("<object> to be a segment", () => {
 		it("passes with a string label and component", () =>
 			expect(
-				() =>
-					expect(
-						{ component: FakeComponent, label: "A label" },
-						"to be a segment",
-					),
+				() => expect({ component: FakeComponent, label: "A label" }, "to be a segment"),
 				"not to throw",
 			));
 
@@ -724,11 +718,7 @@ describe("Module structure plugin for Unexpected", () => {
 	describe("<object> to be a page", () => {
 		it("passes with a string label and component", () =>
 			expect(
-				() =>
-					expect(
-						{ component: FakeComponent, label: "A label" },
-						"to be a page",
-					),
+				() => expect({ component: FakeComponent, label: "A label" }, "to be a page"),
 				"not to throw",
 			));
 

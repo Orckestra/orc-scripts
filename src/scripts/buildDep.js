@@ -23,8 +23,7 @@ async function build(repos) {
 	const folder = path.resolve(process.cwd(), "builds/" + name);
 	let pack;
 
-	console.log(`Building ${name +
-		(release ? " " + release : "")} from repository ${repos}
+	console.log(`Building ${name + (release ? " " + release : "")} from repository ${repos}
 		in ${folder}`);
 
 	const buildResult = spawn.sync("npm", ["run", "build"]);
@@ -63,10 +62,7 @@ async function build(repos) {
 	console.log("Git repository was cloned");
 
 	try {
-		await copyFile(
-			path.resolve(folder, ".env.example"),
-			path.resolve(folder, ".env"),
-		);
+		await copyFile(path.resolve(folder, ".env.example"), path.resolve(folder, ".env"));
 	} catch (err) {
 		console.error(err.message);
 		return -5;

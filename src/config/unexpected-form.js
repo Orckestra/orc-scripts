@@ -1,10 +1,7 @@
 module.exports = {
 	name: "unexpected-form",
 	installInto: function(expect) {
-		expect.addAssertion("<object> to be a form field", function(
-			expect,
-			subject,
-		) {
+		expect.addAssertion("<object> to be a form field", function(expect, subject) {
 			const type = subject.type;
 			const pattern = {
 				type: expect.it("to be a string"),
@@ -111,19 +108,14 @@ module.exports = {
 			return expect(subject, "to satisfy", pattern);
 		});
 
-		expect.addAssertion("<object> to be a form list", function(
-			expect,
-			subject,
-		) {
+		expect.addAssertion("<object> to be a form list", function(expect, subject) {
 			if (subject.type !== "List") {
 				expect.fail();
 			}
 			const pattern = {
 				type: "List",
 				name: expect.it("to be a string"),
-				rowField: expect
-					.it("to be a form field")
-					.or("to be a form combination field"),
+				rowField: expect.it("to be a form field").or("to be a form combination field"),
 			};
 			if (subject.hasOwnProperty("rowCount")) {
 				pattern.rowCount = expect.it("to be a number");
@@ -131,28 +123,21 @@ module.exports = {
 			if (subject.hasOwnProperty("add")) {
 				if (subject.rowCount) {
 					expect.errorMode = "nested";
-					return expect.fail(
-						"Form list with row count cannot have 'add' label",
-					);
+					return expect.fail("Form list with row count cannot have 'add' label");
 				}
 				pattern.add = expect.it("to be a label");
 			}
 			if (subject.hasOwnProperty("staticValues")) {
 				if (!subject.rowCount) {
 					expect.errorMode = "nested";
-					return expect.fail(
-						"Form list without row count cannot have static values",
-					);
+					return expect.fail("Form list without row count cannot have static values");
 				}
 				pattern.staticValues = expect.it("to be an array");
 			}
 			return expect(subject, "to satisfy", pattern);
 		});
 
-		expect.addAssertion("<object> to be a form fieldset", function(
-			expect,
-			subject,
-		) {
+		expect.addAssertion("<object> to be a form fieldset", function(expect, subject) {
 			if (subject.type !== "Fieldset") {
 				expect.fail();
 			}
@@ -260,14 +245,10 @@ const addInputProps = (expect, subject, pattern, textual = true) => {
 
 const addTextInputProps = (expect, subject, pattern) => {
 	if (subject.hasOwnProperty("maxlength")) {
-		pattern.maxlength = expect
-			.it("to be a number")
-			.and("to be greater than", 0);
+		pattern.maxlength = expect.it("to be a number").and("to be greater than", 0);
 	}
 	if (subject.hasOwnProperty("minlength")) {
-		pattern.minlength = expect
-			.it("to be a number")
-			.and("to be greater than", 0);
+		pattern.minlength = expect.it("to be a number").and("to be greater than", 0);
 	}
 	if (subject.hasOwnProperty("pattern")) {
 		pattern.pattern = expect.it("to be a regular expression");
@@ -300,14 +281,10 @@ const addNumberInputProps = (expect, subject, pattern) => {
 
 const addDateInputProps = (expect, subject, pattern) => {
 	if (subject.hasOwnProperty("max")) {
-		pattern.max = expect
-			.it("to be a string")
-			.and("to match", /^\d{4}-\d{2}-\d{2}$/);
+		pattern.max = expect.it("to be a string").and("to match", /^\d{4}-\d{2}-\d{2}$/);
 	}
 	if (subject.hasOwnProperty("min")) {
-		pattern.min = expect
-			.it("to be a string")
-			.and("to match", /^\d{4}-\d{2}-\d{2}$/);
+		pattern.min = expect.it("to be a string").and("to match", /^\d{4}-\d{2}-\d{2}$/);
 	}
 	if (subject.hasOwnProperty("step")) {
 		pattern.step = expect.it("to be a number");
@@ -316,14 +293,10 @@ const addDateInputProps = (expect, subject, pattern) => {
 
 const addTimeInputProps = (expect, subject, pattern) => {
 	if (subject.hasOwnProperty("max")) {
-		pattern.max = expect
-			.it("to be a string")
-			.and("to match", /^\d{2}:\d{2}(?::\d{2})?$/);
+		pattern.max = expect.it("to be a string").and("to match", /^\d{2}:\d{2}(?::\d{2})?$/);
 	}
 	if (subject.hasOwnProperty("min")) {
-		pattern.min = expect
-			.it("to be a string")
-			.and("to match", /^\d{2}:\d{2}(?::\d{2})?$/);
+		pattern.min = expect.it("to be a string").and("to match", /^\d{2}:\d{2}(?::\d{2})?$/);
 	}
 	if (subject.hasOwnProperty("step")) {
 		pattern.step = expect.it("to be a number").or("to be", "any");

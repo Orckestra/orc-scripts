@@ -16,11 +16,7 @@ const jestConfig = {
 	testEnvironment: "jsdom",
 	moduleNameMapper: {
 		"\\.(jpg|jpeg|png|gif)$": here("../__mocks__/fileMock.js"),
-		"styled-components": path.resolve(
-			process.cwd(),
-			"node_modules",
-			"styled-components",
-		),
+		"styled-components": path.resolve(process.cwd(), "node_modules", "styled-components"),
 		"react-redux": path.resolve(process.cwd(), "node_modules", "react-redux"),
 	},
 	modulePaths: ["<rootDir>/src/", "<rootDir>/node_modules/"],

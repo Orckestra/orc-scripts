@@ -106,10 +106,7 @@ module.exports = {
 				expect(subject, "to have keys satisfying", "to start with", "/");
 				expect(subject, "to have values satisfying", "to be a page");
 			})
-			.addAssertion("<object> to be a module structure", function(
-				expect,
-				subject,
-			) {
+			.addAssertion("<object> to be a module structure", function(expect, subject) {
 				expect(subject, "to have keys satisfying", "not to start with", "/");
 				expect(
 					subject,

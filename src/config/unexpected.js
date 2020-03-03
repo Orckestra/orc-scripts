@@ -22,35 +22,32 @@ global.expect = unexpected
 		"<array-like> to be shorter than [or same length as] <array-like>",
 		function(expect, subject, pattern) {
 			if (expect.flags["or same length as"]) {
-				return expect(
-					subject.length,
-					"to be less than or equal to",
-					pattern.length,
-				);
+				return expect(subject.length, "to be less than or equal to", pattern.length);
 			} else {
 				return expect(subject.length, "to be less than", pattern.length);
 			}
 		},
 	)
-	.addAssertion(
-		"<function> to be a reducer with initial state <object>",
-		function(expect, subject, initialState) {
-			expect.errorMode = "nested";
-			const oldState = Immutable.Map();
-			return expect(
-				subject,
-				"when called with",
-				[oldState, { type: "NOT_A_USEFUL_ACTION" }],
-				"to be",
-				oldState,
-			).and(
-				"when called with",
-				[undefined, { type: "@@INIT" }],
-				"to equal",
-				Immutable.fromJS(initialState),
-			);
-		},
-	)
+	.addAssertion("<function> to be a reducer with initial state <object>", function(
+		expect,
+		subject,
+		initialState,
+	) {
+		expect.errorMode = "nested";
+		const oldState = Immutable.Map();
+		return expect(
+			subject,
+			"when called with",
+			[oldState, { type: "NOT_A_USEFUL_ACTION" }],
+			"to be",
+			oldState,
+		).and(
+			"when called with",
+			[undefined, { type: "@@INIT" }],
+			"to equal",
+			Immutable.fromJS(initialState),
+		);
+	})
 	.addAssertion("<function> as a React component <assertion?>", function(
 		expect,
 		Subject,
@@ -75,10 +72,7 @@ global.expect = unexpected
 			expect(subject, "to be a string");
 		}
 	})
-	.addAssertion("<object> to be a column definition", function(
-		expect,
-		subject,
-	) {
+	.addAssertion("<object> to be a column definition", function(expect, subject) {
 		if (subject.type === "select") {
 			expect(subject, "to exhaustively satisfy", { type: "select" });
 		} else {
@@ -92,9 +86,7 @@ global.expect = unexpected
 					),
 			};
 			if (subject.hasOwnProperty("width")) {
-				pattern.width = expect
-					.it("to be a string")
-					.and("not to match", /[;:{[]/);
+				pattern.width = expect.it("to be a string").and("not to match", /[;:{[]/);
 			}
 			if (subject.hasOwnProperty("type")) {
 				pattern.type = expect
@@ -117,10 +109,7 @@ global.expect = unexpected
 				if (subject.type === "custom") {
 					pattern.component = expect.it("to be a function");
 					if (subject.hasOwnProperty("funcs")) {
-						pattern.funcs = expect.it(
-							"to have values satisfying",
-							"to be a function",
-						);
+						pattern.funcs = expect.it("to have values satisfying", "to be a function");
 					}
 				}
 			}
