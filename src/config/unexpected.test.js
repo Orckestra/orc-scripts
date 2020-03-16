@@ -59,11 +59,7 @@ describe("<object> to be a column definition", () => {
 
 	it("fails if select column has other parameters", () =>
 		expect(
-			() =>
-				expect(
-					{ type: "select", label: "select" },
-					"to be a column definition",
-				),
+			() => expect({ type: "select", label: "select" }, "to be a column definition"),
 			"to throw",
 			"expected { type: 'select', label: 'select' } to be a column definition\n" +
 				"\n" +

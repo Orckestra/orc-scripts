@@ -6,9 +6,6 @@ node_js:
 cache:
   directories:
     - node_modules
-env:
-  global:
-    - BUILD_REACT=true
 script:
   - npm run lint
   - npm run coverage

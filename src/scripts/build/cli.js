@@ -21,9 +21,7 @@ const config = useBuiltinConfig
 
 const verbosity = args.includes("--quiet") ? [] : ["--verbose"];
 
-const ignore = args.includes("--ignore")
-	? []
-	: ["--ignore", "**/*.test.js,**/__mocks__"];
+const ignore = args.includes("--ignore") ? [] : ["--ignore", "**/*.test.js,**/__mocks__"];
 
 const babelUnacceptedArgs = ["--no-copy-files"];
 

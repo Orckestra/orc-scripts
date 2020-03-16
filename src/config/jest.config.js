@@ -16,14 +16,12 @@ const jestConfig = {
 	testEnvironment: "jsdom",
 	moduleNameMapper: {
 		"\\.(jpg|jpeg|png|gif)$": here("../__mocks__/fileMock.js"),
-		"styled-components": path.resolve(
-			process.cwd(),
-			"node_modules",
-			"styled-components",
-		),
-		"react-redux": path.resolve(process.cwd(), "node_modules", "react-redux"),
+		"^styled-components": fromRoot("node_modules", "styled-components"),
+		"^react-redux": fromRoot("node_modules", "react-redux"),
+		"^react$": fromRoot("node_modules", "react"),
+		"^react-dom$": fromRoot("node_modules", "react-dom"),
 	},
-	modulePaths: ["<rootDir>/src/", "<rootDir>/node_modules/"],
+	modulePaths: [fromRoot("src"), fromRoot("node_modules")],
 	moduleFileExtensions: ["js", "json"],
 	collectCoverageFrom: ["src/**/*.js"],
 	globals: {

@@ -3,7 +3,7 @@ const readPkgUp = require("read-pkg-up");
 const { inc, prerelease } = require("semver");
 
 const gitDiffResult = spawn.sync("git", ["diff", "HEAD"]);
-if (gitDiffResult.status !== 0) {
+if (gitDiffResult.status !== 0 || gitDiffResult.stdout.toString("utf-8")) {
 	console.error("Working directory not clean, cannot tag release");
 	process.exit(-1);
 }
@@ -27,12 +27,12 @@ if (isMaster) {
 	// TODO: Should semver increment major/minor/patch - but which is hard to discover
 	// Fail out and tag manually for now
 	console.error(
-		"Tags from master branch should be made manyually with the npm version command",
+		"Tags from master branch should be made manually with the npm version command",
 	);
 	process.exit(2);
 } else if (isRelease) {
 	const pre = prerelease(currentVersion);
-	if (pre && pre.length === 0 && pre[0] !== "pre") {
+	if (pre && pre[0] === "pre") {
 		tag = inc(currentVersion, "prerelease", "pre");
 	} else {
 		const versionLevels = ["premajor", "preminor", "prepatch"];

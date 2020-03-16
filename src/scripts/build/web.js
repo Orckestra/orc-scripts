@@ -4,8 +4,7 @@ const webpack = require("webpack");
 const args = process.argv.slice(2);
 
 if (args.includes("--stats")) {
-	const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-		.BundleAnalyzerPlugin;
+	const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 	config.plugins.push(new BundleAnalyzerPlugin());
 }
 

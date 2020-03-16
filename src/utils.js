@@ -63,10 +63,7 @@ function envIsSet(name) {
 	);
 }
 
-function resolveBin(
-	modName,
-	{ executable = modName, cwd = process.cwd() } = {},
-) {
+function resolveBin(modName, { executable = modName, cwd = process.cwd() } = {}) {
 	let pathFromWhich;
 	try {
 		pathFromWhich = fs.realpathSync(which.sync(executable));

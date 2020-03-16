@@ -61,11 +61,7 @@ describe("utils", () => {
 			expect(
 				ifAnyDep,
 				"when called with",
-				[
-					["wrong-dependency", "unexpected", "not-this-one"],
-					"then param",
-					"else param",
-				],
+				[["wrong-dependency", "unexpected", "not-this-one"], "then param", "else param"],
 				"to be",
 				"then param",
 			));
@@ -74,11 +70,7 @@ describe("utils", () => {
 			expect(
 				ifAnyDep,
 				"when called with",
-				[
-					["wrong-dependency", "expect", "not-this-one"],
-					"then param",
-					"else param",
-				],
+				[["wrong-dependency", "expect", "not-this-one"], "then param", "else param"],
 				"to be",
 				"else param",
 			));
@@ -88,13 +80,7 @@ describe("utils", () => {
 		it("exists", () => expect(parseEnv, "to be a function"));
 
 		it("returns the environment variable given if it exists", () =>
-			expect(
-				parseEnv,
-				"when called with",
-				["BABEL_ENV", "wrong"],
-				"to equal",
-				"test",
-			));
+			expect(parseEnv, "when called with", ["BABEL_ENV", "wrong"], "to equal", "test"));
 
 		it("returns default value if it does not exist", () =>
 			expect(

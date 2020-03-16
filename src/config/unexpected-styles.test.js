@@ -33,46 +33,20 @@ describe("Styled component plugin for unexpected", () => {
 
 	describe("<string> as a selector to have style rules <assertion?>", () => {
 		it("passes when a style matches", () =>
-			expect(
-				".foo",
-				"as a selector to have style rules",
-				"to contain",
-				"green",
-			));
+			expect(".foo", "as a selector to have style rules", "to contain", "green"));
 
 		it("works with html tag", () =>
-			expect(
-				"html",
-				"as a selector to have style rules",
-				"to contain",
-				"margin",
-			));
+			expect("html", "as a selector to have style rules", "to contain", "margin"));
 
 		it("works with body tag", () =>
-			expect(
-				"body",
-				"as a selector to have style rules",
-				"to contain",
-				"padding",
-			));
+			expect("body", "as a selector to have style rules", "to contain", "padding"));
 
 		it("works on a second style sheet", () =>
-			expect(
-				".bar",
-				"as a selector to have style rules",
-				"to contain",
-				"color: blue;",
-			));
+			expect(".bar", "as a selector to have style rules", "to contain", "color: blue;"));
 
 		it("gives a decent diff", () =>
 			expect(
-				() =>
-					expect(
-						".foo",
-						"as a selector to have style rules",
-						"to contain",
-						"width",
-					),
+				() => expect(".foo", "as a selector to have style rules", "to contain", "width"),
 				"to throw",
 				"expected '.foo' as a selector to have style rules to contain 'width'\n" +
 					"\n" +

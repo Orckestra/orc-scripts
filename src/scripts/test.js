@@ -19,9 +19,7 @@ const watch =
 const ci = isCI ? ["--reporters=default", "--reporters=jest-junit"] : [];
 
 const config =
-	!args.includes("--config") &&
-	!hasFile("jest.config.js") &&
-	!hasPkgProp("jest")
+	!args.includes("--config") && !hasFile("jest.config.js") && !hasPkgProp("jest")
 		? ["--config", JSON.stringify(require("../config/jest.config"))]
 		: [];
 
