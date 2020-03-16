@@ -1,23 +1,24 @@
 const unexpected = require("unexpected");
-const unexpectedStyles = require("./unexpected-styles");
 const unexpectedDom = require("unexpected-dom");
 const unexpectedReaction = require("unexpected-reaction");
-const unexpectedModule = require("./unexpected-module");
-const unexpectedForm = require("./unexpected-form");
 const unexpectedSinon = require("unexpected-sinon");
 const unexpectedImmutable = require("unexpected-immutable");
+const unexpectedStyles = require("./unexpected-styles");
+const unexpectedModule = require("./unexpected-module");
+const unexpectedForm = require("./unexpected-form");
 const React = require("react");
 const Immutable = require("immutable");
+const sinon = require("sinon");
 
 global.expect = unexpected
 	.clone()
+	.use(unexpectedSinon)
+	.use(unexpectedImmutable)
 	.use(unexpectedDom)
 	.use(unexpectedReaction)
 	.use(unexpectedStyles)
 	.use(unexpectedModule)
 	.use(unexpectedForm)
-	.use(unexpectedSinon)
-	.use(unexpectedImmutable)
 	.addAssertion(
 		"<array-like> to be shorter than [or same length as] <array-like>",
 		function(expect, subject, pattern) {
@@ -128,3 +129,6 @@ global.expect = unexpected
 			return expect(subject, "to exhaustively satisfy", pattern);
 		}
 	});
+
+// Add stub for jsdom scrollTo function
+Element.prototype.scrollTo = sinon.stub().named("Element.scrollTo");
