@@ -53,7 +53,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^25.1.0",
-    "babel-loader": "^8.0.4",
+    "babel-loader": "8.1.0",
     "babel-plugin-react-intl-auto": "^3.1.0",
     "babel-plugin-styled-components": "^1.10.6",
     "connected-react-router": "^6.3.1",
