@@ -1,6 +1,6 @@
 {
   "name": "orc-scripts",
-  "version": "1.0.0-pre.2",
+  "version": "1.0.0-pre.3",
   "description": "Scripts toolbox for Orckestra",
   "bin": {
     "orc-scripts": "dist/index.js"
@@ -71,7 +71,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-react-hooks": "^2.3.0",
-    "extract-react-intl-messages": "^3.0.0",
+    "extract-react-intl-messages": "^4.1.1",
     "file-loader": "^6.0.0",
     "husky": "^4.0.0",
     "img-loader": "^3.0.1",
@@ -118,7 +118,7 @@
     "unexpected-immutable": "^0.5.0",
     "unexpected-reaction": "^2.14.0",
     "unexpected-sinon": "^10.11.1",
-    "url-loader": "^3.0.0",
+    "url-loader": "^4.0.0",
     "url-pattern": "^1.0.3",
     "url-polyfill": "^1.1.0",
     "webpack": "^4.25.1",

@@ -378,7 +378,9 @@ describe("<object> to be a column definition", () => {
 				"{\n" +
 				"  type: 'date',\n" +
 				"  fieldName: 'ColumnA',\n" +
-				'  component: () => _react.default.createElement("div", null),\n' +
+				"  component: " +
+				TestComp.toString() +
+				",\n" +
 				"  funcs: { test: () => {} }\n" +
 				"}\n" +
 				"to be a column definition\n" +
@@ -386,7 +388,9 @@ describe("<object> to be a column definition", () => {
 				"{\n" +
 				"  type: 'date',\n" +
 				"  fieldName: 'ColumnA',\n" +
-				'  component: () => _react.default.createElement("div", null), // should be removed\n' +
+				"  component: " +
+				TestComp.toString() +
+				", // should be removed\n" +
 				"  funcs: { test: () => {} } // should be removed\n" +
 				"}",
 		));

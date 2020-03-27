@@ -32,7 +32,7 @@ if (isMaster) {
 	process.exit(2);
 } else if (isRelease) {
 	const pre = prerelease(currentVersion);
-	if (pre && pre[0] === "pre") {
+	if (pre) {
 		tag = inc(currentVersion, "prerelease", "pre");
 	} else {
 		const versionLevels = ["premajor", "preminor", "prepatch"];
