@@ -38,7 +38,7 @@ module.exports = {
 				const styleRules = classes
 					.split(" ")
 					.map(sel => getStyleDeclarations("." + sel))
-					.filter(x => x)
+					.filter(Boolean)
 					.join("\n");
 				return expect.shift(styleRules);
 			},
