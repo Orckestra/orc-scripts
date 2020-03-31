@@ -21,7 +21,7 @@ global.expect = unexpected
 	.use(unexpectedForm)
 	.addAssertion(
 		"<array-like> to be shorter than [or same length as] <array-like>",
-		function(expect, subject, pattern) {
+		function (expect, subject, pattern) {
 			if (expect.flags["or same length as"]) {
 				return expect(subject.length, "to be less than or equal to", pattern.length);
 			} else {
@@ -29,7 +29,7 @@ global.expect = unexpected
 			}
 		},
 	)
-	.addAssertion("<function> to be a reducer with initial state <object>", function(
+	.addAssertion("<function> to be a reducer with initial state <object>", function (
 		expect,
 		subject,
 		initialState,
@@ -49,7 +49,7 @@ global.expect = unexpected
 			Immutable.fromJS(initialState),
 		);
 	})
-	.addAssertion("<function> as a React component <assertion?>", function(
+	.addAssertion("<function> as a React component <assertion?>", function (
 		expect,
 		Subject,
 		assertions,
@@ -62,7 +62,7 @@ global.expect = unexpected
 			return expect.fail("Could not create element. ", e.message);
 		}
 	})
-	.addAssertion("<any> to be a label", function(expect, subject) {
+	.addAssertion("<any> to be a label", function (expect, subject) {
 		expect.errorMode = "nested";
 		if (typeof subject == "object") {
 			expect(subject, "to satisfy", {
@@ -73,7 +73,7 @@ global.expect = unexpected
 			expect(subject, "to be a string");
 		}
 	})
-	.addAssertion("<object> to be a column definition", function(expect, subject) {
+	.addAssertion("<object> to be a column definition", function (expect, subject) {
 		if (subject.type === "select") {
 			expect(subject, "to exhaustively satisfy", { type: "select" });
 		} else {

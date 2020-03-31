@@ -1,7 +1,7 @@
 module.exports = {
 	name: "unexpected-form",
-	installInto: function(expect) {
-		expect.addAssertion("<object> to be a form field", function(expect, subject) {
+	installInto: function (expect) {
+		expect.addAssertion("<object> to be a form field", function (expect, subject) {
 			const type = subject.type;
 			const pattern = {
 				type: expect.it("to be a string"),
@@ -83,7 +83,7 @@ module.exports = {
 			return expect(subject, "to satisfy", pattern);
 		});
 
-		expect.addAssertion("<object> to be a form combination field", function(
+		expect.addAssertion("<object> to be a form combination field", function (
 			expect,
 			subject,
 		) {
@@ -108,7 +108,7 @@ module.exports = {
 			return expect(subject, "to satisfy", pattern);
 		});
 
-		expect.addAssertion("<object> to be a form list", function(expect, subject) {
+		expect.addAssertion("<object> to be a form list", function (expect, subject) {
 			if (subject.type !== "List") {
 				expect.fail();
 			}
@@ -137,25 +137,27 @@ module.exports = {
 			return expect(subject, "to satisfy", pattern);
 		});
 
-		expect.addAssertion("<object> to be a form fieldset", function(expect, subject) {
+		expect.addAssertion("<object> to be a form fieldset", function (expect, subject) {
 			if (subject.type !== "Fieldset") {
 				expect.fail();
 			}
 			const pattern = {
 				type: "Fieldset",
 				label: expect.it("to be a label"),
-				fields: expect.it("to be an array").and(
-					"to have items satisfying",
-					expect
-						.it("to be a form field")
-						.or("to be a form combination field")
-						.or("to be a form list"),
-				),
+				fields: expect
+					.it("to be an array")
+					.and(
+						"to have items satisfying",
+						expect
+							.it("to be a form field")
+							.or("to be a form combination field")
+							.or("to be a form list"),
+					),
 			};
 			expect(subject, "to satisfy", pattern);
 		});
 
-		expect.addAssertion("<array-like> to be a form definition", function(
+		expect.addAssertion("<array-like> to be a form definition", function (
 			expect,
 			subject,
 		) {
@@ -177,7 +179,7 @@ module.exports = {
 				"<undefined> to be a form list",
 				"<undefined> to be a form fieldset",
 			],
-			function(expect) {
+			function (expect) {
 				return expect.fail();
 			},
 		);
