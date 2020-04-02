@@ -8,6 +8,10 @@ Sets up for the build script (below). This creates the `dist/` directory and cop
 
 ## `build`
 
+Parameters:
+
+- `--watch`: Starts watch mode, which will rebuild individual files when changed
+
 Runs the build process, creating the distribution files for the package. This is typically used for preparing a release. Adding the `--watch` option starts a watch for file changes, rebuilding when a source file changes. This is useful for developing in a linked library. For web apps, this will use Webpack, for libraries, it uses Babel. Expects to have `prep` (above) run before it.
 
 ## `buildDep`
