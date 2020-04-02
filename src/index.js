@@ -6,7 +6,8 @@ global.amOrcScripts = /orc-scripts$/.test(require("pkg-dir").sync() || "");
 
 let shouldThrow;
 try {
-	shouldThrow = global.amOrcScripts && Number(process.version.slice(1).split(".")[0]) < 8;
+	shouldThrow =
+		global.amOrcScripts && Number(process.version.slice(1).split(".")[0]) < 10;
 } catch (error) {
 	// ignore
 }
