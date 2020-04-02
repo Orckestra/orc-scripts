@@ -10,16 +10,23 @@ const gitMatch = /^(git@github\.com:|https:\/\/)/;
 repos = process.argv.find(element => gitMatch.test(element));
 if (!repos) {
 	console.error("No target repository given");
-	process.exit(-1);
+	process.exit(-11);
 }
 
-const develop = process.argv.includes("--develop");
+const gitBranchResult = spawn.sync("git", ["rev-parse", "--abbrev-ref", "HEAD"]);
+if (gitBranchResult.status !== 0) {
+	console.error(gitBranchResult.stderr.toString("utf-8"));
+	process.exit(-12);
+}
+const currentBranch = gitBranchResult.stdout.toString("utf-8").trim();
+
+const master = process.argv.includes("--master") || currentBranch === "master";
 let release;
 if (process.argv.includes("--release")) {
 	release = process.argv[process.argv.indexOf("--release") + 1];
 }
 
-const releaseBranch = develop ? "develop" : release ? "release/" + release : "master";
+const releaseBranch = master ? "master" : release ? "release/" + release : "develop";
 
 async function build(repos) {
 	const name = repos.match(/([^/]*)\.git$/)[1];
