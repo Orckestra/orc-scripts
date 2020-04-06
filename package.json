@@ -2,17 +2,15 @@
   "name": "orc-scripts",
   "version": "1.0.0-dev.0",
   "description": "Scripts toolbox for Orckestra",
+  "type": "commonjs",
   "bin": {
-    "orc-scripts": "dist/index.js"
+    "orc-scripts": "src/index.js"
   },
   "engines": {
-    "node": ">= 8",
-    "npm": ">= 5"
+    "node": ">= 10",
+    "npm": ">= 6.13.4"
   },
   "scripts": {
-    "build": "node src prep && node src build --no-copy-files",
-    "build:clean": "npm run clean && npm run build",
-    "clean": "node src clean",
     "coverage": "node src test --coverage",
     "coveralls": "cat coverage/lcov.info | coveralls",
     "lint": "eslint src",
@@ -22,7 +20,8 @@
     "watch": "node src prep && node src build --watch"
   },
   "files": [
-    "dist",
+    "src",
+    "babel.js",
     "webpack.js",
     "jest.js",
     "eslint.js",
@@ -74,6 +73,7 @@
     "eslint-plugin-react-hooks": "^3.0.0",
     "extract-react-intl-messages": "^4.1.1",
     "file-loader": "^6.0.0",
+    "full-icu": "^1.3.1",
     "husky": "^4.0.0",
     "img-loader": "^3.0.1",
     "immutable": "4.0.0-rc.12",
@@ -105,6 +105,7 @@
     "redux-api-middleware": "^3.0.0",
     "redux-immutable": "^4.0.0",
     "reselect": "^4.0.0",
+    "resolve": "^1.15.1",
     "rimraf": "^3.0.0",
     "sinon": "^9.0.0",
     "style-loader": "^1.1.3",

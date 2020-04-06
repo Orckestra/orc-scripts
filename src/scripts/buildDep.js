@@ -1,5 +1,6 @@
 const util = require("util");
 const path = require("path");
+const readPkgUp = require("read-pkg-up");
 const makeDir = require("make-dir");
 const rimraf = util.promisify(require("rimraf"));
 const copyFile = util.promisify(require("ncp").ncp);
@@ -35,12 +36,15 @@ async function build(repos) {
 
 	const versionString = name + " " + releaseBranch;
 	console.log(`Building ${versionString} from repository ${repos}
-		in ${folder}`);
+	in ${folder}`);
 
-	const buildResult = spawn.sync("npm", ["run", "build"]);
-	if (buildResult.status !== 0) {
-		console.error(buildResult.stderr.toString("utf-8"));
-		return -1;
+	const { packageJson } = readPkgUp.sync({ normalize: false }) || {};
+	if (packageJson.scripts && packageJson.scripts.build) {
+		const buildResult = spawn.sync("npm", ["run", "build"]);
+		if (buildResult.status !== 0) {
+			console.error(buildResult.stderr.toString("utf-8"));
+			return -1;
+		}
 	}
 	const packResult = spawn.sync("npm", ["pack"]);
 	if (packResult.status !== 0) {
