@@ -2,7 +2,7 @@ const path = require("path");
 const spawn = require("cross-spawn");
 const glob = require("glob");
 
-const [, ignoredBin, script, ...args] = process.argv;
+const [, , script, ...args] = process.argv;
 const executor = global.amOrcScripts ? "node" : process.argv[0];
 
 if (script) {
@@ -24,13 +24,11 @@ if (script) {
 		.join("\n  ")
 		.trim();
 	const fullMessage = `
-Usage: ${ignoredBin} [script] [--flags]
+Usage: orc-scripts [script] [parameters]
 Available Scripts:
   ${scriptsAvailableMessage}
-Options:
-  All options depend on the script. For most scripts you can assume that the
-  args you pass will be forwarded to the respective tool that's being run
-  under the hood.
+Parameters:
+  All parameters depend on the script. See documentation in orc-scripts/docs.
   `.trim();
 	console.log(`\n${fullMessage}\n`);
 }
@@ -58,7 +56,12 @@ function spawnScript() {
 	if (!scriptPath) {
 		throw new Error(`Unknown script "${script}".`);
 	}
-	const result = spawn.sync(executor, [scriptPath, ...args], {
+	const nodeArgs = [
+		"--preserve-symlinks",
+		"--preserve-symlinks-main",
+		"--icu-data-dir=node_modules\\full-icu",
+	];
+	const result = spawn.sync(executor, [...nodeArgs, scriptPath, ...args], {
 		stdio: "inherit",
 		env: getEnv(),
 	});

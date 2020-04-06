@@ -8,8 +8,19 @@ Sets up for the build script (below). This creates the `dist/` directory and cop
 
 ## `build`
 
-Parameters:
+Depending on build type - webpack or not - different parameters can be given.
 
+Parameters for webpack builds:
+
+- `--stats`: Adds bundle analysis to the build using `webpack-bundle-analyser`
+
+Parameters for non-webpack builds:
+
+- `--out-dir`: Sets output directory for build, default `./dist/`
+- `--no-copy-files`: Prevents files being copied to output dir if they are not transpiled
+- `--presets`:
+- `--quiet`:
+- `--ignore`:
 - `--watch`: Starts watch mode, which will rebuild individual files when changed
 
 Runs the build process, creating the distribution files for the package. This is typically used for preparing a release. Adding the `--watch` option starts a watch for file changes, rebuilding when a source file changes. This is useful for developing in a linked library. For web apps, this will use Webpack, for libraries, it uses Babel. Expects to have `prep` (above) run before it.

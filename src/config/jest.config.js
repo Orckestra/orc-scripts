@@ -14,14 +14,12 @@ const ignores = ["/node_modules/"];
 const jestConfig = {
 	roots: [fromRoot("src")],
 	testEnvironment: "jsdom",
+	resolver: here("./jest-resolver"),
 	moduleNameMapper: {
 		"\\.(jpg|jpeg|png|gif)$": here("../__mocks__/fileMock.js"),
-		"^styled-components": fromRoot("node_modules", "styled-components"),
-		"^react-redux": fromRoot("node_modules", "react-redux"),
-		"^react$": fromRoot("node_modules", "react"),
-		"^react-dom$": fromRoot("node_modules", "react-dom"),
 	},
 	modulePaths: [fromRoot("src"), fromRoot("node_modules")],
+	modulePathIgnorePatterns: ["node_modules/orc-[a-z]+/node_modules"],
 	moduleFileExtensions: ["js", "json"],
 	collectCoverageFrom: ["src/**/*.js"],
 	globals: {
@@ -42,6 +40,10 @@ if (!isCI) {
 
 if (useBuiltInBabelConfig) {
 	jestConfig["transform"] = { "^.+\\.js$": here("./babel-transform") };
+	const whitelist = require("./babel-whitelist.json");
+	jestConfig["transformIgnorePatterns"] = [
+		"/node_modules/(?!(?:" + whitelist.join("|") + ")/)",
+	];
 }
 
 module.exports = jestConfig;
