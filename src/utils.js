@@ -71,7 +71,7 @@ function resolveBin(modName, { executable = modName, cwd = process.cwd() } = {})
 		// ignore _error
 	}
 	try {
-		const modPkgPath = require.resolve(`${modName}/package.json`);
+		const modPkgPath = require.resolve(path.join(modName, "package.json"));
 		const modPkgDir = path.dirname(modPkgPath);
 		const { bin } = require(modPkgPath);
 		const binPath = typeof bin === "string" ? bin : bin[executable];
