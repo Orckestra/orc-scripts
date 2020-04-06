@@ -59,7 +59,7 @@ function spawnScript() {
 	const nodeArgs = [
 		"--preserve-symlinks",
 		"--preserve-symlinks-main",
-		"--icu-data-dir=node_modules\\full-icu",
+		"--icu-data-dir=node_modules" + path.sep + "full-icu",
 	];
 	const result = spawn.sync(executor, [...nodeArgs, scriptPath, ...args], {
 		stdio: "inherit",
