@@ -7,7 +7,6 @@ const {
 	resolveBin,
 } = require("./utils");
 const path = require("path");
-const sinon = require("sinon");
 
 describe("utils", () => {
 	describe("fromRoot", () => {
