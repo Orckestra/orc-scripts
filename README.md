@@ -1,4 +1,4 @@
-# Script and dependency toolbox for Orckestra web applications
+# Orckestra Client Application Framework toolbox
 
 [![Build Status](https://travis-ci.org/Orckestra/orc-scripts.svg?branch=master)](https://travis-ci.org/Orckestra/orc-scripts) [![Coverage Status](https://coveralls.io/repos/github/Orckestra/orc-scripts/badge.svg?branch=master)](https://coveralls.io/github/Orckestra/orc-scripts?branch=master)
 

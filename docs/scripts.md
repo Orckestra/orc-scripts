@@ -10,7 +10,7 @@ Sets up for the build script (below). This creates the `dist/` directory and cop
 
 Depending on build type - webpack or not - different parameters can be given.
 
-Parameters for webpack builds:
+Parameters for webpack builds (environment has `BUILD_WEBPACK=true`):
 
 - `--stats`: Adds bundle analysis to the build using `webpack-bundle-analyser`
 
