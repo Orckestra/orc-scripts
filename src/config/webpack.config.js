@@ -95,6 +95,13 @@ if (locales.length) {
 	);
 }
 
+const overtureModule = pkgConf.sync("overtureModule");
+config.plugins.push(
+	new webpack.DefinePlugin({
+		OVERTURE_MODULE: JSON.stringify((overtureModule && overtureModule.name) || ""),
+	}),
+);
+
 if (parseEnv("NODE_ENV") === "production") {
 	config.devtool = "source-map";
 	config.mode = "production";
