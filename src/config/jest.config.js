@@ -25,6 +25,7 @@ const jestConfig = {
 	globals: {
 		BUILD_ID: "000",
 		BUILD_NUMBER: "000",
+		OVERTURE_MODULE: "aModule"
 	},
 	setupFiles: [require.resolve("whatwg-fetch")],
 	setupFilesAfterEnv: [here("unexpected.js")],
