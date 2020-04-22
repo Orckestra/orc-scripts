@@ -1,7 +1,9 @@
 const webpack = require("webpack");
 const path = require("path");
-const pkgConf = require("pkg-conf");
+const readPkgUp = require("read-pkg-up");
 const { parseEnv } = require("../utils");
+
+const { packageJson } = readPkgUp.sync({ normalize: false }) || {};
 
 const here = p => path.join(__dirname, p);
 
@@ -86,7 +88,7 @@ const config = {
 	],
 };
 
-const locales = Object.values(pkgConf.sync("locales"));
+const locales = packageJson.locales;
 if (locales.length) {
 	config.plugins.push(
 		new webpack.DefinePlugin({
@@ -95,7 +97,7 @@ if (locales.length) {
 	);
 }
 
-const overtureModule = pkgConf.sync("overtureModule");
+const overtureModule = packageJson.overtureModule;
 config.plugins.push(
 	new webpack.DefinePlugin({
 		OVERTURE_MODULE: JSON.stringify((overtureModule && overtureModule.name) || ""),
