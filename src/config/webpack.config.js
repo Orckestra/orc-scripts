@@ -23,6 +23,19 @@ const config = {
 		path: path.resolve(process.cwd(), "dist"),
 	},
 	resolve: {
+		alias: {
+			// Needing two versions of date-fns makes things problematic
+			// XXX: lint-staged uses listr, which uses date-fns@1 - they are working on changing to listr2
+			// XXX: If Kalendaryo is updated to a version using date-fns@2, this can go away
+			"date-fns": path.resolve(
+				process.cwd(),
+				"node_modules",
+				"kalendaryo",
+				"node_modules",
+				"date-fns",
+			),
+			"date-fns-2": path.resolve(process.cwd(), "node_modules", "date-fns"),
+		},
 		modules: [
 			// Always resolve in local src and node_modules
 			path.resolve(process.cwd(), "src"),
