@@ -102,18 +102,14 @@ const config = {
 };
 
 const locales = packageJson.locales;
-if (locales.length) {
-	config.plugins.push(
-		new webpack.DefinePlugin({
-			SUPPORTED_LOCALES: JSON.stringify(locales),
-		}),
-	);
-}
-
 const overtureModule = packageJson.overtureModule;
+const dependencies = packageJson.dependencies;
+
 config.plugins.push(
 	new webpack.DefinePlugin({
+		SUPPORTED_LOCALES: JSON.stringify(locales && locales.length ? locales : null),
 		OVERTURE_MODULE: JSON.stringify((overtureModule && overtureModule.name) || ""),
+		DEPENDENCIES: JSON.stringify(dependencies || {}),
 	}),
 );
 

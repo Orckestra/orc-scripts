@@ -34,6 +34,7 @@ const jestConfig = {
 		BUILD_ID: "000",
 		BUILD_NUMBER: "000",
 		OVERTURE_MODULE: "aModule",
+		DEPENDENCIES: { someDependant: "1.1.1" },
 	},
 	setupFiles: [require.resolve("whatwg-fetch")],
 	setupFilesAfterEnv: [here("unexpected.js")],
