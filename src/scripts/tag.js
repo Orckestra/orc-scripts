@@ -1,6 +1,6 @@
 const spawn = require("cross-spawn");
 const readPkgUp = require("read-pkg-up");
-const { inc, prerelease } = require("semver");
+const { inc, lt, eq, coerce, prerelease } = require("semver");
 
 const gitDiffResult = spawn.sync("git", ["diff", "HEAD"]);
 if (gitDiffResult.status !== 0 || gitDiffResult.stdout.toString("utf-8")) {
@@ -16,7 +16,7 @@ if (gitBranchResult.status !== 0) {
 const currentBranch = gitBranchResult.stdout.toString("utf-8").trim();
 
 const isMaster = currentBranch === "master";
-const isDevelopment = currentBranch === "develop" || currentBranch.startsWith("feature/");
+const isDevelopment = currentBranch === "develop";
 const isRelease = currentBranch.startsWith("release/");
 const isLegacy = currentBranch.startsWith("legacy/");
 
@@ -32,19 +32,37 @@ if (isMaster) {
 	process.exit(2);
 } else if (isRelease) {
 	const pre = prerelease(currentVersion);
-	if (pre) {
+	const branchVersion = coerce(currentBranch.replace(/^.*\/v/, "")).version;
+	if (lt(branchVersion, currentVersion)) {
+		// Branch version must be greater or equal
+		console.error("Branch version must be higher than or equal to package version");
+		process.exit(3);
+	}
+	if (pre && eq(branchVersion, currentVersion.replace(/-.*$/, ""))) {
 		tag = inc(currentVersion, "prerelease", "pre");
 	} else {
-		const versionLevels = ["premajor", "preminor", "prepatch"];
-		const branchVersion = currentBranch.replace(/^.*\/v/, "").split(".");
-		tag = inc(currentVersion, versionLevels[branchVersion.length - 1], "pre");
+		// First pre-release needs specific handling
+		// see https://www.npmjs.com/package/semver#functions,
+		// the inc() function regarding the semantics of "prerelease"
+		tag = branchVersion + "-pre.0";
 	}
 } else if (isLegacy) {
-	const versionLevels = ["major", "minor", "patch"];
-	const branchVersion = currentBranch.replace(/^.*\/v/, "").split(".");
-	tag = inc(currentVersion, versionLevels[branchVersion.length]) + "+legacy";
+	// Only patch updates
+	tag = inc(currentVersion, "patch") + "+legacy";
 } else if (isDevelopment) {
-	tag = inc(currentVersion, "prerelease", "dev");
+	const pre = prerelease(currentVersion);
+	if (pre && pre[0] !== "dev") {
+		tag = inc(currentVersion, "prepatch", "dev");
+	} else {
+		tag = inc(currentVersion, "prerelease", "dev");
+	}
+}
+
+if (!tag) {
+	console.error(
+		"This branch (" + currentBranch + ") cannot have releases tagged from it.",
+	);
+	process.exit(4);
 }
 
 const gitTagcheckResult = spawn.sync("git", ["rev-parse", tag]);

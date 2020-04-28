@@ -5,6 +5,8 @@ const eslintrc = {
 	},
 	globals: {
 		SUPPORTED_LOCALES: false,
+		OVERTURE_MODULE: false,
+		DEPENDENCIES: false,
 		BUILD_ID: false,
 		BUILD_NUMBER: false,
 	},

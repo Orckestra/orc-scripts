@@ -103,7 +103,7 @@ describe("utils", () => {
 			);
 		});
 
-		it("resolveBin resolves to the .bin path when it's in $PATH but local", () => {
+		it.skip("resolveBin resolves to the .bin path when it's in $PATH but local", () => {
 			expect(
 				resolveBin("@babel/cli", { executable: "babel" }),
 				"to start with",
@@ -111,7 +111,7 @@ describe("utils", () => {
 			);
 		});
 
-		it("resolveBin resolves to the binary if it's in $PATH", () => {
+		it.skip("resolveBin resolves to the binary if it's in $PATH", () => {
 			expect(resolveBin("node"), "to be", "node");
 		});
 	});
