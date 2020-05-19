@@ -21,6 +21,13 @@ module.exports = {
 		require.resolve("@babel/plugin-transform-template-literals"),
 		require.resolve("@babel/plugin-transform-destructuring"),
 		require.resolve("@babel/plugin-proposal-object-rest-spread"),
+		[
+			"babel-plugin-root-import",
+			{
+				rootPathSuffix: "./src",
+				rootPathPrefix: "~/",
+			},
+		],
 		isTest || isReact ? require.resolve("react-hot-loader/babel") : null,
 		isTest || isReact ? require.resolve("@loadable/babel-plugin") : null,
 		isTest || isReact ? require.resolve("@babel/plugin-transform-react-jsx") : null,
