@@ -85,7 +85,7 @@
     "jest-junit": "^10.0.0",
     "kalendaryo": "^1.11.1",
     "lint-staged": "^10.0.0",
-    "mockdate": "^2.0.5",
+    "mockdate": "^3.0.2",
     "ncp": "^2.0.0",
     "normalizr": "^3.3.0",
     "pkg-dir": "^4.0.0",
