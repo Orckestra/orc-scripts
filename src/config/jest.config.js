@@ -50,6 +50,8 @@ const jestConfig = {
 
 if (!isCI) {
 	jestConfig["coverageReporters"] = ["html", "text-summary"];
+} else {
+	jestConfig["coverageReporters"] = ["json", "lcov", "text", "clover", "cobertura"];
 }
 
 module.exports = jestConfig;
