@@ -37,7 +37,7 @@ const jestConfig = {
 		DEPENDENCIES: { someDependant: "1.1.1" },
 	},
 	setupFiles: [require.resolve("whatwg-fetch")],
-	setupFilesAfterEnv: [here("unexpected.js")],
+	setupFilesAfterEnv: [here("unexpected.js"), here("./jestSetupFiles.js")],
 	transform: { "^.+\\.js$": here("./babel-transform") },
 	transformIgnorePatterns: [
 		"/node_modules/(?!(?:" + require("./babel-whitelist.json").join("|") + ")/)",
