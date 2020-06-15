@@ -39,9 +39,9 @@
   "dependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-proposal-optional-chaining": "^7.9.0",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-transform-computed-properties": "^7.0.0",
     "@babel/plugin-transform-destructuring": "^7.8.3",
@@ -59,6 +59,7 @@
     "babel-plugin-react-intl-auto": "^3.1.0",
     "babel-plugin-root-import": "^6.5.0",
     "babel-plugin-styled-components": "^1.10.6",
+    "clamp-js": "^0.7.0",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.3.1",
     "core-js": "^3.0.0",
@@ -67,6 +68,8 @@
     "css-loader": "^3.4.2",
     "date-fns": "^2",
     "dotenv": "^8.0.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.3.0",
     "eslint-config-react-app": "^5.1.0",
     "eslint-plugin-flowtype": "^4.3.0",
@@ -82,6 +85,7 @@
     "immutable": "4.0.0-rc.12",
     "is-ci": "^2.0.0",
     "jest": "^25.1.0",
+    "jest-enzyme": "^7.1.2",
     "jest-junit": "^10.0.0",
     "kalendaryo": "^1.11.1",
     "lint-staged": "^10.0.0",
@@ -127,10 +131,7 @@
     "webpack": "^4.25.1",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-dev-server": "^3.1.10",
-    "whatwg-fetch": "^3.0.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
-    "jest-enzyme": "^7.1.2"
+    "whatwg-fetch": "^3.0.0"
   },
   "sideEffects": false,
   "lint-staged": {
