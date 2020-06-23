@@ -86,7 +86,7 @@
     "is-ci": "^2.0.0",
     "jest": "^25.1.0",
     "jest-enzyme": "^7.1.2",
-    "jest-junit": "^10.0.0",
+    "jest-junit": "^11.0.1",
     "kalendaryo": "^1.11.1",
     "lint-staged": "^10.0.0",
     "mockdate": "^2.0.5",
