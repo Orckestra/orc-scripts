@@ -1,6 +1,6 @@
 {
   "name": "orc-scripts",
-  "version": "1.0.0-dev.17",
+  "version": "1.0.0-dev.19",
   "description": "Scripts toolbox for Orckestra",
   "type": "commonjs",
   "bin": {
@@ -60,7 +60,6 @@
     "babel-plugin-react-intl-auto": "^3.1.0",
     "babel-plugin-root-import": "^6.5.0",
     "babel-plugin-styled-components": "^1.10.6",
-    "clamp-js": "^0.7.0",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.3.1",
     "core-js": "^3.0.0",
