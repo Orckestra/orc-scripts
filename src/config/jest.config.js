@@ -14,6 +14,7 @@ const jestConfig = {
 	resolver: here("jest-resolver.js"),
 	moduleNameMapper: {
 		"\\.(jpg|jpeg|png|gif)$": here("../__mocks__/fileMock.js"),
+		"\\.(css|less|scss|sass)$": "identity-obj-proxy",
 	},
 	modulePaths: [fromRoot("src"), fromRoot("node_modules")],
 	modulePathIgnorePatterns: ["node_modules/orc-[a-z]+/node_modules"],
