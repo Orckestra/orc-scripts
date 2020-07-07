@@ -14,17 +14,6 @@ const jestConfig = {
 	resolver: here("jest-resolver.js"),
 	moduleNameMapper: {
 		"\\.(jpg|jpeg|png|gif)$": here("../__mocks__/fileMock.js"),
-		// Needing two versions of date-fns makes things problematic
-		// XXX: lint-staged uses listr, which uses date-fns@1 - they are working on changing to listr2
-		// XXX: If Kalendaryo is updated to a version using date-fns@2, this can go away
-		"date-fns$": path.resolve(
-			process.cwd(),
-			"node_modules",
-			"kalendaryo",
-			"node_modules",
-			"date-fns",
-		),
-		"date-fns-2$": path.resolve(process.cwd(), "node_modules", "date-fns"),
 	},
 	modulePaths: [fromRoot("src"), fromRoot("node_modules")],
 	modulePathIgnorePatterns: ["node_modules/orc-[a-z]+/node_modules"],
@@ -39,9 +28,7 @@ const jestConfig = {
 	setupFiles: [require.resolve("whatwg-fetch")],
 	setupFilesAfterEnv: [here("unexpected.js"), here("./jestSetupFiles.js")],
 	transform: { "^.+\\.js$": here("./babel-transform") },
-	transformIgnorePatterns: [
-		"/node_modules/(?!(?:" + require("./babel-whitelist.json").join("|") + ")/)",
-	],
+	transformIgnorePatterns: ["/node_modules/(?!(?:" + require("./babel-whitelist.json").join("|") + ")/)"],
 	testMatch: ["**/*.test.js"],
 	testPathIgnorePatterns: [...ignores],
 	testURL: "http://localhost:8000/",
