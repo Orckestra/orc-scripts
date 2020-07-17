@@ -1,6 +1,6 @@
 {
   "name": "orc-scripts",
-  "version": "1.0.0-dev.18",
+  "version": "1.0.0-dev.21",
   "description": "Scripts toolbox for Orckestra",
   "type": "commonjs",
   "bin": {
@@ -16,7 +16,8 @@
     "lint": "eslint src",
     "test": "node src test",
     "test:orc-shared": "node src buildDep https://github.com/Orckestra/orc-shared.git",
-    "watch": "node src prep && node src build --watch"
+    "watch": "node src prep && node src build --watch",
+    "tag": "node src tag"
   },
   "files": [
     "src",
@@ -52,6 +53,7 @@
     "@loadable/babel-plugin": "^5.12.0",
     "@loadable/component": "^5.12.0",
     "@material-ui/core": "^4.9.14",
+    "@welldone-software/why-did-you-render": "^4.2.5",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^26.1.0",
@@ -59,7 +61,6 @@
     "babel-plugin-react-intl-auto": "^3.1.0",
     "babel-plugin-root-import": "^6.5.0",
     "babel-plugin-styled-components": "^1.10.6",
-    "clamp-js": "^0.7.0",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.3.1",
     "core-js": "^3.0.0",
@@ -86,7 +87,7 @@
     "is-ci": "^2.0.0",
     "jest": "^25.1.0",
     "jest-enzyme": "^7.1.2",
-    "jest-junit": "^10.0.0",
+    "jest-junit": "^11.0.1",
     "kalendaryo": "^1.11.1",
     "lint-staged": "^10.0.0",
     "mockdate": "^2.0.5",
@@ -102,6 +103,7 @@
     "react-measure": "^2.1.2",
     "react-multi-clamp": "^2.0.2",
     "react-redux": "^7.1.3",
+    "react-resize-detector": "^5.0.6",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-test-renderer": "^16.12.0",
