@@ -26,14 +26,11 @@ outStream.addListener("open", () => {
 			.replace(/<desc>(.*)<\/desc>/, "")
 			.replace("svg", "symbol")
 			.replace("</svg>", "</symbol>\n")
-			.replace("<symbol", `<symbol id="${fileNameWithoutExtension}"`)
+			.replace("<symbol", `<symbol id="icon-${fileNameWithoutExtension}"`)
 			.replace(/<g id="(.*?)"/, "<g")
-			.replace(/stroke="(.*?)" /, "")
-			.replace(/stroke-width="(.*?)" /, "")
-			.replace(/fill="(.*?)" /, "")
 			.replace(/width(.*)px" /, "")
 			.replace(/ version(.*)>/, ">")
-			.replace(/ fill="(.*?)"/, "")
+			.replace(/ fill="(.*?)"><\/path>/, "></path>")
 			.replace(/[!@$^&%*+[\]{}|?\\]/g, "")
 			.replace(/^\s*[\r\n]/gm, "");
 
