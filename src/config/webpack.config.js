@@ -10,32 +10,14 @@ const here = p => path.join(__dirname, p);
 const babelWhitelist = require("./babel-whitelist.json");
 
 const config = {
-	entry: [
-		here("setAssetPath.js"),
-		"url-polyfill",
-		"core-js",
-		"whatwg-fetch",
-		path.resolve("./src/index.js"),
-	],
+	entry: [here("setAssetPath.js"), "url-polyfill", "core-js", "whatwg-fetch", path.resolve("./src/index.js")],
 	output: {
 		chunkFilename: "[id].[chunkhash].js",
 		filename: "bundle.js",
 		path: path.resolve(process.cwd(), "dist"),
 	},
 	resolve: {
-		alias: {
-			// Needing two versions of date-fns makes things problematic
-			// XXX: lint-staged uses listr, which uses date-fns@1 - they are working on changing to listr2
-			// XXX: If Kalendaryo is updated to a version using date-fns@2, this can go away
-			"date-fns": path.resolve(
-				process.cwd(),
-				"node_modules",
-				"kalendaryo",
-				"node_modules",
-				"date-fns",
-			),
-			"date-fns-2": path.resolve(process.cwd(), "node_modules", "date-fns"),
-		},
+		alias: {},
 		modules: [
 			// Always resolve in local src and node_modules
 			path.resolve(process.cwd(), "src"),
@@ -54,12 +36,7 @@ const config = {
 					].concat(
 						// Allowed by whitelist
 						babelWhitelist.map(
-							lib =>
-								new RegExp(
-									"node_modules(?:/|\\\\)" +
-										lib.replace("/", "(?:/|\\\\)") +
-										"(?:/|\\\\)",
-								),
+							lib => new RegExp("node_modules(?:/|\\\\)" + lib.replace("/", "(?:/|\\\\)") + "(?:/|\\\\)"),
 						),
 					),
 				},
@@ -119,10 +96,7 @@ if (parseEnv("NODE_ENV") === "production") {
 } else {
 	config.devtool = "inline-source-map";
 	config.optimization = { usedExports: true };
-	config.plugins.push(
-		new webpack.NamedModulesPlugin(),
-		new webpack.HotModuleReplacementPlugin(),
-	);
+	config.plugins.push(new webpack.NamedModulesPlugin(), new webpack.HotModuleReplacementPlugin());
 	config.mode = "development";
 }
 
