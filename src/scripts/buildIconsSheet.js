@@ -19,20 +19,25 @@ outStream.addListener("open", () => {
 
 		const svgContent = fs.readFileSync(pathToIcon).toString();
 
-		const strippedContent = svgContent
-			.replace(/<?(.*)?>/, "")
-			.replace(/<!--(.*)-->/, "")
-			.replace(/<title>(.*)<\/title>/, "")
-			.replace(/<desc>(.*)<\/desc>/, "")
-			.replace("svg", "symbol")
+		let strippedContent = svgContent
+			.replace("<svg", "<symbol")
 			.replace("</svg>", "</symbol>\n")
 			.replace("<symbol", `<symbol id="icon-${fileNameWithoutExtension}"`)
-			.replace(/<g id="(.*?)"/, "<g")
-			.replace(/width(.*)px" /, "")
-			.replace(/ version(.*)>/, ">")
-			.replace(/ fill="(.*?)"><\/path>/, "></path>")
-			.replace(/[!@$^&%*+[\]{}|?\\]/g, "")
-			.replace(/^\s*[\r\n]/gm, "");
+			.replace(/width(.*)" /, "")
+			.replace(/height(.*)" /, "");
+
+		if (strippedContent.includes('fill="none"') === false) {
+			strippedContent = strippedContent.replace(/fill="(.*?)"/, "");
+		}
+
+		if (strippedContent.includes("stroke") === false) {
+			console.log(fileNameWithoutExtension);
+			strippedContent = strippedContent.replace("<path ", '<path stroke="none" ');
+		} else {
+			strippedContent = strippedContent.replace(/stroke="(.*?)"/, "");
+		}
+
+		strippedContent = strippedContent.replace(/^\s*[\r\n]/gm, "").replace(/  +/g, " ");
 
 		outStream.write(strippedContent);
 	});
