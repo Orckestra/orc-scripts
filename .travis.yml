@@ -4,9 +4,10 @@ node_js:
   - "10"
   - "12"
 script:
+  - npm prune
+  - npm ls --depth=1 
   - npm run lint
   - npm run coverage
-  - npm run test:orc-shared
 after_success: npm run coveralls
 before_deploy: export NPM_TAG=`node src getDist`
 deploy:
