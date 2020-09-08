@@ -8,7 +8,7 @@ script:
   - npm ls --depth=1 
   - npm run lint
   - npm run coverage
-re  - npm run test:orc-shared
+  - npm run test:orc-shared
 after_success: npm run coveralls
 before_deploy: export NPM_TAG=`node src getDist`
 deploy:
