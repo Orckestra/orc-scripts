@@ -5,7 +5,7 @@ node_js:
   - "12"
 script:
   - npm prune
-  - npm ls --depth=1 
+  - npm ls --depth=1 || true
   - npm run lint
   - npm run coverage
 after_success: npm run coveralls
