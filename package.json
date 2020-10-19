@@ -49,6 +49,8 @@
     "@babel/plugin-transform-react-jsx": "^7.0.0",
     "@babel/plugin-transform-template-literals": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
+    "@formatjs/intl-getcanonicallocales": "^1.4.6",
+    "@formatjs/intl-pluralrules": "^3.4.10",
     "@gustavnikolaj/async-main-wrap": "^3.0.1",
     "@loadable/babel-plugin": "^5.13.2",
     "@loadable/component": "5.13.1",
