@@ -106,7 +106,7 @@
     "react-datepicker": "^3.0.0",
     "react-dom": "^16.12.0",
     "react-hot-loader": "^4.12.18",
-    "react-intl": "5.6.5",
+    "react-intl": "5.9.4",
     "react-measure": "^2.1.2",
     "react-multi-clamp": "^2.0.2",
     "react-redux": "^7.1.3",
