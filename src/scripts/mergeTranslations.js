@@ -20,7 +20,6 @@ readdir(appTranslationsDir, (_, files) => {
 			readFile(appLocalizationFile, "utf8", (_, appData) => {
 				const appLocalizations = JSON.parse(appData);
 				const mergedData = { ...appLocalizations, ...orcSharedLocalizations };
-				console.log(mergedData);
 				const stringifiedData = JSON.stringify(mergedData, null, 1);
 				writeFile(appLocalizationFile, stringifiedData, "utf8");
 			});
