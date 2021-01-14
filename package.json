@@ -130,7 +130,7 @@
     "styled-transition-group": "^2.0.0",
     "svg-inline-loader": "^0.8.0",
     "ts-jest": "^26.4.0",
-    "typeface-open-sans": "^0.0.75",
+    "typeface-open-sans": "^1.1.13",
     "typeface-roboto-condensed": "^0.0.75",
     "unexpected": "^11.1.0",
     "unexpected-dom": "^4.14.3",
