@@ -4,4 +4,6 @@ module.exports = {
 	printWidth: 120,
 	arrowParens: "avoid",
 	endOfLine: "auto",
+	tabWidth: 2,
+	semi: true,
 };
