@@ -94,6 +94,14 @@ function generateOperation(operation) {
 }\n\n`;
 }
 
+function generateImports() {
+	if (fs.existsSync("node_modules/orc-shared")) {
+		return 'import { buildUrl } from "orc-shared/src/utils/buildUrl";\n\n';
+	}
+
+	return 'import { buildUrl } from "../utils/buildUrl";\n\n';
+}
+
 https
 	.get(occUrl, { headers: { "X-AUTH": occToken } }, resp => {
 		let data = "";
@@ -125,7 +133,7 @@ https
 			}
 
 			let helperData = "/* istanbul ignore file */\n\n";
-			helperData += 'import { buildUrl } from "orc-shared/src/utils/buildUrl";\n\n';
+			helperData += generateImports();
 
 			for (const op of operations) {
 				helperData += generateOperation(op);
