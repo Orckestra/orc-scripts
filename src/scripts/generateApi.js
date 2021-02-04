@@ -2,21 +2,6 @@ const fs = require("fs");
 const https = require("https");
 const lodash = require("lodash");
 
-/*
-    This script generates a helper file which contains metadata used to access the OCC API.
-    This scripts depends on 3 inputs:
-        * OccUrl
-            * This is the URL of the OCC platform that will be used to generate the metadata. It should look like this: https://xyz.orckestra.cloud/api/openapi?removeDuplicatedBodyElements=true
-            * The OCC platform needs to use version 4.5 or above since the script uses the OpenAPI metadata.
-            * For security reasons this value is stored in an environment variable
-        * OccToken
-            * This is the X-AUTH token used to authenticate with the platform.
-            * For security reasons this value is stored in an environment variable
-        * outputFile
-            * Command line argument to the script.
-            * Must be used in the following format: --outputFile <file>
-*/
-
 const occUrl = process.env.OccUrl;
 const occToken = process.env.OccToken;
 let outputFile = "";
