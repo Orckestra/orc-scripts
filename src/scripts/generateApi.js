@@ -6,7 +6,7 @@ const lodash = require("lodash");
     This script generates a helper file which contains metadata used to access the OCC API.
     This scripts depends on 3 inputs:
         * OccUrl
-            * This is the URL of the OCC platform that will be used to generate the metadata.
+            * This is the URL of the OCC platform that will be used to generate the metadata. It should look like this: https://xyz.orckestra.cloud/api/openapi?removeDuplicatedBodyElements=true
             * The OCC platform needs to use version 4.5 or above since the script uses the OpenAPI metadata.
             * For security reasons this value is stored in an environment variable
         * OccToken
