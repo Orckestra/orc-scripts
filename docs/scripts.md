@@ -69,3 +69,18 @@ Creates a version tag and commit (using the `npm version` command) fitting the c
 ## `getDist`
 
 Used by deployment scripts to determine the npm dist-tag to use for the package. This uses the tag names created by `orc-scripts tag` and sets dist-tag to `dev` for development tags, `beta` for pre-release tags, `previous` for legacy tags, and `latest` for clean version tags. This script itself only outputs the string name of the dist-tag to console.
+
+## `generateApi`
+
+Generates a helper file which contains metadata used to access the OCC API. This command depends on 3 inputs:
+
+- OccUrl
+  - This is the URL of the OCC platform that will be used to generate the metadata. It should look like this: https://xyz.orckestra.cloud/api/openapi?removeDuplicatedBodyElements=true
+  - The OCC platform needs to use version 4.5 or above since the script uses the OpenAPI metadata.
+  - For security reasons this value is stored in an environment variable
+- OccToken
+  - This is the X-AUTH token used to authenticate with the platform.
+  - For security reasons this value is stored in an environment variable
+- outputFile
+  - Command line argument to the script.
+  - Must be used in the following format: `--outputFile <file>`
