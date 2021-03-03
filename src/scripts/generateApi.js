@@ -135,7 +135,7 @@ https
 			let helperData = "/* istanbul ignore file */\n\n";
 			helperData += generateImports();
 
-			for (const op of operations) {
+			for (const op of lodash.sortBy(operations, [o => o.name])) {
 				helperData += generateOperation(op);
 			}
 
