@@ -11,6 +11,10 @@ const orcSharedTranslationsDir = path.resolve(process.cwd(), "node_modules/orc-s
 
 readdir(appTranslationsDir, (_, files) => {
 	files.forEach(file => {
+		if (!file.endsWith(".json")) {
+			return;
+		}
+
 		const appLocalizationFile = path.resolve(appTranslationsDir, file);
 		const correspondingOrcSharedFile = path.resolve(orcSharedTranslationsDir, file);
 

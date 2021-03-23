@@ -7,7 +7,7 @@ trigger:
     - hotfix*
     - bug*
     - release*
-   
+
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -43,7 +43,7 @@ steps:
   displayName: 'npm run lint'
   inputs:
     command: 'custom'
-    customCommand: 'run lint'
+    customCommand: 'run lint -- --max-warnings 0'
 
 - task: Npm@1
   displayName: 'npm run coverage'
