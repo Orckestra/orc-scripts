@@ -22,6 +22,8 @@ module.exports = {
 		require.resolve("@babel/plugin-transform-destructuring"),
 		require.resolve("@babel/plugin-proposal-object-rest-spread"),
 		require.resolve("@babel/plugin-proposal-class-properties"),
+		require.resolve("@babel/plugin-proposal-private-property-in-object"),
+		require.resolve("@babel/plugin-proposal-private-methods"),
 		[
 			"babel-plugin-root-import",
 			{
