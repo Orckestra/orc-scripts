@@ -33,7 +33,7 @@ outStream.addListener("open", () => {
 
 			if (strippedContent.includes("stroke") === false) {
 				console.log(fileNameWithoutExtension + ": adding stroke=none");
-				strippedContent = strippedContent.replace(/\<path /gm, '<path stroke="none" ');
+				strippedContent = strippedContent.replace(/<path /gm, '<path stroke="none" ');
 			} else {
 				strippedContent = strippedContent.replace(/stroke="(.*?)"/, "");
 			}
@@ -41,7 +41,7 @@ outStream.addListener("open", () => {
 			console.log(fileNameWithoutExtension + ": skipping post-processing");
 		}
 
-		strippedContent = strippedContent.replace(/\s*<!--\s*no post-processing\s*--\>\s*/gm, "");
+		strippedContent = strippedContent.replace(/\s*<!--\s*no post-processing\s*-->\s*/gm, "");
 		strippedContent = strippedContent.replace(/^\s*[\r\n]/gm, "").replace(/  +/g, " ");
 
 		outStream.write(strippedContent);
