@@ -45,7 +45,7 @@ describe("Styled component plugin for unexpected", () => {
 			expect(
 				() => expect(".foo", "as a selector to have style rules", "to contain", "width"),
 				"to throw",
-				"expected '.foo' as a selector to have style rules to contain 'width'\n" + "\n" + ".foo {color: green;}",
+				"expected '.foo' as a selector to have style rules to contain 'width'\n\n.foo {color: green;}",
 			));
 	});
 
