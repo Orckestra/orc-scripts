@@ -26,17 +26,22 @@ outStream.addListener("open", () => {
 			.replace(/width(.*)" /, "")
 			.replace(/height(.*)" /, "");
 
-		if (strippedContent.includes('fill="none"') === false) {
-			strippedContent = strippedContent.replace(/fill="(.*?)"/, "");
-		}
+		if (/<!-- no post-processing -->/g.test(strippedContent) === false) {
+			if (strippedContent.includes('fill="none"') === false) {
+				strippedContent = strippedContent.replace(/fill="(.*?)"/, "");
+			}
 
-		if (strippedContent.includes("stroke") === false) {
-			console.log(fileNameWithoutExtension);
-			strippedContent = strippedContent.replace("<path ", '<path stroke="none" ');
+			if (strippedContent.includes("stroke") === false) {
+				console.log(fileNameWithoutExtension + ": adding stroke=none");
+				strippedContent = strippedContent.replace(/<path /gm, '<path stroke="none" ');
+			} else {
+				strippedContent = strippedContent.replace(/stroke="(.*?)"/, "");
+			}
 		} else {
-			strippedContent = strippedContent.replace(/stroke="(.*?)"/, "");
+			console.log(fileNameWithoutExtension + ": skipping post-processing");
 		}
 
+		strippedContent = strippedContent.replace(/\s*<!--\s*no post-processing\s*-->\s*/gm, "");
 		strippedContent = strippedContent.replace(/^\s*[\r\n]/gm, "").replace(/  +/g, " ");
 
 		outStream.write(strippedContent);
