@@ -11,7 +11,7 @@ const ignores = ["/node_modules/"];
 const jestConfig = {
 	roots: [fromRoot("src")],
 	testEnvironment: "jsdom",
-	resolver: here("jest-resolver.js"),
+	//resolver: here("jest-resolver.js"),
 	moduleNameMapper: {
 		"\\.(jpg|jpeg|png|gif)$": here("../__mocks__/fileMock.js"),
 		"\\.(css|less|scss|sass)$": "identity-obj-proxy",
