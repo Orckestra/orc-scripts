@@ -17,7 +17,7 @@ const currentBranch = gitBranchResult.stdout.toString("utf-8").trim();
 
 const isMaster = currentBranch === "master";
 const isDevelopment = currentBranch === "develop";
-const isRelease = currentBranch.startsWith("release/");
+const isRelease = currentBranch.startsWith("releases/");
 const isLegacy = currentBranch.startsWith("legacy/");
 
 const { packageJson } = readPkgUp.sync({ normalize: false }) || {};
@@ -26,13 +26,11 @@ let tag = "";
 if (isMaster) {
 	// TODO: Should semver increment major/minor/patch - but which is hard to discover
 	// Fail out and tag manually for now
-	console.error(
-		"Tags from master branch should be made manually with the npm version command",
-	);
+	console.error("Tags from master branch should be made manually with the npm version command");
 	process.exit(2);
 } else if (isRelease) {
 	const pre = prerelease(currentVersion);
-	const branchVersion = coerce(currentBranch.replace(/^.*\/v/, "")).version;
+	const branchVersion = coerce(currentBranch.replace(/^.*\//, "")).version;
 	if (lt(branchVersion, currentVersion)) {
 		// Branch version must be greater or equal
 		console.error("Branch version must be higher than or equal to package version");
@@ -59,9 +57,7 @@ if (isMaster) {
 }
 
 if (!tag) {
-	console.error(
-		"This branch (" + currentBranch + ") cannot have releases tagged from it.",
-	);
+	console.error("This branch (" + currentBranch + ") cannot have releases tagged from it.");
 	process.exit(4);
 }
 
