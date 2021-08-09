@@ -49,7 +49,7 @@ describe("<array-like> to be a form definition", () => {
 			expect(
 				() => expect({ name: "field1", type: "InvalidType" }, "to be a form field"),
 				"to throw",
-				"expected { name: 'field1', type: 'InvalidType' } to be a form field\n" + "  Invalid type 'InvalidType'",
+				"expected { name: 'field1', type: 'InvalidType' } to be a form field\n  Invalid type 'InvalidType'",
 			));
 
 		describe("type 'Button'", () => {
