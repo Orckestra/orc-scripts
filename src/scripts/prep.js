@@ -8,20 +8,20 @@ const copyFile = util.promisify(require("ncp").ncp);
 const distDir = path.resolve(process.cwd(), "dist");
 const contentDir = path.resolve(process.cwd(), "src/content");
 const staticDir = path.resolve(process.cwd(), "src/static");
+const mockDir = path.resolve(process.cwd(), "src/__mocks__");
 
 async function prep() {
 	await makeDir("dist");
 	try {
-		await copyFile(contentDir, path.resolve(distDir, "content"));
+		await Promise.all([
+			copyFile(contentDir, path.resolve(distDir, "content")),
+			copyFile(mockDir, path.resolve(distDir, "__mocks__")),
+		]);
 	} catch (_) {}
 	if (process.env.NODE_ENV === "production") process.exit(0);
 	try {
 		const files = await readdir(staticDir);
-		await Promise.all(
-			files.map(file =>
-				copyFile(path.resolve(staticDir, file), path.resolve(distDir, file)),
-			),
-		);
+		await Promise.all(files.map(file => copyFile(path.resolve(staticDir, file), path.resolve(distDir, file))));
 	} catch (_) {}
 }
 

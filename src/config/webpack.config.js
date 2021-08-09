@@ -1,39 +1,51 @@
 const webpack = require("webpack");
 const path = require("path");
-const pkgConf = require("pkg-conf");
+const readPkgUp = require("read-pkg-up");
 const { parseEnv } = require("../utils");
+
+const { packageJson } = readPkgUp.sync({ normalize: false }) || {};
 
 const here = p => path.join(__dirname, p);
 
-module.exports = {
-	entry: [
-		here("setAssetPath.js"),
-		"url-polyfill",
-		"core-js",
-		"whatwg-fetch",
-		path.resolve("./src/index.js"),
-	],
+const babelWhitelist = require("./babel-whitelist.json");
+
+const config = {
+	entry: [here("setAssetPath.js"), "url-polyfill", "core-js", "whatwg-fetch", path.resolve("./src/index.js")],
 	output: {
 		chunkFilename: "[id].[chunkhash].js",
 		filename: "bundle.js",
 		path: path.resolve(process.cwd(), "dist"),
 	},
+	resolve: {
+		alias: {},
+		modules: [
+			// Always resolve in local src and node_modules
+			path.resolve(process.cwd(), "src"),
+			path.resolve(process.cwd(), "node_modules"),
+		],
+		symlinks: false,
+	},
 	module: {
 		rules: [
 			{
 				resource: {
-					test: /\.js$/,
+					test: /\.js$/, // Only JavaScript files
 					or: [
-						{ not: [/node_modules/] },
-						/ansi-regex/,
-						/strip-ansi/,
-						/connected-react-router/,
-					],
+						// One of these conditions must be true
+						{ not: [/node_modules/] }, // No dependencies unless explicitly allowed by whitelist
+					].concat(
+						// Allowed by whitelist
+						babelWhitelist.map(
+							lib => new RegExp("node_modules(?:/|\\\\)" + lib.replace("/", "(?:/|\\\\)") + "(?:/|\\\\)"),
+						),
+					),
 				},
-				use: {
-					loader: "babel-loader",
-					options: require("./babelrc.js"),
-				},
+				use: [
+					{
+						loader: "babel-loader",
+						options: require("./babelrc.js"),
+					},
+				],
 			},
 			{
 				test: /\.svg$/,
@@ -58,13 +70,6 @@ module.exports = {
 			},
 		],
 	},
-	resolve: {
-		modules: [
-			// Always resolve in local src and node_modules
-			path.resolve(process.cwd(), "src"),
-			path.resolve(process.cwd(), "node_modules"),
-		],
-	},
 	plugins: [
 		new webpack.DefinePlugin({
 			BUILD_ID: `"${process.env.BUILD_BUILDID}"`,
@@ -73,24 +78,26 @@ module.exports = {
 	],
 };
 
-const locales = Object.values(pkgConf.sync("locales"));
-if (locales.length) {
-	module.exports.plugins.push(
-		new webpack.DefinePlugin({
-			SUPPORTED_LOCALES: JSON.stringify(locales),
-		}),
-	);
-}
+const locales = packageJson.locales;
+const overtureModule = packageJson.overtureModule;
+const dependencies = packageJson.dependencies;
+
+config.plugins.push(
+	new webpack.DefinePlugin({
+		SUPPORTED_LOCALES: JSON.stringify(locales && locales.length ? locales : null),
+		OVERTURE_MODULE: JSON.stringify((overtureModule && overtureModule.name) || ""),
+		DEPENDENCIES: JSON.stringify(dependencies || {}),
+	}),
+);
 
 if (parseEnv("NODE_ENV") === "production") {
-	module.exports.devtool = "source-map";
-	module.exports.mode = "production";
+	config.devtool = "source-map";
+	config.mode = "production";
 } else {
-	module.exports.devtool = "inline-source-map";
-	module.exports.optimization = { usedExports: true };
-	module.exports.plugins.push(
-		new webpack.NamedModulesPlugin(),
-		new webpack.HotModuleReplacementPlugin(),
-	);
-	module.exports.mode = "development";
+	config.devtool = "inline-source-map";
+	config.optimization = { usedExports: true };
+	config.plugins.push(new webpack.NamedModulesPlugin(), new webpack.HotModuleReplacementPlugin());
+	config.mode = "development";
 }
+
+module.exports = config;

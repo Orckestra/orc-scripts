@@ -4,8 +4,7 @@ const webpack = require("webpack");
 const HOST = process.env.HOSTNAME || "localhost";
 
 const args = process.argv.slice(2);
-const argPort =
-	args.indexOf("--port") !== -1 ? args[args.indexOf("--port") + 1] : null;
+const argPort = args.indexOf("--port") !== -1 ? args[args.indexOf("--port") + 1] : null;
 const PORT = argPort || process.env.PORT || 5000;
 
 const config = require("../config/webpack.config.js");
@@ -21,16 +20,11 @@ const options = {
 if (HOST !== "localhost") {
 	options.public = HOST;
 }
-if (
-	HOST !== "localhost" ||
-	args.indexOf("--https") !== -1 ||
-	process.env.HTTPS
-) {
+if (HOST !== "localhost" || args.indexOf("--https") !== -1 || process.env.HTTPS) {
 	options.https = true;
 }
 
-const location =
-	"http" + (options.https ? "s" : "") + "://" + HOST + ":" + PORT;
+const location = "http" + (options.https ? "s" : "") + "://" + HOST + ":" + PORT;
 
 // /mockData/ contains json files to simulate API endpoints
 options.before = (app, server) => {

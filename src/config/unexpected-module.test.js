@@ -12,28 +12,17 @@ const fakeSelector = () => {};
 
 describe("Module structure plugin for Unexpected", () => {
 	describe("<object> to be a component", () => {
-		it("accepts function components", () =>
-			expect(FakeComponent, "to be a component"));
+		it("accepts function components", () => expect(FakeComponent, "to be a component"));
 
-		it("accepts class components", () =>
-			expect(ClassComponent, "to be a component"));
+		it("accepts class components", () => expect(ClassComponent, "to be a component"));
 
-		it("accepts memoized components", () =>
-			expect(React.memo(FakeComponent), "to be a component"));
+		it("accepts memoized components", () => expect(React.memo(FakeComponent), "to be a component"));
 
 		it("fails with undefined", () =>
-			expect(
-				() => expect(undefined, "to be a component"),
-				"to throw",
-				"expected undefined to be a component",
-			));
+			expect(() => expect(undefined, "to be a component"), "to throw", "expected undefined to be a component"));
 
 		it("fails with null", () =>
-			expect(
-				() => expect(null, "to be a component"),
-				"to throw",
-				"expected null to be a component",
-			));
+			expect(() => expect(null, "to be a component"), "to throw", "expected null to be a component"));
 
 		it("fails with string", () =>
 			expect(
@@ -45,10 +34,7 @@ describe("Module structure plugin for Unexpected", () => {
 
 	describe("<object> to be a subpage", () => {
 		it("handles a minimal subpage", () =>
-			expect(
-				() => expect({ component: FakeComponent }, "to be a subpage"),
-				"not to throw",
-			));
+			expect(() => expect({ component: FakeComponent }, "to be a subpage"), "not to throw"));
 
 		it("does not accept subpages with pages", () =>
 			expect(
@@ -134,21 +120,13 @@ describe("Module structure plugin for Unexpected", () => {
 
 		it("handles a subpage with toolbar", () =>
 			expect(
-				() =>
-					expect(
-						{ component: FakeComponent, toolStateSelector: fakeSelector },
-						"to be a subpage",
-					),
+				() => expect({ component: FakeComponent, toolStateSelector: fakeSelector }, "to be a subpage"),
 				"not to throw",
 			));
 
 		it("throws if toolbar state selector not function", () =>
 			expect(
-				() =>
-					expect(
-						{ component: FakeComponent, toolStateSelector: "fakeSelector" },
-						"to be a subpage",
-					),
+				() => expect({ component: FakeComponent, toolStateSelector: "fakeSelector" }, "to be a subpage"),
 				"to throw",
 				"expected { component: () => null, toolStateSelector: 'fakeSelector' }\n" +
 					"to be a subpage\n" +
@@ -161,21 +139,13 @@ describe("Module structure plugin for Unexpected", () => {
 
 		it("handles a subpage with toolbar functions", () =>
 			expect(
-				() =>
-					expect(
-						{ component: FakeComponent, toolFuncSelector: fakeSelector },
-						"to be a subpage",
-					),
+				() => expect({ component: FakeComponent, toolFuncSelector: fakeSelector }, "to be a subpage"),
 				"not to throw",
 			));
 
 		it("throws if toolbar function selector not function", () =>
 			expect(
-				() =>
-					expect(
-						{ component: FakeComponent, toolFuncSelector: "fakeSelector" },
-						"to be a subpage",
-					),
+				() => expect({ component: FakeComponent, toolFuncSelector: "fakeSelector" }, "to be a subpage"),
 				"to throw",
 				"expected { component: () => null, toolFuncSelector: 'fakeSelector' }\n" +
 					"to be a subpage\n" +
@@ -232,11 +202,7 @@ describe("Module structure plugin for Unexpected", () => {
 			));
 
 		it("fails when subject is an empty object", () =>
-			expect(
-				() => expect({}, "to be a subpage list"),
-				"to throw",
-				"expected {} to be a subpage list",
-			));
+			expect(() => expect({}, "to be a subpage list"), "to throw", "expected {} to be a subpage list"));
 
 		it("fails when subject contains something not a subpage", () =>
 			expect(
@@ -271,14 +237,7 @@ describe("Module structure plugin for Unexpected", () => {
 
 	describe("<object> to be a segment", () => {
 		it("passes with a string label and component", () =>
-			expect(
-				() =>
-					expect(
-						{ component: FakeComponent, label: "A label" },
-						"to be a segment",
-					),
-				"not to throw",
-			));
+			expect(() => expect({ component: FakeComponent, label: "A label" }, "to be a segment"), "not to throw"));
 
 		it("passes with an object label, component and subpage list", () =>
 			expect(
@@ -678,11 +637,7 @@ describe("Module structure plugin for Unexpected", () => {
 			));
 
 		it("fails when subject is an empty object", () =>
-			expect(
-				() => expect({}, "to be a segment list"),
-				"to throw",
-				"expected {} to be a segment list",
-			));
+			expect(() => expect({}, "to be a segment list"), "to throw", "expected {} to be a segment list"));
 
 		it("fails when subject contains something not a segment", () =>
 			expect(
@@ -723,14 +678,7 @@ describe("Module structure plugin for Unexpected", () => {
 
 	describe("<object> to be a page", () => {
 		it("passes with a string label and component", () =>
-			expect(
-				() =>
-					expect(
-						{ component: FakeComponent, label: "A label" },
-						"to be a page",
-					),
-				"not to throw",
-			));
+			expect(() => expect({ component: FakeComponent, label: "A label" }, "to be a page"), "not to throw"));
 
 		it("passes with a label, component and subpage list", () =>
 			expect(
@@ -1045,11 +993,7 @@ describe("Module structure plugin for Unexpected", () => {
 			));
 
 		it("fails when subject is an empty object", () =>
-			expect(
-				() => expect({}, "to be a page list"),
-				"to throw",
-				"expected {} to be a page list",
-			));
+			expect(() => expect({}, "to be a page list"), "to throw", "expected {} to be a page list"));
 
 		it("fails when subject contains something not a page", () =>
 			expect(

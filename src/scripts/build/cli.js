@@ -12,18 +12,12 @@ const outDir = useSpecifiedOutDir ? [] : ["--out-dir", "dist"];
 const copyFiles = args.includes("--no-copy-files") ? [] : ["--copy-files"];
 
 const useBuiltinConfig =
-	!args.includes("--presets") &&
-	(!hasFile(".babelrc") || !hasFile("babel.config.js")) &&
-	!hasPkgProp("babel");
-const config = useBuiltinConfig
-	? ["--presets", here("../../config/babel-preset.js")]
-	: [];
+	!args.includes("--presets") && (!hasFile(".babelrc") || !hasFile("babel.config.js")) && !hasPkgProp("babel");
+const config = useBuiltinConfig ? ["--presets", here("../../config/babel-preset.js")] : [];
 
 const verbosity = args.includes("--quiet") ? [] : ["--verbose"];
 
-const ignore = args.includes("--ignore")
-	? []
-	: ["--ignore", "**/*.test.js,**/__mocks__"];
+const ignore = args.includes("--ignore") ? [] : ["--ignore", "**/*.test.js,**/__mocks__"];
 
 const babelUnacceptedArgs = ["--no-copy-files"];
 
@@ -31,9 +25,7 @@ const filteredArgs = args.filter(arg => !babelUnacceptedArgs.includes(arg));
 
 const child = spawn(
 	resolveBin("@babel/cli", { executable: "babel" }),
-	[...outDir, ...copyFiles, ...ignore, ...verbosity, ...config, "src"].concat(
-		filteredArgs,
-	),
+	[...outDir, ...copyFiles, ...ignore, ...verbosity, ...config, "src"].concat(filteredArgs),
 	{ stdio: "inherit" },
 );
 

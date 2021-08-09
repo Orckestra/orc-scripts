@@ -4,8 +4,7 @@ const arrify = require("arrify");
 const which = require("which");
 const readPkgUp = require("read-pkg-up");
 
-const hasOwn = (obj, key) =>
-	obj.hasOwnProperty(key) && obj[key] !== null && obj[key] !== undefined;
+const hasOwn = (obj, key) => obj.hasOwnProperty(key) && obj[key] !== null && obj[key] !== undefined;
 
 const hasPath = (obj, keys) => {
 	const [key, ...tail] = keys;
@@ -34,8 +33,7 @@ const hasFile = (...p) => fs.existsSync(fromRoot(...p));
 
 const hasPkgProp = props => arrify(props).some(prop => has(pkg, prop));
 
-const hasPkgSubProp = pkgProp => props =>
-	hasPkgProp(arrify(props).map(p => `${pkgProp}.${p}`));
+const hasPkgSubProp = pkgProp => props => hasPkgProp(arrify(props).map(p => `${pkgProp}.${p}`));
 
 const hasPeerDep = hasPkgSubProp("peerDependencies");
 const hasDep = hasPkgSubProp("dependencies");
@@ -56,17 +54,10 @@ function parseEnv(name, def) {
 }
 
 function envIsSet(name) {
-	return (
-		process.env.hasOwnProperty(name) &&
-		process.env[name] &&
-		process.env[name] !== "undefined"
-	);
+	return process.env.hasOwnProperty(name) && process.env[name] && process.env[name] !== "undefined";
 }
 
-function resolveBin(
-	modName,
-	{ executable = modName, cwd = process.cwd() } = {},
-) {
+function resolveBin(modName, { executable = modName, cwd = process.cwd() } = {}) {
 	let pathFromWhich;
 	try {
 		pathFromWhich = fs.realpathSync(which.sync(executable));
@@ -74,7 +65,7 @@ function resolveBin(
 		// ignore _error
 	}
 	try {
-		const modPkgPath = require.resolve(`${modName}/package.json`);
+		const modPkgPath = require.resolve(path.join(modName, "package.json"));
 		const modPkgDir = path.dirname(modPkgPath);
 		const { bin } = require(modPkgPath);
 		const binPath = typeof bin === "string" ? bin : bin[executable];

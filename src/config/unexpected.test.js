@@ -8,8 +8,7 @@ const TestComp = () => <div />;
 // "<function> as a React component <assertion?>"
 
 describe("<any> to be a label", () => {
-	it("passes if subject is a string", () =>
-		expect(() => expect("Label", "to be a label"), "not to throw"));
+	it("passes if subject is a string", () => expect(() => expect("Label", "to be a label"), "not to throw"));
 
 	it("passes if subject is a react-intl descriptor", () =>
 		expect(
@@ -52,18 +51,11 @@ describe("<any> to be a label", () => {
 
 describe("<object> to be a column definition", () => {
 	it("passes with a select column", () =>
-		expect(
-			() => expect({ type: "select" }, "to be a column definition"),
-			"not to throw",
-		));
+		expect(() => expect({ type: "select" }, "to be a column definition"), "not to throw"));
 
 	it("fails if select column has other parameters", () =>
 		expect(
-			() =>
-				expect(
-					{ type: "select", label: "select" },
-					"to be a column definition",
-				),
+			() => expect({ type: "select", label: "select" }, "to be a column definition"),
 			"to throw",
 			"expected { type: 'select', label: 'select' } to be a column definition\n" +
 				"\n" +
@@ -382,7 +374,9 @@ describe("<object> to be a column definition", () => {
 				"{\n" +
 				"  type: 'date',\n" +
 				"  fieldName: 'ColumnA',\n" +
-				'  component: () => _react.default.createElement("div", null),\n' +
+				"  component: " +
+				TestComp.toString() +
+				",\n" +
 				"  funcs: { test: () => {} }\n" +
 				"}\n" +
 				"to be a column definition\n" +
@@ -390,7 +384,9 @@ describe("<object> to be a column definition", () => {
 				"{\n" +
 				"  type: 'date',\n" +
 				"  fieldName: 'ColumnA',\n" +
-				'  component: () => _react.default.createElement("div", null), // should be removed\n' +
+				"  component: " +
+				TestComp.toString() +
+				", // should be removed\n" +
 				"  funcs: { test: () => {} } // should be removed\n" +
 				"}",
 		));

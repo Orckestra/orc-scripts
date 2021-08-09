@@ -4,7 +4,7 @@ module.exports = {
 	name: "unexpected-styles",
 	version: "0.0.2",
 	dependencies: ["unexpected-reaction", "unexpected-dom"],
-	installInto: function(expect) {
+	installInto: function (expect) {
 		const getStyleDeclarations = selector => {
 			const sheets = document.querySelectorAll("style");
 			let declarations = "";
@@ -20,16 +20,13 @@ module.exports = {
 			return declarations;
 		};
 
-		expect.addAssertion(
-			"<string> as a selector to have style rules <assertion?>",
-			function(expect, selector) {
-				return expect.shift(getStyleDeclarations(selector));
-			},
-		);
+		expect.addAssertion("<string> as a selector to have style rules <assertion?>", function (expect, selector) {
+			return expect.shift(getStyleDeclarations(selector));
+		});
 
 		expect.addAssertion(
 			"<DOMElement> to have style rules satisfying <assertion>",
-			function(expect, element, ...assertion) {
+			function (expect, element, ...assertion) {
 				expect.errorMode = "nested";
 				const classes = element.getAttribute("class");
 				if (!classes) {
@@ -38,7 +35,7 @@ module.exports = {
 				const styleRules = classes
 					.split(" ")
 					.map(sel => getStyleDeclarations("." + sel))
-					.filter(x => x)
+					.filter(Boolean)
 					.join("\n");
 				return expect.shift(styleRules);
 			},

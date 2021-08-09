@@ -32,51 +32,20 @@ describe("Styled component plugin for unexpected", () => {
 	});
 
 	describe("<string> as a selector to have style rules <assertion?>", () => {
-		it("passes when a style matches", () =>
-			expect(
-				".foo",
-				"as a selector to have style rules",
-				"to contain",
-				"green",
-			));
+		it("passes when a style matches", () => expect(".foo", "as a selector to have style rules", "to contain", "green"));
 
-		it("works with html tag", () =>
-			expect(
-				"html",
-				"as a selector to have style rules",
-				"to contain",
-				"margin",
-			));
+		it("works with html tag", () => expect("html", "as a selector to have style rules", "to contain", "margin"));
 
-		it("works with body tag", () =>
-			expect(
-				"body",
-				"as a selector to have style rules",
-				"to contain",
-				"padding",
-			));
+		it("works with body tag", () => expect("body", "as a selector to have style rules", "to contain", "padding"));
 
 		it("works on a second style sheet", () =>
-			expect(
-				".bar",
-				"as a selector to have style rules",
-				"to contain",
-				"color: blue;",
-			));
+			expect(".bar", "as a selector to have style rules", "to contain", "color: blue;"));
 
 		it("gives a decent diff", () =>
 			expect(
-				() =>
-					expect(
-						".foo",
-						"as a selector to have style rules",
-						"to contain",
-						"width",
-					),
+				() => expect(".foo", "as a selector to have style rules", "to contain", "width"),
 				"to throw",
-				"expected '.foo' as a selector to have style rules to contain 'width'\n" +
-					"\n" +
-					".foo {color: green;}",
+				"expected '.foo' as a selector to have style rules to contain 'width'\n\n.foo {color: green;}",
 			));
 	});
 
@@ -117,17 +86,10 @@ describe("Styled component plugin for unexpected", () => {
 
 		it("gives a detailed diff", () =>
 			expect(
-				() =>
-					expect(
-						<TestStyled />,
-						"when mounted",
-						"to have style rules satisfying",
-						"to contain",
-						"color: blue;",
-					),
+				() => expect(<TestStyled />, "when mounted", "to have style rules satisfying", "to contain", "color: blue;"),
 				"to throw",
 				new RegExp(
-					'expected <div class="unexpected-stylestest__TestStyled-\\w+-0 \\w+"></div>\n' +
+					'expected <div class="unexpected-stylestest__TestStyled-sc-\\w+-0 [\\w-]+"></div>\n' +
 						"to have style rules satisfying to contain 'color: blue;'\n" +
 						"  expected '\\.\\w+ \\{color: red; background-color: green;\\}' to contain 'color: blue;'\n" +
 						"\n" +
@@ -138,13 +100,7 @@ describe("Styled component plugin for unexpected", () => {
 
 		it("fails if no class name", () =>
 			expect(
-				() =>
-					expect(
-						<div id="foo" />,
-						"when mounted",
-						"to have style rules satisfying",
-						"to be ok",
-					),
+				() => expect(<div id="foo" />, "when mounted", "to have style rules satisfying", "to be ok"),
 				"to throw",
 				'expected <div id="foo"></div> to have style rules satisfying to be ok\n' +
 					'  <div id="foo"></div> has no class name',
@@ -152,13 +108,7 @@ describe("Styled component plugin for unexpected", () => {
 
 		it("fails if empty class name", () =>
 			expect(
-				() =>
-					expect(
-						<div id="foo" className="" />,
-						"when mounted",
-						"to have style rules satisfying",
-						"to be a string",
-					),
+				() => expect(<div id="foo" className="" />, "when mounted", "to have style rules satisfying", "to be a string"),
 				"to throw",
 				'expected <div id="foo" class=""></div>\n' +
 					"to have style rules satisfying to be a string\n" +
