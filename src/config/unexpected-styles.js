@@ -20,12 +20,9 @@ module.exports = {
 			return declarations;
 		};
 
-		expect.addAssertion(
-			"<string> as a selector to have style rules <assertion?>",
-			function (expect, selector) {
-				return expect.shift(getStyleDeclarations(selector));
-			},
-		);
+		expect.addAssertion("<string> as a selector to have style rules <assertion?>", function (expect, selector) {
+			return expect.shift(getStyleDeclarations(selector));
+		});
 
 		expect.addAssertion(
 			"<DOMElement> to have style rules satisfying <assertion>",

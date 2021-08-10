@@ -4,11 +4,7 @@ const isTest = process.env.NODE_ENV === "test" || process.env.BABEL_ENV === "tes
 const isWebpack = parseEnv("BUILD_WEBPACK", false);
 const isReact = parseEnv("BUILD_REACT", isWebpack);
 
-const envTargets = isTest
-	? "current node, last 2 chrome version"
-	: isReact
-	? "defaults, IE 11"
-	: "node 10";
+const envTargets = isTest ? "current node, last 2 chrome version" : isReact ? "defaults, IE 11" : "node 10";
 
 console.log("Using targets", envTargets);
 
@@ -35,10 +31,7 @@ module.exports = {
 		isTest || isReact ? require.resolve("@loadable/babel-plugin") : null,
 		isTest || isReact ? require.resolve("@babel/plugin-transform-react-jsx") : null,
 		isTest || isReact
-			? [
-					require.resolve("babel-plugin-react-intl-auto"),
-					{ removePrefix: "src", filebase: true },
-			  ]
+			? [require.resolve("babel-plugin-react-intl-auto"), { removePrefix: "src", filebase: true }]
 			: null,
 		require.resolve("@babel/plugin-transform-computed-properties"),
 	].filter(x => !!x),

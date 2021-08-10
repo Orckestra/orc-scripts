@@ -83,26 +83,18 @@ module.exports = {
 			return expect(subject, "to satisfy", pattern);
 		});
 
-		expect.addAssertion("<object> to be a form combination field", function (
-			expect,
-			subject,
-		) {
+		expect.addAssertion("<object> to be a form combination field", function (expect, subject) {
 			if (subject.type !== "Combination") {
 				expect.fail();
 			}
 			const pattern = {
 				type: "Combination",
-				fields: expect
-					.it("to be an array")
-					.and("to have items satisfying", "to be a form field"),
+				fields: expect.it("to be an array").and("to have items satisfying", "to be a form field"),
 			};
 			if (subject.hasOwnProperty("proportions")) {
 				pattern.proportions = expect
 					.it("to be an array")
-					.and(
-						"to have items satisfying",
-						expect.it("to be a string").or("to be a number"),
-					)
+					.and("to have items satisfying", expect.it("to be a string").or("to be a number"))
 					.and("to be shorter than or same length as", subject.fields);
 			}
 			return expect(subject, "to satisfy", pattern);
@@ -148,19 +140,13 @@ module.exports = {
 					.it("to be an array")
 					.and(
 						"to have items satisfying",
-						expect
-							.it("to be a form field")
-							.or("to be a form combination field")
-							.or("to be a form list"),
+						expect.it("to be a form field").or("to be a form combination field").or("to be a form list"),
 					),
 			};
 			expect(subject, "to satisfy", pattern);
 		});
 
-		expect.addAssertion("<array-like> to be a form definition", function (
-			expect,
-			subject,
-		) {
+		expect.addAssertion("<array-like> to be a form definition", function (expect, subject) {
 			return expect(
 				subject,
 				"to have items satisfying",

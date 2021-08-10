@@ -3,18 +3,11 @@ expect.output.preferredWidth = 80;
 describe("<array-like> to be a form definition", () => {
 	describe("<object> to be a form field", () => {
 		it("passes with a name only", () =>
-			expect(
-				() => expect({ name: "field1", type: "CheckboxInput" }, "to be a form field"),
-				"not to throw",
-			));
+			expect(() => expect({ name: "field1", type: "CheckboxInput" }, "to be a form field"), "not to throw"));
 
 		it("passes with a name and string label", () =>
 			expect(
-				() =>
-					expect(
-						{ name: "field1", type: "CheckboxInput", label: "A field" },
-						"to be a form field",
-					),
+				() => expect({ name: "field1", type: "CheckboxInput", label: "A field" }, "to be a form field"),
 				"not to throw",
 			));
 
@@ -56,8 +49,7 @@ describe("<array-like> to be a form definition", () => {
 			expect(
 				() => expect({ name: "field1", type: "InvalidType" }, "to be a form field"),
 				"to throw",
-				"expected { name: 'field1', type: 'InvalidType' } to be a form field\n" +
-					"  Invalid type 'InvalidType'",
+				"expected { name: 'field1', type: 'InvalidType' } to be a form field\n  Invalid type 'InvalidType'",
 			));
 
 		describe("type 'Button'", () => {
@@ -625,10 +617,7 @@ describe("<array-like> to be a form definition", () => {
 
 		describe("type 'LineLabel'", () => {
 			it("passes with a name only", () =>
-				expect(
-					() => expect({ name: "field1", type: "LineLabel" }, "to be a form field"),
-					"not to throw",
-				));
+				expect(() => expect({ name: "field1", type: "LineLabel" }, "to be a form field"), "not to throw"));
 		});
 
 		describe("type 'NumberInput'", () => {
@@ -763,10 +752,7 @@ describe("<array-like> to be a form definition", () => {
 
 		describe("type 'ReadOnly'", () => {
 			it("passes with a name only", () =>
-				expect(
-					() => expect({ name: "field1", type: "ReadOnly" }, "to be a form field"),
-					"not to throw",
-				));
+				expect(() => expect({ name: "field1", type: "ReadOnly" }, "to be a form field"), "not to throw"));
 		});
 
 		describe("type 'Selector'", () => {
@@ -1670,8 +1656,7 @@ describe("<array-like> to be a form definition", () => {
 
 		it("fails if field array empty", () =>
 			expect(
-				() =>
-					expect({ type: "Combination", fields: [] }, "to be a form combination field"),
+				() => expect({ type: "Combination", fields: [] }, "to be a form combination field"),
 				"to throw",
 				"expected { type: 'Combination', fields: [] } to be a form combination field\n" +
 					"\n" +

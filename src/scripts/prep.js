@@ -21,11 +21,7 @@ async function prep() {
 	if (process.env.NODE_ENV === "production") process.exit(0);
 	try {
 		const files = await readdir(staticDir);
-		await Promise.all(
-			files.map(file =>
-				copyFile(path.resolve(staticDir, file), path.resolve(distDir, file)),
-			),
-		);
+		await Promise.all(files.map(file => copyFile(path.resolve(staticDir, file), path.resolve(distDir, file))));
 	} catch (_) {}
 }
 

@@ -5,9 +5,7 @@ module.exports = {
 			.addAssertion("<object> to be a component", function (expect, subject) {
 				return expect(
 					subject,
-					expect
-						.it("to have property", "$$typeof", Symbol.for("react.memo"))
-						.or("to be a function"),
+					expect.it("to have property", "$$typeof", Symbol.for("react.memo")).or("to be a function"),
 				);
 			})
 			.addAssertion("<any> to be a component", function (expect) {
@@ -34,10 +32,7 @@ module.exports = {
 					pattern.label = expect.it("to be an object").and("to be a label");
 					pattern.dataPath = expect
 						.it("to be an array")
-						.and(
-							"to have items satisfying",
-							expect.it("to be a string").or("to be a number"),
-						);
+						.and("to have items satisfying", expect.it("to be a string").or("to be a number"));
 					if (subject.dataIdParam) {
 						pattern.dataIdParam = expect.it("to match", /^\w+$/);
 					}
@@ -57,10 +52,7 @@ module.exports = {
 						label: expect.it("to be an object").and("to be a label"),
 						dataPath: expect
 							.it("to be an array")
-							.and(
-								"to have items satisfying",
-								expect.it("to be a string").or("to be a number"),
-							),
+							.and("to have items satisfying", expect.it("to be a string").or("to be a number")),
 					};
 					if (subject.dataIdParam) {
 						pattern.dataIdParam = expect.it("to match", /^\w+$/);

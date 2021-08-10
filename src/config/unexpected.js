@@ -29,31 +29,17 @@ global.expect = unexpected
 			}
 		},
 	)
-	.addAssertion("<function> to be a reducer with initial state <object>", function (
-		expect,
-		subject,
-		initialState,
-	) {
+	.addAssertion("<function> to be a reducer with initial state <object>", function (expect, subject, initialState) {
 		expect.errorMode = "nested";
 		const oldState = Immutable.Map();
-		return expect(
-			subject,
-			"when called with",
-			[oldState, { type: "NOT_A_USEFUL_ACTION" }],
-			"to be",
-			oldState,
-		).and(
+		return expect(subject, "when called with", [oldState, { type: "NOT_A_USEFUL_ACTION" }], "to be", oldState).and(
 			"when called with",
 			[undefined, { type: "@@INIT" }],
 			"to equal",
 			Immutable.fromJS(initialState),
 		);
 	})
-	.addAssertion("<function> as a React component <assertion?>", function (
-		expect,
-		Subject,
-		assertions,
-	) {
+	.addAssertion("<function> as a React component <assertion?>", function (expect, Subject, assertions) {
 		expect.errorMode = "bubble";
 		try {
 			const element = React.createElement(Subject);
@@ -81,10 +67,7 @@ global.expect = unexpected
 				fieldName: expect
 					.it("to be a string")
 					.or("to be an array")
-					.and(
-						"to have items satisfying",
-						expect.it("to be a string").or("to be a number"),
-					),
+					.and("to have items satisfying", expect.it("to be a string").or("to be a number")),
 			};
 			if (subject.hasOwnProperty("width")) {
 				pattern.width = expect.it("to be a string").and("not to match", /[;:{[]/);
