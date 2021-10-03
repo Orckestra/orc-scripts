@@ -100,7 +100,7 @@
     "moment-timezone": "^0.5.33",
     "ncp": "^2.0.0",
     "normalizr": "^3.3.0",
-    "pkg-dir": "^4.0.0",
+    "pkg-dir": "^6.0.0",
     "polished": "^3.4.2",
     "prettier": "^2.0.2",
     "react": "^16.12.0",
