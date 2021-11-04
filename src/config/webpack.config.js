@@ -79,13 +79,13 @@ const config = {
 };
 
 const locales = packageJson.locales;
-const overtureModule = packageJson.overtureModule;
+const overtureApplication = packageJson.overtureApplication;
 const dependencies = packageJson.dependencies;
 
 config.plugins.push(
 	new webpack.DefinePlugin({
 		SUPPORTED_LOCALES: JSON.stringify(locales && locales.length ? locales : null),
-		OVERTURE_MODULE: JSON.stringify((overtureModule && overtureModule.name) || ""),
+		OVERTURE_APPLICATION: JSON.stringify((overtureApplication && overtureApplication.name) || ""),
 		DEPENDENCIES: JSON.stringify(dependencies || {}),
 	}),
 );
