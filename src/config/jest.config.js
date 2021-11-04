@@ -23,7 +23,7 @@ const jestConfig = {
 	globals: {
 		BUILD_ID: "000",
 		BUILD_NUMBER: "000",
-		OVERTURE_MODULE: "aModule",
+		OVERTURE_APPLICATION: "anApplication",
 		DEPENDENCIES: { someDependant: "1.1.1" },
 	},
 	setupFiles: [require.resolve("whatwg-fetch")],
