@@ -142,7 +142,7 @@
     "url-loader": "^4.0.0",
     "url-pattern": "^1.0.3",
     "url-polyfill": "^1.1.0",
-    "webpack": "^4.25.1",
+    "webpack": "^5.64.2",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-dev-server": "^3.1.10",
     "whatwg-fetch": "^3.0.0"
