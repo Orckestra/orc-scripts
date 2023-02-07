@@ -12,6 +12,25 @@ const envOptions = { loose: true, targets: envTargets };
 module.exports = {
 	presets: [[require.resolve("@babel/preset-env"), envOptions]],
 	plugins: [
+		[
+			"@emotion",
+			{
+				importMap: {
+					"@mui/system": {
+						styled: {
+							canonicalImport: ["@emotion/styled", "default"],
+							styledBaseImport: ["@mui/system", "styled"],
+						},
+					},
+					"@mui/material/styles": {
+						styled: {
+							canonicalImport: ["@emotion/styled", "default"],
+							styledBaseImport: ["@mui/material/styles", "styled"],
+						},
+					},
+				},
+			},
+		],
 		require.resolve("@babel/plugin-syntax-dynamic-import"),
 		isTest || isReact ? require.resolve("babel-plugin-styled-components") : null,
 		require.resolve("@babel/plugin-transform-template-literals"),
