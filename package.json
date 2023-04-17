@@ -95,7 +95,7 @@
     "is-ci": "^2.0.0",
     "jest": "^26.1.0",
     "jest-enzyme": "^7.1.2",
-    "jest-junit": "^11.0.1",
+    "jest-junit": "^16.0.0",
     "lint-staged": "^10.0.0",
     "moment-timezone": "^0.5.33",
     "ncp": "^2.0.0",
