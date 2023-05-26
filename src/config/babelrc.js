@@ -16,10 +16,10 @@ module.exports = {
 		isTest || isReact ? require.resolve("babel-plugin-styled-components") : null,
 		require.resolve("@babel/plugin-transform-template-literals"),
 		require.resolve("@babel/plugin-transform-destructuring"),
-		require.resolve("@babel/plugin-proposal-object-rest-spread"),
-		require.resolve("@babel/plugin-proposal-class-properties"),
-		require.resolve("@babel/plugin-proposal-private-property-in-object"),
-		require.resolve("@babel/plugin-proposal-private-methods"),
+		require.resolve("@babel/plugin-transform-object-rest-spread"),
+		require.resolve("@babel/plugin-transform-class-properties"),
+		require.resolve("@babel/plugin-transform-private-property-in-object"),
+		require.resolve("@babel/plugin-transform-private-methods"),
 		[
 			"babel-plugin-root-import",
 			{
