@@ -42,6 +42,13 @@ steps:
     customCommand: 'prune'
 
 - task: Npm@1
+  displayName: 'npm ls --depth=1'
+  continueOnError: true
+  inputs:
+    command: 'custom'
+    customCommand: 'ls --depth=1'
+
+- task: Npm@1
   displayName: 'npm run lint'
   inputs:
     command: 'custom'
