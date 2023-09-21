@@ -25,7 +25,7 @@ steps:
   displayName: 'npm install'
   inputs:
     command: 'install'
-    arguments: '--legacy-peer-deps --verbose'
+    arguments: '--verbose'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish eresolve-report.txt'
