@@ -6,3 +6,5 @@ babel.tmp.json
 builds/
 breakage/
 /.idea
+*.orig
+.vscode/
