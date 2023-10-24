@@ -16,9 +16,10 @@ if (gitBranchResult.status !== 0) {
 const currentBranch = gitBranchResult.stdout.toString("utf-8").trim();
 
 const isVersionBranch = currentBranch.startsWith("version/");
+const isDevelopment = currentBranch === "develop";
 
-if (!isVersionBranch) {
-	console.error("Tagging is only supported on a version/X.Y branch");
+if (!isVersionBranch && !isDevelopment) {
+	console.error("Tagging is only supported on a version/X.Y or develop branch");
 	process.exit(2);
 }
 
