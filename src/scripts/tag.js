@@ -1,6 +1,6 @@
 const spawn = require("cross-spawn");
 const readPkgUp = require("read-pkg-up");
-const { inc, lt, eq, coerce, prerelease } = require("semver");
+const { inc } = require("semver");
 
 const gitDiffResult = spawn.sync("git", ["diff", "HEAD"]);
 if (gitDiffResult.status !== 0 || gitDiffResult.stdout.toString("utf-8")) {
