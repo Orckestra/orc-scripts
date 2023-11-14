@@ -28,17 +28,16 @@ const config = {
 	module: {
 		rules: [
 			{
-				resource: {
-					test: /\.js$/, // Only JavaScript files
-					or: [
-						// One of these conditions must be true
-						{ not: [/node_modules/] }, // No dependencies unless explicitly allowed by whitelist
-					].concat(
+				test: /\.js$/, // Only JavaScript files
+				exclude: {
+					and: [/node_modules/], // Exclude libraries in node_modules ...
+					not: [
+						// Except for a few of them that needs to be transpiled because they use modern syntax
 						// Allowed by whitelist
 						babelWhitelist.map(
 							lib => new RegExp("node_modules(?:/|\\\\)" + lib.replace("/", "(?:/|\\\\)") + "(?:/|\\\\)"),
 						),
-					),
+					]
 				},
 				use: [
 					{
@@ -61,12 +60,7 @@ const config = {
 			},
 			{
 				test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-				use: {
-					loader: "url-loader",
-					options: {
-						limit: 50000,
-					},
-				},
+				type: 'asset/inline',
 			},
 		],
 	},
@@ -95,8 +89,11 @@ if (parseEnv("NODE_ENV") === "production") {
 	config.mode = "production";
 } else {
 	config.devtool = "inline-source-map";
-	config.optimization = { usedExports: true };
-	config.plugins.push(new webpack.NamedModulesPlugin(), new webpack.HotModuleReplacementPlugin());
+	config.optimization = {
+		usedExports: true,
+		moduleIds: 'named',
+	};
+	config.plugins.push(new webpack.HotModuleReplacementPlugin());
 	config.mode = "development";
 }
 
