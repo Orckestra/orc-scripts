@@ -93,7 +93,6 @@ if (parseEnv("NODE_ENV") === "production") {
 		usedExports: true,
 		moduleIds: 'named',
 	};
-	config.plugins.push(new webpack.HotModuleReplacementPlugin());
 	config.mode = "development";
 }
 
