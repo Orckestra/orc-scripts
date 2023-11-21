@@ -94,6 +94,9 @@ if (parseEnv("NODE_ENV") === "production") {
 		moduleIds: 'named',
 	};
 	config.mode = "development";
+	config.snapshot = {
+		managedPaths: [],
+	};
 }
 
 module.exports = config;
