@@ -133,7 +133,7 @@
     "svg-inline-loader": "^0.8.2",
     "ts-jest": "^26.4.0",
     "typeface-open-sans": "^1.1.13",
-    "typeface-roboto-condensed": "^0.0.75",
+    "typeface-roboto-condensed": "^1.1.13",
     "unexpected": "^11.1.0",
     "unexpected-dom": "^4.14.3",
     "unexpected-immutable": "^0.5.0",
