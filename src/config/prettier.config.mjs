@@ -1,9 +1,11 @@
-module.exports = {
+const config = {
 	useTabs: true,
+	tabWidth: 2,
 	trailingComma: "all",
 	printWidth: 120,
 	arrowParens: "avoid",
 	endOfLine: "auto",
-	tabWidth: 2,
 	semi: true,
 };
+
+export default config;
