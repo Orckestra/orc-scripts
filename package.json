@@ -1,6 +1,6 @@
 {
   "name": "orc-scripts",
-  "version": "4.0.0-dev.7",
+  "version": "4.0.0-dev.8",
   "description": "Scripts toolbox for Orckestra",
   "type": "commonjs",
   "bin": {
@@ -109,7 +109,7 @@
     "polished": "^3.4.2",
     "prettier": "^3.3.2",
     "react": "^17.0.2",
-    "react-big-calendar": "^0.33.2",
+    "react-big-calendar": "^1.13.0",
     "react-datepicker": "^3.0.0",
     "react-dom": "^17.0.2",
     "react-hot-loader": "^4.12.18",
