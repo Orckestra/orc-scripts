@@ -65,7 +65,9 @@ async function build(repos) {
 
 		try {
 			await makeDir("builds");
-		} catch (_) {}
+		} catch {
+			// don't do anything
+		}
 
 		const releaseArgs = ["--branch", releaseBranch, "--single-branch"];
 

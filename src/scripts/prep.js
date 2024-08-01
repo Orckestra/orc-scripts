@@ -20,7 +20,9 @@ async function prep() {
 			copyFile(contentDir, path.resolve(distDir, "content")),
 			copyFile(mockDir, path.resolve(distDir, "__mocks__")),
 		]);
-	} catch (_) {}
+	} catch {
+		// don't do anything
+	}
 
 	if (process.env.NODE_ENV === "production") {
 		// production build will not copy the static files
@@ -28,7 +30,9 @@ async function prep() {
 		try {
 			const files = await readdir(staticDir);
 			await Promise.all(files.map(file => copyFile(path.resolve(staticDir, file), path.resolve(distDir, file))));
-		} catch (_) {}
+		} catch {
+			// don't do anything
+		}
 	}
 
 	if (existsSync(projectSpecificPrep)) {

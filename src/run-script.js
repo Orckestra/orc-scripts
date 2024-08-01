@@ -76,7 +76,7 @@ function spawnScript() {
 function attemptResolve(...resolveArgs) {
 	try {
 		return require.resolve(...resolveArgs);
-	} catch (error) {
+	} catch {
 		return null;
 	}
 }
