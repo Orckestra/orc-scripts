@@ -91,7 +91,7 @@ module.exports = {
 				type: "Combination",
 				fields: expect.it("to be an array").and("to have items satisfying", "to be a form field"),
 			};
-			if (subject.hasOwnProperty("proportions")) {
+			if (Object.prototype.hasOwnProperty.call(subject, "proportions")) {
 				pattern.proportions = expect
 					.it("to be an array")
 					.and("to have items satisfying", expect.it("to be a string").or("to be a number"))
@@ -109,17 +109,17 @@ module.exports = {
 				name: expect.it("to be a string"),
 				rowField: expect.it("to be a form field").or("to be a form combination field"),
 			};
-			if (subject.hasOwnProperty("rowCount")) {
+			if (Object.prototype.hasOwnProperty.call(subject, "rowCount")) {
 				pattern.rowCount = expect.it("to be a number");
 			}
-			if (subject.hasOwnProperty("add")) {
+			if (Object.prototype.hasOwnProperty.call(subject, "add")) {
 				if (subject.rowCount) {
 					expect.errorMode = "nested";
 					return expect.fail("Form list with row count cannot have 'add' label");
 				}
 				pattern.add = expect.it("to be a label");
 			}
-			if (subject.hasOwnProperty("staticValues")) {
+			if (Object.prototype.hasOwnProperty.call(subject, "staticValues")) {
 				if (!subject.rowCount) {
 					expect.errorMode = "nested";
 					return expect.fail("Form list without row count cannot have static values");
@@ -173,135 +173,135 @@ module.exports = {
 };
 
 const addLabelProp = (expect, subject, pattern) => {
-	if (subject.hasOwnProperty("label")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "label")) {
 		pattern.label = expect.it("to be a label");
 	}
 };
 
 const addMultipleProp = (expect, subject, pattern) => {
-	if (subject.hasOwnProperty("multiple")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "multiple")) {
 		pattern.multiple = expect.it("to be a boolean");
 	}
 };
 
 const addButtonProps = (expect, subject, pattern, small) => {
-	if (subject.hasOwnProperty("primary")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "primary")) {
 		pattern.primary = expect.it("to be a boolean");
 	}
-	if (subject.hasOwnProperty("active")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "active")) {
 		pattern.active = expect.it("to be a boolean");
 	}
 	if (small) {
 		pattern.altText = expect.it("to be a label");
 		pattern.icon = expect.it("to be a string");
 	} else {
-		if (subject.hasOwnProperty("buttonText")) {
+		if (Object.prototype.hasOwnProperty.call(subject, "buttonText")) {
 			pattern.buttonText = expect.it("to be a label");
 		}
-		if (subject.hasOwnProperty("icon")) {
+		if (Object.prototype.hasOwnProperty.call(subject, "icon")) {
 			pattern.icon = expect.it("to be a string");
 		}
 	}
-	if (subject.hasOwnProperty("autofocus")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "autofocus")) {
 		pattern.autofocus = expect.it("to be a boolean");
 	}
-	if (subject.hasOwnProperty("disabled")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "disabled")) {
 		pattern.disabled = expect.it("to be a boolean");
 	}
 };
 
 const addInputProps = (expect, subject, pattern, textual = true) => {
-	if (textual && subject.hasOwnProperty("autocomplete")) {
+	if (textual && Object.prototype.hasOwnProperty.call(subject, "autocomplete")) {
 		pattern.autocomplete = expect.it("to be a string");
 	}
-	if (subject.hasOwnProperty("autofocus")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "autofocus")) {
 		pattern.autofocus = expect.it("to be a boolean");
 	}
-	if (subject.hasOwnProperty("disabled")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "disabled")) {
 		pattern.disabled = expect.it("to be a boolean");
 	}
-	if (textual && subject.hasOwnProperty("readOnly")) {
+	if (textual && Object.prototype.hasOwnProperty.call(subject, "readOnly")) {
 		pattern.readOnly = expect.it("to be a boolean");
 	}
-	if (subject.hasOwnProperty("required")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "required")) {
 		pattern.required = expect.it("to be a label");
 	}
-	if (subject.hasOwnProperty("tabindex")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "tabindex")) {
 		pattern.tabindex = expect.it("to be a number");
 	}
 };
 
 const addTextInputProps = (expect, subject, pattern) => {
-	if (subject.hasOwnProperty("maxlength")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "maxlength")) {
 		pattern.maxlength = expect.it("to be a number").and("to be greater than", 0);
 	}
-	if (subject.hasOwnProperty("minlength")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "minlength")) {
 		pattern.minlength = expect.it("to be a number").and("to be greater than", 0);
 	}
-	if (subject.hasOwnProperty("pattern")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "pattern")) {
 		pattern.pattern = expect.it("to be a regular expression");
 	}
-	if (subject.hasOwnProperty("placeholder")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "placeholder")) {
 		pattern.placeholder = expect.it("to be a label");
 	}
-	if (subject.hasOwnProperty("size")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "size")) {
 		pattern.size = expect.it("to be a number").and("to be greater than", 0);
 	}
-	if (subject.hasOwnProperty("spellcheck")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "spellcheck")) {
 		pattern.spellcheck = expect.it("to be a boolean").or("to be", "");
 	}
 };
 
 const addNumberInputProps = (expect, subject, pattern) => {
-	if (subject.hasOwnProperty("max")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "max")) {
 		pattern.max = expect.it("to be a number");
 	}
-	if (subject.hasOwnProperty("min")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "min")) {
 		pattern.min = expect.it("to be a number");
 	}
-	if (subject.hasOwnProperty("step")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "step")) {
 		pattern.step = expect.it("to be a number");
 	}
-	if (subject.hasOwnProperty("placeholder")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "placeholder")) {
 		pattern.placeholder = expect.it("to be a label");
 	}
 };
 
 const addDateInputProps = (expect, subject, pattern) => {
-	if (subject.hasOwnProperty("max")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "max")) {
 		pattern.max = expect.it("to be a string").and("to match", /^\d{4}-\d{2}-\d{2}$/);
 	}
-	if (subject.hasOwnProperty("min")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "min")) {
 		pattern.min = expect.it("to be a string").and("to match", /^\d{4}-\d{2}-\d{2}$/);
 	}
-	if (subject.hasOwnProperty("step")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "step")) {
 		pattern.step = expect.it("to be a number");
 	}
 };
 
 const addTimeInputProps = (expect, subject, pattern) => {
-	if (subject.hasOwnProperty("max")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "max")) {
 		pattern.max = expect.it("to be a string").and("to match", /^\d{2}:\d{2}(?::\d{2})?$/);
 	}
-	if (subject.hasOwnProperty("min")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "min")) {
 		pattern.min = expect.it("to be a string").and("to match", /^\d{2}:\d{2}(?::\d{2})?$/);
 	}
-	if (subject.hasOwnProperty("step")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "step")) {
 		pattern.step = expect.it("to be a number").or("to be", "any");
 	}
 };
 
 const addSwitchInputProps = (expect, subject, pattern) => {
-	if (subject.hasOwnProperty("onCaption")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "onCaption")) {
 		pattern.onCaption = expect.it("to be a label");
 	}
-	if (subject.hasOwnProperty("offCaption")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "offCaption")) {
 		pattern.offCaption = expect.it("to be a label");
 	}
-	if (subject.hasOwnProperty("onColor")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "onColor")) {
 		pattern.onColor = expect.it("to be a string");
 	}
-	if (subject.hasOwnProperty("offColor")) {
+	if (Object.prototype.hasOwnProperty.call(subject, "offColor")) {
 		pattern.offColor = expect.it("to be a string");
 	}
 };

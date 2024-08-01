@@ -4,7 +4,8 @@ const arrify = require("arrify");
 const which = require("which");
 const readPkgUp = require("read-pkg-up");
 
-const hasOwn = (obj, key) => obj.hasOwnProperty(key) && obj[key] !== null && obj[key] !== undefined;
+const hasOwn = (obj, key) =>
+	Object.prototype.hasOwnProperty.call(obj, key) && obj[key] !== null && obj[key] !== undefined;
 
 const hasPath = (obj, keys) => {
 	const [key, ...tail] = keys;
@@ -46,7 +47,7 @@ function parseEnv(name, def) {
 	if (envIsSet(name)) {
 		try {
 			return JSON.parse(process.env[name] || "<fail>");
-		} catch (err) {
+		} catch {
 			return process.env[name];
 		}
 	}
@@ -54,14 +55,16 @@ function parseEnv(name, def) {
 }
 
 function envIsSet(name) {
-	return process.env.hasOwnProperty(name) && process.env[name] && process.env[name] !== "undefined";
+	return (
+		Object.prototype.hasOwnProperty.call(process.env, name) && process.env[name] && process.env[name] !== "undefined"
+	);
 }
 
 function resolveBin(modName, { executable = modName, cwd = process.cwd() } = {}) {
 	let pathFromWhich;
 	try {
 		pathFromWhich = fs.realpathSync(which.sync(executable));
-	} catch (_error) {
+	} catch {
 		// ignore _error
 	}
 	try {
