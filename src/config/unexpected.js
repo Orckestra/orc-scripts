@@ -69,10 +69,10 @@ global.expect = unexpected
 					.or("to be an array")
 					.and("to have items satisfying", expect.it("to be a string").or("to be a number")),
 			};
-			if (subject.hasOwnProperty("width")) {
+			if (Object.prototype.hasOwnProperty.call(subject, "width")) {
 				pattern.width = expect.it("to be a string").and("not to match", /[;:{[]/);
 			}
-			if (subject.hasOwnProperty("type")) {
+			if (Object.prototype.hasOwnProperty.call(subject, "type")) {
 				pattern.type = expect
 					.it("to be", "number")
 					.or("to be", "date")
@@ -87,26 +87,26 @@ global.expect = unexpected
 						.or("to be an array")
 						.and("to have items satisfying", "to be a string");
 				}
-				if (subject.type === "switch" && subject.hasOwnProperty("switch")) {
+				if (subject.type === "switch" && Object.prototype.hasOwnProperty.call(subject, "switch")) {
 					pattern.switch = expect.it("to be an object");
 				}
 				if (subject.type === "custom") {
 					pattern.component = expect.it("to be a function");
-					if (subject.hasOwnProperty("funcs")) {
+					if (Object.prototype.hasOwnProperty.call(subject, "funcs")) {
 						pattern.funcs = expect.it("to have values satisfying", "to be a function");
 					}
 				}
 			}
-			if (subject.hasOwnProperty("transform")) {
+			if (Object.prototype.hasOwnProperty.call(subject, "transform")) {
 				pattern.transform = expect.it("to be a function");
 			}
-			if (subject.hasOwnProperty("label")) {
+			if (Object.prototype.hasOwnProperty.call(subject, "label")) {
 				pattern.label = expect.it("to be a label");
 			}
-			if (subject.hasOwnProperty("sort")) {
+			if (Object.prototype.hasOwnProperty.call(subject, "sort")) {
 				pattern.sort = expect.it("to be a function");
 			}
-			if (subject.hasOwnProperty("defaultValue")) {
+			if (Object.prototype.hasOwnProperty.call(subject, "defaultValue")) {
 				pattern.defaultValue = expect.it("to be defined");
 			}
 			return expect(subject, "to exhaustively satisfy", pattern);
