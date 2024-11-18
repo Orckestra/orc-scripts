@@ -1,6 +1,6 @@
 {
   "name": "orc-scripts",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Scripts toolbox for Orckestra",
   "type": "commonjs",
   "bin": {
@@ -37,7 +37,9 @@
     "url": "https://github.com/Orckestra/orc-scripts/issues"
   },
   "homepage": "https://github.com/Orckestra/orc-scripts#readme",
-  "overrides": { "cheerio": "1.0.0-rc.3" },
+  "overrides": {
+    "cheerio": "1.0.0-rc.3"
+  },
   "dependencies": {
     "@babel/cli": "^7.24.7",
     "@babel/core": "^7.24.7",
