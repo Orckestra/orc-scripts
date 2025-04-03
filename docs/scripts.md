@@ -84,3 +84,7 @@ Generates a helper file which contains metadata used to access the OCC API. This
 - outputFile
   - Command line argument to the script.
   - Must be used in the following format: `--outputFile <file>`
+- requestsFile
+  - Command line argument to the script
+  - Used to declare the list of requests to generate
+  - Must be used in the following format: `--requestsFile <file>`
