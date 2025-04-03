@@ -1,6 +1,6 @@
 {
   "name": "orc-scripts",
-  "version": "4.0.4",
+  "version": "4.0.5",
   "description": "Scripts toolbox for Orckestra",
   "type": "commonjs",
   "bin": {
