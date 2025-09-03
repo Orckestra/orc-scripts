@@ -5,8 +5,6 @@ const jsdom = require("jsdom");
 let outputFile = "";
 let windowsZonesUrl = "";
 
-console.log(process.argv);
-
 if (process.argv.includes("--outputFile")) {
 	outputFile = process.argv[process.argv.indexOf("--outputFile") + 1];
 }
