@@ -24,8 +24,8 @@ downloadUrl();
 
 function extractTimeZones(timeZones) {
 	const result = {
-		IANA: {},
-		WindowsZone: {},
+		ianaToWindows: {},
+		windowsToIana: {},
 	};
 
 	const dom = new jsdom.JSDOM(timeZones);
@@ -38,23 +38,23 @@ function extractTimeZones(timeZones) {
 		const key = zone.getAttribute("other");
 		const type = zone.getAttribute("type");
 
-		if (!result.IANA[key]) {
-			result.IANA[key] = [];
+		if (!result.windowsToIana[key]) {
+			result.windowsToIana[key] = [];
 		}
 
 		const types = type.split(" ");
 
 		for (let t of types) {
-			if (!result.IANA[key].includes(t)) {
-				result.IANA[key].push(t);
+			if (!result.windowsToIana[key].includes(t)) {
+				result.windowsToIana[key].push(t);
 			}
 
-			if (!result.WindowsZone[t]) {
-				result.WindowsZone[t] = [];
+			if (!result.ianaToWindows[t]) {
+				result.ianaToWindows[t] = [];
 			}
 
-			if (!result.WindowsZone[t].includes(key)) {
-				result.WindowsZone[t].push(key);
+			if (!result.ianaToWindows[t].includes(key)) {
+				result.ianaToWindows[t].push(key);
 			}
 		}
 	}
