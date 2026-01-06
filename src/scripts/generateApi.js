@@ -5,6 +5,7 @@ const lodash = require("lodash");
 const occUrl = process.env.OccUrl;
 const occToken = process.env.OccToken;
 let outputFile = "";
+let requestsFile = "";
 
 if (process.argv.includes("--outputFile")) {
 	outputFile = process.argv[process.argv.indexOf("--outputFile") + 1];
@@ -12,6 +13,10 @@ if (process.argv.includes("--outputFile")) {
 
 if (!outputFile) {
 	throw new Error("Missing --outputFile 'file' argument.");
+}
+
+if (process.argv.includes("--requestsFile")) {
+	requestsFile = process.argv[process.argv.indexOf("--requestsFile") + 1];
 }
 
 if (!occToken) {
@@ -40,7 +45,7 @@ function isVerbAllowed(verb) {
 	return lowerCaseVerb === "get" || lowerCaseVerb === "post" || lowerCaseVerb === "put" || lowerCaseVerb === "delete";
 }
 
-function generateOperationsFromPath(url, pathData) {
+function generateOperationsFromPath(url, pathData, desiredRequests) {
 	const operations = [];
 
 	for (const verb of Object.getOwnPropertyNames(pathData)) {
@@ -50,8 +55,15 @@ function generateOperationsFromPath(url, pathData) {
 
 		const operation = pathData[verb];
 
+		const operationName = extractRequestNameFromOperation(operation);
+
+		const shouldAddOperation = desiredRequests == null || desiredRequests.includes(operationName.toLowerCase());
+		if( !shouldAddOperation ){
+			continue;
+		}
+
 		operations.push({
-			name: extractRequestNameFromOperation(operation),
+			name: operationName,
 			url: url,
 			verb: verb.toUpperCase(),
 			hasQueryString: operation.parameters.filter(p => p.in === "query").length > 0,
@@ -102,51 +114,66 @@ function generateImports() {
 	return 'import { buildUrl } from "../utils/buildUrl";\n\n';
 }
 
-https
-	.get(occUrl, { headers: { "X-AUTH": occToken } }, resp => {
-		let data = "";
-		let error = "";
-
-		if (resp.statusCode !== 200) {
-			error = new Error(`Request Failed. Status Code: ${resp.statusCode}`);
+if (requestsFile) {
+	fs.readFile(requestsFile, 'utf-8', (err, data) => {
+		if (err) {
+			return console.error(err);
 		}
-		if (error) {
-			console.error(error.message);
-			// Consume response data to free up memory
-			resp.resume();
-			return;
-		}
-
-		// A chunk of data has been received.
-		resp.on("data", chunk => {
-			data += chunk;
-		});
-
-		// The whole response has been received. Print out the result.
-		resp.on("end", () => {
-			const swaggerMetaData = JSON.parse(data);
-			const paths = swaggerMetaData.paths;
-			let operations = [];
-
-			for (const url of Object.getOwnPropertyNames(paths)) {
-				operations = operations.concat(generateOperationsFromPath(url, paths[url]));
-			}
-
-			let helperData = "/* istanbul ignore file */\n\n";
-			helperData += generateImports();
-
-			for (const op of lodash.sortBy(operations, [o => o.name])) {
-				helperData += generateOperation(op);
-			}
-
-			fs.writeFile(outputFile, helperData, function (err) {
-				if (err) {
-					return console.error(err);
-				}
-				console.log(`File '${outputFile}' has been created`);
-			});
-		});
+		const desiredRequests = data.split("\n").map(d => d.trim().toLowerCase());
+		generate(desiredRequests);
 	})
-	.on("error", err => {
-		console.log("Error: " + err.message);
-	});
+}else {
+	generate(null);
+}
+
+
+function generate(desiredRequests) {
+	https
+		.get(occUrl, { headers: { "X-AUTH": occToken } }, resp => {
+			let data = "";
+			let error = "";
+
+			if (resp.statusCode !== 200) {
+				error = new Error(`Request Failed. Status Code: ${resp.statusCode}`);
+			}
+			if (error) {
+				console.error(error.message);
+				// Consume response data to free up memory
+				resp.resume();
+				return;
+			}
+
+			// A chunk of data has been received.
+			resp.on("data", chunk => {
+				data += chunk;
+			});
+
+			// The whole response has been received. Print out the result.
+			resp.on("end", () => {
+				const swaggerMetaData = JSON.parse(data);
+				const paths = swaggerMetaData.paths;
+				let operations = [];
+
+				for (const url of Object.getOwnPropertyNames(paths)) {
+					operations = operations.concat(generateOperationsFromPath(url, paths[url], desiredRequests));
+				}
+
+				let helperData = "/* istanbul ignore file */\n\n";
+				helperData += generateImports();
+
+				for (const op of lodash.sortBy(operations, [o => o.name])) {
+					helperData += generateOperation(op);
+				}
+
+				fs.writeFile(outputFile, helperData, function (err) {
+					if (err) {
+						return console.error(err);
+					}
+					console.log(`File '${outputFile}' has been created`);
+				});
+			});
+		})
+		.on("error", err => {
+			console.log("Error: " + err.message);
+		});
+}
