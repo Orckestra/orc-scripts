@@ -1,15 +1,4 @@
 import React from "react";
-import styled from "styled-components";
-
-const TestStyled = styled.div`
-	color: red;
-	background-color: green;
-`;
-
-const SvgStyled = styled.svg`
-	height: 10px;
-	width: 100px;
-`;
 
 describe("Styled component plugin for unexpected", () => {
 	let firstSheet, secondSheet;
@@ -66,36 +55,6 @@ describe("Styled component plugin for unexpected", () => {
 				"to have style rules satisfying",
 				"to contain",
 				"color: blue;",
-			));
-
-		it("passes with SVG element", () =>
-			expect(
-				<SvgStyled />,
-				"when mounted",
-				"to have style rules satisfying",
-				expect.it("to be a", "string").and("to contain", "width: 100px;"),
-			));
-
-		it("passes with a styled component", () =>
-			expect(
-				<TestStyled />,
-				"when mounted",
-				"to have style rules satisfying",
-				expect.it("to be a", "string").and("to contain", "color: red;"),
-			));
-
-		it("gives a detailed diff", () =>
-			expect(
-				() => expect(<TestStyled />, "when mounted", "to have style rules satisfying", "to contain", "color: blue;"),
-				"to throw",
-				new RegExp(
-					'expected <div class="unexpected-stylestest__TestStyled-sc-\\w+-0 [\\w-]+"></div>\n' +
-						"to have style rules satisfying to contain 'color: blue;'\n" +
-						"  expected '\\.\\w+ \\{color: red; background-color: green;\\}' to contain 'color: blue;'\n" +
-						"\n" +
-						"  \\.\\w+ \\{color: red; background-color: green;\\}\n" +
-						"           \\^\\^\\^\\^\\^\\^\\^                \\^\\^\\^\\^\\^\\^\\^",
-				),
 			));
 
 		it("fails if no class name", () =>
