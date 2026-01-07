@@ -13,7 +13,6 @@ module.exports = {
 	presets: [[require.resolve("@babel/preset-env"), envOptions]],
 	plugins: [
 		require.resolve("@babel/plugin-syntax-dynamic-import"),
-		isTest || isReact ? require.resolve("babel-plugin-styled-components") : null,
 		require.resolve("@babel/plugin-transform-template-literals"),
 		require.resolve("@babel/plugin-transform-destructuring"),
 		require.resolve("@babel/plugin-transform-object-rest-spread"),

@@ -3,7 +3,6 @@ const unexpectedDom = require("unexpected-dom");
 const unexpectedReaction = require("unexpected-reaction");
 const unexpectedSinon = require("unexpected-sinon");
 const unexpectedImmutable = require("unexpected-immutable");
-const unexpectedStyles = require("./unexpected-styles");
 const unexpectedModule = require("./unexpected-module");
 const unexpectedForm = require("./unexpected-form");
 const React = require("react");
@@ -16,7 +15,6 @@ global.expect = unexpected
 	.use(unexpectedImmutable)
 	.use(unexpectedDom)
 	.use(unexpectedReaction)
-	.use(unexpectedStyles)
 	.use(unexpectedModule)
 	.use(unexpectedForm)
 	.addAssertion(
