@@ -23,9 +23,7 @@
     "src",
     "babel.js",
     "webpack.js",
-    "jest.js",
-    "eslint.js",
-    "prettier.js"
+    "jest.js"
   ],
   "repository": {
     "type": "git",
