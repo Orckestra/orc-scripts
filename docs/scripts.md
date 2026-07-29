@@ -12,7 +12,7 @@ Depending on build type - webpack or not - different parameters can be given.
 
 Parameters for webpack builds (environment has `BUILD_WEBPACK=true`):
 
-- `--stats`: Adds bundle analysis to the build using `webpack-bundle-analyser`
+- `--stats`: Adds bundle analysis to the build using `webpack-bundle-analyzer`
 
 Parameters for non-webpack builds:
 
@@ -40,8 +40,11 @@ Checks out and builds, then tests the given git repository, with the current wor
 Parameters:
 
 - `--port <number>`: Sets the listening port for the development server
+- `--https`: Forces an HTTPS server even when `HOSTNAME` is not set
 
-Starts a web server locally, with hot module reloading enabled. Intended to support development work. You may set a specific port using the `--port <port>` option, or with the `PORT` environment variable. If a `HOST` environment variable is supplied, it will set up as an HTTPS server, expecting to be accessed at that hostname. Expects to have `prep` (above) run before it.
+Starts a web server locally, with hot module reloading enabled. Intended to support development work. You may set a specific port using the `--port <port>` option, or with the `PORT` environment variable. If a `HOSTNAME` environment variable is supplied (and isn't `localhost`), or the `--https` flag or `HTTPS` environment variable is set, it will set up as an HTTPS server. Expects to have `prep` (above) run before it.
+
+For the HTTPS case, `SSL_CERT_PATH` must point to either a `.pfx` file or a folder containing exactly one `.pfx` file. The certificate's passphrase is read from `SSL_CERT_PASSWORD` if set; otherwise the script walks up from the certificate's folder looking for a `parameters.dev.xml` file and extracts the passphrase from its `SSL_CertificatePfxPassword` parameter.
 
 ## `test`
 
@@ -59,16 +62,13 @@ Searches through all JS files in the `src/` directory, extracting any `react-int
 
 ## `tag`
 
-Creates a version tag and commit (using the `npm version` command) fitting the current branch and commit. Tags follow the following rules:
+Creates a version tag and commit (using the `npm version` command) for the current branch and commit. Only runs on the `develop` branch or a branch starting with `version/` - it aborts on any other branch, if the working directory is not clean (i.e. there is a diff from `HEAD`), or if the resulting tag already exists. When it runs, it always bumps to a `-dev.N` prerelease, e.g. `v1.2.45-dev.3`.
 
-- The `develop` branch and branches starting with `feature` will be given a pre-release tag of `dev` - as in `v1.2.45-dev.3`.
-- Branches beginning with `release/v` will be version-incremented according to branch name and given a pre-release tag of `pre`, ex. `v1.1.2-pre.1` from branch `release/v1.1.2`.
-- Branches prefixed with `legacy/` will have a standard version number according to the branch name suffixed with `+legacy`.
-- The `master` brannch will not be tagged, this should be done manually. This branch should be the only place clean versions (i.e. tag matching `/^v\d+\.\d+\.\d+$/`) are tagged.
+The `master` branch is never tagged by this script - clean versions (tag matching `/^v\d+\.\d+\.\d+$/`) should only ever be tagged there, manually. `getDist` (below) also still recognizes `-pre` (pre-release/`beta`) and `+legacy` tag shapes from an older/manual tagging process (e.g. for `release/*`/`legacy/*` branches), even though this script no longer produces them itself.
 
 ## `getDist`
 
-Used by deployment scripts to determine the npm dist-tag to use for the package. This uses the tag names created by `orc-scripts tag` and sets dist-tag to `dev` for development tags, `beta` for pre-release tags, `previous` for legacy tags, and `latest` for clean version tags. This script itself only outputs the string name of the dist-tag to console.
+Used by deployment scripts to determine the npm dist-tag to use for the package. This looks at the current package version and sets dist-tag to `dev` for a `-dev` prerelease, `beta` for a `-pre` prerelease, `previous` for a version ending in `+legacy`, and `latest` for a clean `vX.Y.Z` version. This script itself only outputs the string name of the dist-tag to console.
 
 ## `generateApi`
 
@@ -88,3 +88,32 @@ Generates a helper file which contains metadata used to access the OCC API. This
   - Command line argument to the script
   - Used to declare the list of requests to generate
   - Must be used in the following format: `--requestsFile <file>`
+
+## `clean`
+
+Removes the `dist/` directory from the current working directory.
+
+## `mergeTranslations`
+
+For each JSON file under `src/translations/`, merges in the same-named file from `node_modules/orc-shared/src/translations/`, if it exists, and writes the result back over the app's file. Keys from the `orc-shared` file take precedence over the app's own on collisions.
+
+## `validateTranslations`
+
+Checks that all locale files under `src/translations/` define the same set of keys, and reports (per file) any keys present in that locale but missing from the others. Exits with a non-zero code if any discrepancies are found.
+
+Parameters:
+
+- One or more file names (matched case-insensitively by basename) to restrict validation to those locale files. With no arguments, all files under `src/translations/` are compared against each other.
+
+## `buildIconsSheet`
+
+Reads all `.svg` files in `src/content/icons/` and concatenates them into a single `<symbol>`-based sprite sheet, written to `src/content/iconsSheet.svg`. Each icon's `id` is set to `icon-<filename-without-extension>`. `fill`/`stroke` attributes are normalized (stripped, or set to `stroke="none"` on paths that don't otherwise specify one) unless the icon's SVG source contains a `<!-- no post-processing -->` comment, in which case that icon is left untouched aside from the comment being stripped.
+
+## `generateWindowsZone`
+
+Downloads a CLDR `windowsZones.xml` file and writes out a JSON lookup table mapping IANA timezone names to Windows timezone names and vice versa.
+
+Parameters:
+
+- `--outputFile <file>`: Required. Path to write the resulting JSON to.
+- `--windowsZonesUrl <url>`: Optional. Overrides the default CLDR `windowsZones.xml` URL to download from.

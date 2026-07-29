@@ -9,25 +9,27 @@ const args = process.argv.slice(2);
 const argPort = args.indexOf("--port") !== -1 ? args[args.indexOf("--port") + 1] : null;
 const PORT = argPort || process.env.PORT || 5000;
 
-const findSslPasswordFromParametersFile = (certFile) => {
+const findSslPasswordFromParametersFile = certFile => {
 	// reference: https://hals.app/blog/recursively-read-parent-folder-nodejs/
 
 	let parentDirectory = path.dirname(certFile);
 	while (fs.existsSync(parentDirectory)) {
-		console.log("Looking for certificate password in: " + parentDirectory)
+		console.log("Looking for certificate password in: " + parentDirectory);
 		const fileToFindPath = path.join(parentDirectory, "parameters.dev.xml");
 		if (fs.existsSync(fileToFindPath)) {
 			const fileContent = fs.readFileSync(fileToFindPath, "utf8");
 
 			// Using regex to parse the XML to avoid adding a dependency on an XML package
 
-			const matchResult = /<param\s+name="SSL_CertificatePfxPassword"\s+value="(?<Value>[^"]+)"\s*\/>/.exec(fileContent);
-			if (matchResult && matchResult.groups && matchResult.groups['Value']) {
+			const matchResult = /<param\s+name="SSL_CertificatePfxPassword"\s+value="(?<Value>[^"]+)"\s*\/>/.exec(
+				fileContent,
+			);
+			if (matchResult && matchResult.groups && matchResult.groups["Value"]) {
 				console.log("Certificate password found");
-				return matchResult.groups['Value'];
+				return matchResult.groups["Value"];
 			}
 
-			console.warn("Could not find SSL_CertificatePfxPassword in file " + fileToFindPath)
+			console.warn("Could not find SSL_CertificatePfxPassword in file " + fileToFindPath);
 			return null;
 		}
 
@@ -43,7 +45,39 @@ const findSslPasswordFromParametersFile = (certFile) => {
 	}
 
 	return null;
-}
+};
+
+const resolveSslCertPath = certPath => {
+	let stats;
+
+	try {
+		stats = fs.statSync(certPath);
+	} catch (error) {
+		if (error.code === "ENOENT") {
+			throw new Error("SSL_CERT_PATH does not exist: " + certPath);
+		}
+
+		const exception = new Error("SSL_CERT_PATH is not a valid path: " + certPath);
+		exception.cause = error;
+		throw exception;
+	}
+
+	if (stats.isFile()) {
+		return certPath;
+	}
+
+	const folder = certPath;
+	const pfxFiles = fs.readdirSync(folder).filter(file => path.extname(file).toLowerCase() === ".pfx");
+
+	if (pfxFiles.length > 1) {
+		throw new Error("Multiple PFX files found in " + folder + ": " + pfxFiles.join(", "));
+	}
+	if (pfxFiles.length === 0) {
+		throw new Error("No PFX file found in " + folder);
+	}
+
+	return path.join(folder, pfxFiles[0]);
+};
 
 const config = require("../config/webpack.config.js");
 const options = {
@@ -51,24 +85,28 @@ const options = {
 	hot: "only",
 	port: PORT,
 	host: HOST,
-	static: './dist',
+	static: "./dist",
 	devMiddleware: {
 		publicPath: process.env.WEBPACK_PUBLIC_PATH || "/",
 	},
 };
 
 if (HOST !== "localhost" || args.indexOf("--https") !== -1 || process.env.HTTPS) {
-	options.server = 'https';
+	options.server = "https";
 }
 
-if (options.server === 'https' && process.env.SSL_CERT_PATH) {
+if (options.server === "https" && process.env.SSL_CERT_PATH) {
+	process.env.SSL_CERT_PATH = resolveSslCertPath(process.env.SSL_CERT_PATH);
+
+	console.log("Certificate PFX found: " + process.env.SSL_CERT_PATH);
+
 	options.server = {
-		type: 'https',
+		type: "https",
 		options: {
 			pfx: process.env.SSL_CERT_PATH,
 			passphrase: process.env.SSL_CERT_PASSWORD || findSslPasswordFromParametersFile(process.env.SSL_CERT_PATH),
 		},
-	}
+	};
 }
 
 const compiler = webpack(config);
