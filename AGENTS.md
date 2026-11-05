@@ -63,4 +63,6 @@ Shared helpers used across scripts/configs: `fromRoot`/`hasFile` (resolve paths 
 
 ## CI
 
-Azure Pipelines (`.az.yml`) runs on `master`/`develop`/`feature*`/`hotfix*`/`bug*`/`release*`: install → lint (`--max-warnings 0`) → coverage → coveralls → then, only on an exact tag match, publishes to npm with the dist-tag from `getDist`.
+The build has moved from Azure DevOps to GitHub Actions. The pipelines of the `hotfixes/1.6`, `hotfixes/1.8`, `hotfixes/2.0` and `hotfixes/3.0` branches were not migrated: those versions are no longer used, so they still only have their Azure DevOps pipeline (`.az.yml`). If one of them is needed again, its pipeline can be migrated to GitHub Actions then.
+
+The former Azure Pipelines definition (`.az.yml`) runs on `master`/`develop`/`feature*`/`hotfix*`/`bug*`/`release*`: install → lint (`--max-warnings 0`) → coverage → coveralls → then, only on an exact tag match, publishes to npm with the dist-tag from `getDist`.
