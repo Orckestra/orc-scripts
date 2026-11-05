@@ -1,0 +1,119 @@
+# Build, test and publish orc-scripts (migrated from the Azure DevOps pipeline .az.yml).
+#
+# Publishing: a push whose HEAD commit carries a version tag (created by `npm run tag`, or manually on master)
+# is published to npm with the dist-tag computed by `node src getDist`.
+#
+# Requirements: repository secrets (formerly the ADO variable groups "coveralls orc-scripts" and
+# "npm publish token"):
+# - COVERALLS_REPO_TOKEN: used by `npm run coveralls`.
+# - NPM_PUBLISH_TOKEN: used by `npm publish`.
+# Pull requests from forks don't get repository secrets, so their coveralls step fails.
+
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+      - 'feature**'
+      - 'hotfix**'
+      - 'bug**'
+      - 'release**'
+  pull_request:
+    branches:
+      - master
+      - develop
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Full history and tags: needed by `git describe --exact-match --tags HEAD` below.
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      # registry-url writes an .npmrc that authenticates with NODE_AUTH_TOKEN (used by npm publish).
+      - name: Use Node 18.x
+        uses: actions/setup-node@v7
+        with:
+          node-version: 18.x
+          registry-url: https://registry.npmjs.org/
+
+      - name: npm install
+        run: |
+          npm install --verbose
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Publish eresolve-report.txt
+        if: failure()
+        continue-on-error: true
+        uses: actions/upload-artifact@v7
+        with:
+          path: ~/.npm/eresolve-report.txt
+          archive: false
+          if-no-files-found: ignore
+
+      - name: npm prune
+        run: |
+          npm prune
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: npm ls --depth=1
+        continue-on-error: true
+        run: npm ls --depth=1
+
+      - name: npm run lint
+        run: |
+          npm run lint -- --max-warnings 0
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: npm run coverage
+        run: |
+          npm run coverage
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: npm run coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          COVERALLS_SERVICE_NAME: GitHub Actions orc-scripts
+          COVERALLS_SERVICE_NUMBER: ${{ github.run_number }}
+          COVERALLS_GIT_BRANCH: ${{ github.ref_name }}
+          COVERALLS_GIT_COMMIT: ${{ github.sha }}
+        run: |
+          npm run coveralls
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Detect NPM tag
+        id: npm-tag
+        run: |
+          $npmTag = node src getDist
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Write-Host "NPM tag: $npmTag"
+          "tag=$npmTag" >> $env:GITHUB_OUTPUT
+
+      - name: Detect if we need to publish packages
+        id: can-publish
+        run: |
+          git describe --exact-match --tags HEAD
+          $canPublish = ($LASTEXITCODE -eq 0).ToString().ToLowerInvariant()
+          Write-Host "Can publish: $canPublish"
+          "value=$canPublish" >> $env:GITHUB_OUTPUT
+          exit 0
+
+      - name: npm publish
+        if: github.event_name != 'pull_request' && steps.can-publish.outputs.value == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+        run: |
+          npm publish --tag '${{ steps.npm-tag.outputs.tag }}'
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
