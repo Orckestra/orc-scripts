@@ -70,9 +70,7 @@ jobs:
 
       - name: npm ls --depth=1
         continue-on-error: true
-        run: |
-          npm ls --depth=1
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        run: npm ls --depth=1
 
       - name: npm run lint
         run: |
