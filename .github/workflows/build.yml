@@ -1,0 +1,137 @@
+# Build, test and publish orc-scripts (migrated from the Azure DevOps pipeline .az.yml).
+#
+# Publishing: a push whose HEAD commit carries a version tag (created by `npm run tag`, or manually on master)
+# is published to npm with the dist-tag computed by `node src getDist`.
+#
+# Requirements:
+# - Organization variables (Azure app registration used by LoadKeyVaultSecrets):
+#   ORCKESTRAPRODUCTTEAM_AZURE_CLIENT_ID, ORCKESTRAINC_AZURE_TENANT_ID,
+#   ORCKESTRAPRODUCTTEAM_AZURE_SUBSCRIPTION_ID, ORCKESTRAPRODUCTTEAM_AZURE_KEY_VAULT_NAME
+# - The app registration needs a federated credential for this repository (one per branch or tag subject
+#   used, e.g. repo:Orckestra/orc-scripts:ref:refs/heads/develop) and secret read access on the vault.
+# - Key Vault secrets (formerly the ADO variable groups "coveralls orc-scripts" and "npm publish token"):
+#   orc-scripts-coveralls-token -> COVERALLS_REPO_TOKEN
+#   orc-scripts-npm-publish-token -> NPM_PUBLISH_TOKEN
+
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+      - 'feature**'
+      - 'hotfix**'
+      - 'bug**'
+      - 'release**'
+  pull_request:
+    branches:
+      - master
+      - develop
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # azure/login OIDC inside LoadKeyVaultSecrets
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Runs on every event, pull requests included. Pull requests from forks can't get an OIDC token, so their
+      # builds fail here.
+      - name: Load values from key vault
+        uses: Harris-E-Commerce/OrckestraCommerce.github.actions/LoadKeyVaultSecrets@latest
+        with:
+          client-id: ${{ vars.ORCKESTRAPRODUCTTEAM_AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.ORCKESTRAINC_AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.ORCKESTRAPRODUCTTEAM_AZURE_SUBSCRIPTION_ID }}
+          vault-name: ${{ vars.ORCKESTRAPRODUCTTEAM_AZURE_KEY_VAULT_NAME }}
+          secrets: "orc-scripts-coveralls-token:COVERALLS_REPO_TOKEN, orc-scripts-npm-publish-token:NPM_PUBLISH_TOKEN"
+
+      # Full history and tags: needed by `git describe --exact-match --tags HEAD` below.
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      # registry-url writes an .npmrc that authenticates with NODE_AUTH_TOKEN (used by npm publish).
+      - name: Use Node 18.x
+        uses: actions/setup-node@v7
+        with:
+          node-version: 18.x
+          registry-url: https://registry.npmjs.org/
+
+      - name: npm install
+        run: |
+          npm install --verbose
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Publish eresolve-report.txt
+        if: failure()
+        continue-on-error: true
+        uses: actions/upload-artifact@v7
+        with:
+          path: ~/.npm/eresolve-report.txt
+          archive: false
+          if-no-files-found: ignore
+
+      - name: npm prune
+        run: |
+          npm prune
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: npm ls --depth=1
+        continue-on-error: true
+        run: |
+          npm ls --depth=1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: npm run lint
+        run: |
+          npm run lint -- --max-warnings 0
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: npm run coverage
+        run: |
+          npm run coverage
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      # COVERALLS_REPO_TOKEN comes from the key vault step (through $GITHUB_ENV): don't redeclare it here.
+      - name: npm run coveralls
+        env:
+          COVERALLS_SERVICE_NAME: GitHub Actions orc-scripts
+          COVERALLS_SERVICE_NUMBER: ${{ github.run_number }}
+          COVERALLS_GIT_BRANCH: ${{ github.ref_name }}
+          COVERALLS_GIT_COMMIT: ${{ github.sha }}
+        run: |
+          npm run coveralls
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Detect NPM tag
+        id: npm-tag
+        run: |
+          $npmTag = node src getDist
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Write-Host "NPM tag: $npmTag"
+          "tag=$npmTag" >> $env:GITHUB_OUTPUT
+
+      - name: Detect if we need to publish packages
+        id: can-publish
+        run: |
+          git describe --exact-match --tags HEAD
+          $canPublish = ($LASTEXITCODE -eq 0).ToString().ToLowerInvariant()
+          Write-Host "Can publish: $canPublish"
+          "value=$canPublish" >> $env:GITHUB_OUTPUT
+          exit 0
+
+      - name: npm publish
+        if: github.event_name != 'pull_request' && steps.can-publish.outputs.value == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ env.NPM_PUBLISH_TOKEN }}
+        run: |
+          npm publish --tag '${{ steps.npm-tag.outputs.tag }}'
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
