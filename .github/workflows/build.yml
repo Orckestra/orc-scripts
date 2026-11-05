@@ -3,15 +3,11 @@
 # Publishing: a push whose HEAD commit carries a version tag (created by `npm run tag`, or manually on master)
 # is published to npm with the dist-tag computed by `node src getDist`.
 #
-# Requirements:
-# - Organization variables (Azure app registration used by LoadKeyVaultSecrets):
-#   ORCKESTRAPRODUCTTEAM_AZURE_CLIENT_ID, ORCKESTRAINC_AZURE_TENANT_ID,
-#   ORCKESTRAPRODUCTTEAM_AZURE_SUBSCRIPTION_ID, ORCKESTRAPRODUCTTEAM_AZURE_KEY_VAULT_NAME
-# - The app registration needs a federated credential for this repository (one per branch or tag subject
-#   used, e.g. repo:Orckestra/orc-scripts:ref:refs/heads/develop) and secret read access on the vault.
-# - Key Vault secrets (formerly the ADO variable groups "coveralls orc-scripts" and "npm publish token"):
-#   orc-scripts-coveralls-token -> COVERALLS_REPO_TOKEN
-#   orc-scripts-npm-publish-token -> NPM_PUBLISH_TOKEN
+# Requirements: repository secrets (formerly the ADO variable groups "coveralls orc-scripts" and
+# "npm publish token"):
+# - COVERALLS_REPO_TOKEN: used by `npm run coveralls`.
+# - NPM_PUBLISH_TOKEN: used by `npm publish`.
+# Pull requests from forks don't get repository secrets, so their coveralls step fails.
 
 name: Build
 
@@ -32,7 +28,6 @@ on:
 
 permissions:
   contents: read
-  id-token: write # azure/login OIDC inside LoadKeyVaultSecrets
 
 defaults:
   run:
@@ -42,17 +37,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # Runs on every event, pull requests included. Pull requests from forks can't get an OIDC token, so their
-      # builds fail here.
-      - name: Load values from key vault
-        uses: Harris-E-Commerce/OrckestraCommerce.github.actions/LoadKeyVaultSecrets@latest
-        with:
-          client-id: ${{ vars.ORCKESTRAPRODUCTTEAM_AZURE_CLIENT_ID }}
-          tenant-id: ${{ vars.ORCKESTRAINC_AZURE_TENANT_ID }}
-          subscription-id: ${{ vars.ORCKESTRAPRODUCTTEAM_AZURE_SUBSCRIPTION_ID }}
-          vault-name: ${{ vars.ORCKESTRAPRODUCTTEAM_AZURE_KEY_VAULT_NAME }}
-          secrets: "orc-scripts-coveralls-token:COVERALLS_REPO_TOKEN, orc-scripts-npm-publish-token:NPM_PUBLISH_TOKEN"
-
       # Full history and tags: needed by `git describe --exact-match --tags HEAD` below.
       - uses: actions/checkout@v7
         with:
@@ -100,9 +84,9 @@ jobs:
           npm run coverage
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-      # COVERALLS_REPO_TOKEN comes from the key vault step (through $GITHUB_ENV): don't redeclare it here.
       - name: npm run coveralls
         env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
           COVERALLS_SERVICE_NAME: GitHub Actions orc-scripts
           COVERALLS_SERVICE_NUMBER: ${{ github.run_number }}
           COVERALLS_GIT_BRANCH: ${{ github.ref_name }}
@@ -131,7 +115,7 @@ jobs:
       - name: npm publish
         if: github.event_name != 'pull_request' && steps.can-publish.outputs.value == 'true'
         env:
-          NODE_AUTH_TOKEN: ${{ env.NPM_PUBLISH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
         run: |
           npm publish --tag '${{ steps.npm-tag.outputs.tag }}'
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
